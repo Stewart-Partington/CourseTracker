@@ -11,6 +11,11 @@ namespace CourseTracker.Domain.Courses
 	public class Course : EntityBase
 	{
 
+		public Course()
+		{
+			Assessments = new List<Assessment>();
+		}
+
 		public string Name { get; set; }
 
 		public int Year { get; set; }
@@ -18,6 +23,17 @@ namespace CourseTracker.Domain.Courses
 		public int Semester { get; set; }
 
 		public List<Assessment> Assessments { get; set; }
+
+		public double Grade { 
+			get
+			{
+				double result = Assessments
+					.Where(x => x.Grade != 0 && x.Weight != 0)
+					.Sum(x => (x.Grade * (x.Weight / 100)));
+
+				return Math.Round(result, 1, MidpointRounding.AwayFromZero);
+			}
+		}
 
 	}
 
