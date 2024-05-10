@@ -15,6 +15,10 @@ namespace CourseTracker.Application.Interfaces
 	public interface IDatabaseService
 	{
 
+		DbSet<Student> Students { get; set; }
+		DbSet<Course> Courses { get; set; }
+		DbSet<Assessment> Assessments { get; set; }
+
 		Guid Insert<t>(EntityBase entity);
 
 	}
