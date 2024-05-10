@@ -10,6 +10,8 @@ namespace CourseTracker.Domain.Assessments
 	public class Assessment : EntityBase
 	{
 
+		public Guid CourseId { get; set; }
+
 		AssessmentTypes AssessmentType { get; set;  }
 
 		public string Name { get; set;  }

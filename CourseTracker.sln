@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseTracker.Domain", "CourseTracker.Domain\CourseTracker.Domain.csproj", "{A4DA8450-6792-4E6B-B8AB-B4CD35CDF23D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseTracker.Application", "CourseTracker.Application\CourseTracker.Application.csproj", "{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseTracker.Application", "CourseTracker.Application\CourseTracker.Application.csproj", "{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseTracker.Persistence", "CourseTracker.Persistence\CourseTracker.Persistence.csproj", "{7568B5CA-EEDC-4D89-85D2-6817148C09DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7568B5CA-EEDC-4D89-85D2-6817148C09DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7568B5CA-EEDC-4D89-85D2-6817148C09DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7568B5CA-EEDC-4D89-85D2-6817148C09DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7568B5CA-EEDC-4D89-85D2-6817148C09DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
