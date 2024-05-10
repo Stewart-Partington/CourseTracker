@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseTracker.Domain", "Cou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseTracker.Application", "CourseTracker.Application\CourseTracker.Application.csproj", "{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseTracker.Persistence", "CourseTracker.Persistence\CourseTracker.Persistence.csproj", "{0F1D0C79-3887-4189-94BF-5463E9A4C7A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD4794EF-9AEC-42E1-AEB2-43AB102F8FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1D0C79-3887-4189-94BF-5463E9A4C7A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1D0C79-3887-4189-94BF-5463E9A4C7A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1D0C79-3887-4189-94BF-5463E9A4C7A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1D0C79-3887-4189-94BF-5463E9A4C7A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
