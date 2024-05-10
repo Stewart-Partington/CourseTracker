@@ -1,4 +1,5 @@
 ﻿using CourseTracker.Application.Interfaces;
+using CourseTracker.Domain;
 using CourseTracker.Domain.Assessments;
 using CourseTracker.Domain.Courses;
 using CourseTracker.Domain.Students;
@@ -18,11 +19,6 @@ namespace CourseTracker.Persistence
 
 		private string _connectionString;
 
-		//      public DatabaseService(IConfiguration configuration)
-		//      {
-		//	_connectionString = configuration.GetConnectionString("SQLConnectionString");
-		//}
-
 		public DatabaseService()
         {
 			IConfiguration config = new ConfigurationBuilder()
@@ -33,13 +29,32 @@ namespace CourseTracker.Persistence
 			_connectionString = config.GetConnectionString("SQLConnectionString");
 		}
 
-        public DbSet<Student> Students { get; set; }
-		public DbSet<Course> Courses { get; set; }
-		public DbSet<Assessment> Assessments { get; set; }
-
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(_connectionString);
+		}
+
+		public DbSet<Student> Students { get; set; }
+		public DbSet<Course> Courses { get; set; }
+		public DbSet<Assessment> Assessments { get; set; }
+
+		public Guid Insert<t>(EntityBase entity)
+		{
+
+			Guid result;
+
+			switch (typeof(t).Name)
+			{
+				case nameof(Student):
+				Students.Add((Student)entity);
+				break;
+			}
+
+			this.SaveChanges();
+			result = (Guid)entity.Id;
+
+			return result;
+
 		}
 
 	}

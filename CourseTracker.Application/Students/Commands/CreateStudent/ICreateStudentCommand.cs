@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 	public interface ICreateStudentCommand
 	{
 
-		void Execute(CreateStudentModel model);
+		Guid Execute(CreateStudentModel model);
 
 	}
 
