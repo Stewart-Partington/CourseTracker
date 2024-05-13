@@ -1,4 +1,5 @@
 ﻿using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Commands.DeleteStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
@@ -18,15 +19,17 @@ namespace CourseTracker.API.Students
         private readonly IGetStudentDetailQuery _detailQuery;
         private readonly ICreateStudentCommand _createCommand;
         private readonly IUpdateStudentCommand _updateCommand;
+        private readonly IDeleteStudentCommand _deleteCommand;
 
 		public StudentsController(IGetStudentsListQuery listQuery, IGetStudentDetailQuery detailQuery, ICreateStudentCommand createCommand,
-            IUpdateStudentCommand updateCommand)
+            IUpdateStudentCommand updateCommand, IDeleteStudentCommand deleteCommand)
         {
             _listQuery = listQuery;
             _detailQuery = detailQuery;
             _createCommand = createCommand;
             _updateCommand = updateCommand;
-        }
+            _deleteCommand = deleteCommand;
+		}
 
         [HttpGet]
         public List<StudentListItemModel> Get()
@@ -59,6 +62,16 @@ namespace CourseTracker.API.Students
 			return new HttpResponseMessage(HttpStatusCode.OK);
 
 		}
+
+        [HttpDelete("{id}")]
+        public HttpResponseMessage Delete(Guid id)
+        {
+
+            _deleteCommand.Execute(id);
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+
+        }
 
     }
 }
