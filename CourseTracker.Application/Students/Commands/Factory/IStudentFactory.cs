@@ -1,4 +1,5 @@
 ﻿using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Domain.Students;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace CourseTracker.Application.Students.Commands.Factory
     {
 
         Student Create(CreateStudentModel createStudentModel);
+        Student Create(UpdateStudentModel updateStudentModel);
 
     }
 

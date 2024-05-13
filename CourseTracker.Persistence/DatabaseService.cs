@@ -69,6 +69,11 @@ namespace CourseTracker.Persistence
 
 		}
 
+		public void Save()
+		{
+			this.SaveChanges();
+		}
+
 	}
 
 }

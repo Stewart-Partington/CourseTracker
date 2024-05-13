@@ -20,6 +20,7 @@ namespace CourseTracker.Application.Interfaces
 		DbSet<Assessment> Assessments { get; set; }
 
 		Guid Insert<t>(EntityBase entity);
+		void Save();
 
 	}
 
