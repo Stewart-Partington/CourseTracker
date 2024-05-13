@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CourseTracker.Application\CourseTracker.Application.csproj" />
+    <ProjectReference Include="..\CourseTracker.Domain\CourseTracker.Domain.csproj" />
+    <ProjectReference Include="..\CourseTracker.Persistence\CourseTracker.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assessments\" />
+    <Folder Include="Courses\" />
+  </ItemGroup>
+
+</Project>
