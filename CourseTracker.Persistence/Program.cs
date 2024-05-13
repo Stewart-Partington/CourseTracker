@@ -16,9 +16,9 @@ namespace CourseTracker.Persistence
 			IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true);
 			IConfigurationRoot config = builder.Build();
 
-			//services.AddDbContext<DatabaseService>(options =>
-			//	options.UseSqlServer(config.GetConnectionString("SQLConnectionString")));
-			services.AddDbContext<DatabaseService>();
+			services.AddDbContext<DatabaseService>(options =>
+				options.UseSqlServer(config.GetConnectionString("SQLConnectionString")));
+			//services.AddDbContext<DatabaseService>();
 
 		}
 	}

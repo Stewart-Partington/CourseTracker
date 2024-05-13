@@ -19,7 +19,12 @@ namespace CourseTracker.Persistence
 
 		private string _connectionString;
 
-		public DatabaseService()
+        public DatabaseService(string connectionString)
+        {
+			_connectionString = connectionString;
+        }
+
+        public DatabaseService()
         {
 			IConfiguration config = new ConfigurationBuilder()
 				.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -50,7 +55,14 @@ namespace CourseTracker.Persistence
 				break;
 			}
 
-			this.SaveChanges();
+			try
+			{
+				this.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				string message = ex.Message;
+			}
 			result = (Guid)entity.Id;
 
 			return result;

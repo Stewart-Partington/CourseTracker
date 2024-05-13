@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace CourseTracker.Application.Students.Commands.Factory
 {
 	
-	internal class StudentFactory
+	public class StudentFactory : IStudentFactory
 	{
 
-		internal Student Create(CreateStudentModel createStudentModel)
+		public Student Create(CreateStudentModel createStudentModel)
 		{
 			return new Student()
 			{
