@@ -17,8 +17,6 @@
   <ItemGroup>
     <Folder Include="Assessments\Commands\" />
     <Folder Include="Assessments\Queries\" />
-    <Folder Include="Courses\Commands\" />
-    <Folder Include="Courses\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
