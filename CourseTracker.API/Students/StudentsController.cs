@@ -12,7 +12,7 @@ namespace CourseTracker.API.Students
 
     [ApiController]
 	[Route("api/[controller]")]
-	public class StudentsController : Controller
+	public class StudentsController : ControllerBase
 	{
 
         private readonly IGetStudentsListQuery _listQuery;

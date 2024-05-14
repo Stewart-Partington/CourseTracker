@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CourseTracker.Application.Courses.Commands.Factory
 {
 
-    public class CourseFactory
+    public class CourseFactory : ICourseFactory
 	{
 
 		public Course Create(CreateCourseModel model)
