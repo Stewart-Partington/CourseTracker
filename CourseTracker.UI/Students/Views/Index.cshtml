@@ -1,8 +1,8 @@
-﻿@using CourseTracker.Domain.Students
+﻿@using CourseTracker.Application.Students.Queries.GetStudentsList
 
 @{
 
-    List<Student> students = ViewBag.Students;
+    List<StudentListItemModel> students = ViewBag.Students;
 
 }
 
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Student student in students)
+            @foreach (StudentListItemModel student in students)
             {
                 <tr>
                     <td>@Html.ActionLink("Details", "Details", "Students", null, new { @id = student.Id })</td>
@@ -30,7 +30,7 @@
                         @student.ProgramName
                     </td>
                     <td>
-                        @student.GetAverage()
+                        Put Average here.
                     </td>
                 </tr>
             }

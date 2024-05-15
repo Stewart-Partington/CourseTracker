@@ -6,6 +6,9 @@ using CourseTracker.Domain.Courses;
 using CourseTracker.Domain.Assessments;
 using System.Net.Http.Headers;
 using System.Net;
+using CourseTracker.Application.Students.Queries.GetStudentsList;
+using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -37,40 +40,40 @@ namespace CourseTracker.UI.Services.DAL
 
 		#region Get Lists
 
-		public async Task<List<Student>> GetStudents()
+		public async Task<List<StudentListItemModel>> GetStudents()
 		{
 
-			List<Student> result = null;
+			List<StudentListItemModel> result = null;
 			var response = await _client.GetAsync("api/Students");
 
 			if (response.StatusCode == HttpStatusCode.OK)
-				result = await response.Content.ReadFromJsonAsync<List<Student>>();
+				result = await response.Content.ReadFromJsonAsync<List<StudentListItemModel>>();
 
 			return result;
 
 		}
 
-		public async Task<List<Course>> GetCourses(Guid studentId)
+		public async Task<List<CoursesListItemModel>> GetCourses(Guid studentId)
 		{
 
-			List<Course> result = null;
+			List<CoursesListItemModel> result = null;
 			var response = await _client.GetAsync($"api/Courses/{studentId}");
 
 			if (response.StatusCode == HttpStatusCode.OK)
-				result = await response.Content.ReadFromJsonAsync<List<Course>>();
+				result = await response.Content.ReadFromJsonAsync<List<CoursesListItemModel>>();
 
 			return result;
 
 		}
 
-		public async Task<List<Assessment>> GetAssessments(Guid courseId)
+		public async Task<List<AssessmentsListItemModel>> GetAssessments(Guid courseId)
 		{
 
-			List<Assessment> result = null;
+			List<AssessmentsListItemModel> result = null;
 			var response = await _client.GetAsync($"api/Assessments/{courseId}");
 
 			if (response.StatusCode == HttpStatusCode.OK)
-				result = await response.Content.ReadFromJsonAsync<List<Assessment>>();
+				result = await response.Content.ReadFromJsonAsync<List<AssessmentsListItemModel>>();
 
 			return result;
 

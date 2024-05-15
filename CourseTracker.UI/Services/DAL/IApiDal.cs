@@ -1,7 +1,6 @@
-﻿using CourseTracker.Domain;
-using CourseTracker.Domain.Assessments;
-using CourseTracker.Domain.Courses;
-using CourseTracker.Domain.Students;
+﻿using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Application.Students.Queries.GetStudentsList;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -10,9 +9,9 @@ namespace CourseTracker.UI.Services.DAL
 	{
 
 		// Get Lists
-		Task<List<Student>> GetStudents();
-		Task<List<Course>> GetCourses(Guid studentId);
-		Task<List<Assessment>> GetAssessments(Guid courseId);
+		Task<List<StudentListItemModel>> GetStudents();
+		Task<List<CoursesListItemModel>> GetCourses(Guid studentId);
+		Task<List<AssessmentsListItemModel>> GetAssessments(Guid courseId);
 
 		//Task<Guid> AddEntity<t>(EntityBase entity);
 		//Task UpdateEntity(EntityBase entity);

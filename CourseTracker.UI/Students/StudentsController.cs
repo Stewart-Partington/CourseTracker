@@ -1,4 +1,5 @@
-﻿using CourseTracker.Domain.Students;
+﻿using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Students.Queries.GetStudentsList;
 using CourseTracker.UI.Services.DAL;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace CourseTracker.UI.Students
         public async Task<IActionResult> Index()
 		{
 
-			List<Student> students = await _dal.GetStudents();
+			List<StudentListItemModel> students = await _dal.GetStudents();
 
 			ViewBag.Students = students;
 			
