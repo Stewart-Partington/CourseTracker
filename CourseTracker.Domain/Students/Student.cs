@@ -24,11 +24,14 @@ namespace CourseTracker.Domain.Students
 
 		public List<Course> Courses { get; set; }
 
-		public double GetAverage(int? year = null)
+		public double? GetAverage(int? year = null)
 		{
 			// Todo: Associated tests are green. Need to refactor.
 
-			double result = -1;
+			double? result = null;
+
+			if (Courses.Count == 0)
+				return result;
 
 			if (year == null)
 			{
@@ -46,7 +49,7 @@ namespace CourseTracker.Domain.Students
 					.Sum(x => (x.Grade / courseCount));
 			}
 
-			return Math.Round(result, 1, MidpointRounding.AwayFromZero);
+			return Math.Round((double)result, 1, MidpointRounding.AwayFromZero);
 
 		}
 

@@ -15,14 +15,22 @@ namespace CourseTracker.UI.Students
 			_dal = dal;
         }
 
-
-
         public async Task<IActionResult> Index()
 		{
 
 			List<Student> students = await _dal.GetStudents();
+
+			ViewBag.Students = students;
 			
 			return View();
+
+		}
+
+		public async Task<IActionResult> Details(Guid id)
+		{
+
+			return null;
+
 		}
 
 	}

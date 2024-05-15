@@ -26,7 +26,7 @@ namespace CourseTracker.Domain.Students
 		public void GetAverageFor1Year()
 		{
 
-			double average;
+			double? average;
 			Course course;
 
 			// 2023
@@ -58,7 +58,7 @@ namespace CourseTracker.Domain.Students
 		public void GetAverageForAllYears()
 		{
 
-			double average;
+			double? average;
 			Course course;
 
 			// 2023
