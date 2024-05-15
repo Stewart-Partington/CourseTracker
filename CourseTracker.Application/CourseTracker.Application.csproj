@@ -15,11 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assessments\Commands\" />
-    <Folder Include="Assessments\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CourseTracker.Domain\CourseTracker.Domain.csproj" />
   </ItemGroup>
 

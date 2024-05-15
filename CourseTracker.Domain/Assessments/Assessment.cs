@@ -12,7 +12,7 @@ namespace CourseTracker.Domain.Assessments
 
 		public Guid CourseId { get; set; }
 
-		AssessmentTypes AssessmentType { get; set;  }
+		public AssessmentTypes AssessmentType { get; set;  }
 
 		public string Name { get; set;  }
 
