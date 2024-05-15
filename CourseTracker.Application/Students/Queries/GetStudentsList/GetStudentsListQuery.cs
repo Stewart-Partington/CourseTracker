@@ -28,7 +28,8 @@ namespace CourseTracker.Application.Students.Queries.GetStudentsList
 					Id = x.Id,
 					FirstName = x.FirstName,
 					LastName = x.LastName,
-					ProgramName = x.ProgramName
+					ProgramName = x.ProgramName,
+					Average = x.Average
 				});
 
 			return result.ToList();

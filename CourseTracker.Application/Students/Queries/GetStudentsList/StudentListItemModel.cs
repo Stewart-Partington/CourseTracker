@@ -18,6 +18,8 @@ namespace CourseTracker.Application.Students.Queries.GetStudentsList
 
 		public string ProgramName { get; set; }
 
+		public double? Average { get; set; }
+
 	}
 
 }

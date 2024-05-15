@@ -24,6 +24,25 @@ namespace CourseTracker.Domain.Students
 
 		public List<Course> Courses { get; set; }
 
+		public double? Average
+		{
+			get
+			{
+				double? result = null;
+
+				if (Courses.Count == 0)
+					return result;
+
+                var coursesByYear = Courses.GroupBy(x => x.Year).ToList();
+                double average = 0;
+                foreach (var course in coursesByYear)
+                    average = average + course.Sum(x => (x.Grade / course.Count()));
+                result = average / coursesByYear.Count;
+
+                return result;
+			}
+		}
+
 		public double? GetAverage(int? year = null)
 		{
 			// Todo: Associated tests are green. Need to refactor.
