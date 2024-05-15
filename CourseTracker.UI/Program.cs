@@ -1,4 +1,5 @@
 using CourseTracker.UI.Services.DAL;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CourseTracker.UI
 {
@@ -10,6 +11,10 @@ namespace CourseTracker.UI
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+			builder.Services.Configure<RazorViewEngineOptions>(
+				p => p.ViewLocationExpanders.Add(
+					new CustomViewLocationExpander()));
+
 			builder.Services.AddHttpClient<IApiDal, ApiDal>();
 
 			var app = builder.Build();
@@ -31,7 +36,7 @@ namespace CourseTracker.UI
 
 			app.MapControllerRoute(
 				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
+				pattern: "{controller=Students}/{action=Index}/{id?}");
 
 			app.Run();
 		}

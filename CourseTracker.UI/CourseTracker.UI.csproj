@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CourseTracker.Domain\CourseTracker.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
