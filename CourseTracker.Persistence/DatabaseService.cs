@@ -50,19 +50,22 @@ namespace CourseTracker.Persistence
 
 			switch (typeof(t).Name)
 			{
+				
 				case nameof(Student):
-				Students.Add((Student)entity);
-				break;
+					Students.Add((Student)entity);
+					break;
+
+				case nameof(Course):
+					Courses.Add((Course)entity);
+					break;
+
+				case nameof(Assessment):
+					Assessments.Add((Assessment)entity);
+					break;
+
 			}
 
-			try
-			{
-				this.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				string message = ex.Message;
-			}
+			this.SaveChanges();
 			result = (Guid)entity.Id;
 
 			return result;
