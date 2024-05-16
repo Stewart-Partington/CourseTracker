@@ -1,6 +1,7 @@
 ﻿using CourseTracker.Domain;
 using CourseTracker.Domain.Assessments;
 using CourseTracker.Domain.Courses;
+using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,6 +17,7 @@ namespace CourseTracker.Application.Interfaces
 	{
 
 		DbSet<Student> Students { get; set; }
+		DbSet<SchoolYear> SchoolYears { get; set; }
 		DbSet<Course> Courses { get; set; }
 		DbSet<Assessment> Assessments { get; set; }
 
