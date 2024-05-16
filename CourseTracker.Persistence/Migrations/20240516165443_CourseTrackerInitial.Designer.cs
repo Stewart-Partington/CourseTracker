@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseTracker.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseService))]
-    [Migration("20240510135336_CourseTrackerInitial")]
+    [Migration("20240516165443_CourseTrackerInitial")]
     partial class CourseTrackerInitial
     {
         /// <inheritdoc />
@@ -30,6 +30,9 @@ namespace CourseTracker.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AssessmentType")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
@@ -59,7 +62,26 @@ namespace CourseTracker.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("SchoolYearId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Semester")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchoolYearId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("CourseTracker.Domain.SchoolYears.SchoolYear", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Index")
                         .HasColumnType("int");
 
                     b.Property<Guid>("StudentId")
@@ -72,7 +94,7 @@ namespace CourseTracker.Persistence.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("SchoolYears");
                 });
 
             modelBuilder.Entity("CourseTracker.Domain.Students.Student", b =>
@@ -106,8 +128,17 @@ namespace CourseTracker.Persistence.Migrations
 
             modelBuilder.Entity("CourseTracker.Domain.Courses.Course", b =>
                 {
-                    b.HasOne("CourseTracker.Domain.Students.Student", null)
+                    b.HasOne("CourseTracker.Domain.SchoolYears.SchoolYear", null)
                         .WithMany("Courses")
+                        .HasForeignKey("SchoolYearId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CourseTracker.Domain.SchoolYears.SchoolYear", b =>
+                {
+                    b.HasOne("CourseTracker.Domain.Students.Student", null)
+                        .WithMany("SchoolYears")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -118,9 +149,14 @@ namespace CourseTracker.Persistence.Migrations
                     b.Navigation("Assessments");
                 });
 
-            modelBuilder.Entity("CourseTracker.Domain.Students.Student", b =>
+            modelBuilder.Entity("CourseTracker.Domain.SchoolYears.SchoolYear", b =>
                 {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("CourseTracker.Domain.Students.Student", b =>
+                {
+                    b.Navigation("SchoolYears");
                 });
 #pragma warning restore 612, 618
         }

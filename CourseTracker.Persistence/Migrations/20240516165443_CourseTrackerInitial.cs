@@ -26,22 +26,41 @@ namespace CourseTracker.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
+                name: "SchoolYears",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SchoolYears", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SchoolYears_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SchoolYearId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Year = table.Column<int>(type: "int", nullable: false),
                     Semester = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
+                        name: "FK_Courses_SchoolYears_SchoolYearId",
+                        column: x => x.SchoolYearId,
+                        principalTable: "SchoolYears",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -52,6 +71,7 @@ namespace CourseTracker.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AssessmentType = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Grade = table.Column<double>(type: "float", nullable: false),
                     Weight = table.Column<double>(type: "float", nullable: false)
@@ -73,8 +93,13 @@ namespace CourseTracker.Persistence.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_StudentId",
+                name: "IX_Courses_SchoolYearId",
                 table: "Courses",
+                column: "SchoolYearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SchoolYears_StudentId",
+                table: "SchoolYears",
                 column: "StudentId");
         }
 
@@ -86,6 +111,9 @@ namespace CourseTracker.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "SchoolYears");
 
             migrationBuilder.DropTable(
                 name: "Students");
