@@ -9,6 +9,7 @@ using System.Net;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -53,7 +54,20 @@ namespace CourseTracker.UI.Services.DAL
 
 		}
 
-		public async Task<List<CoursesListItemModel>> GetCourses(Guid studentId)
+		public async Task<List<SchoolYearsListItemModel>> GetSchoolYears()
+		{
+
+            List<SchoolYearsListItemModel> result = null;
+            var response = await _client.GetAsync("api/SchoolYears");
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                result = await response.Content.ReadFromJsonAsync<List<SchoolYearsListItemModel>>();
+
+            return result;
+
+        }
+
+        public async Task<List<CoursesListItemModel>> GetCourses(Guid studentId)
 		{
 
 			List<CoursesListItemModel> result = null;

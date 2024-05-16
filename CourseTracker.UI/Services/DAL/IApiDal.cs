@@ -1,5 +1,6 @@
 ﻿using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
 
 namespace CourseTracker.UI.Services.DAL
@@ -10,6 +11,7 @@ namespace CourseTracker.UI.Services.DAL
 
 		// Get Lists
 		Task<List<StudentListItemModel>> GetStudents();
+		Task<List<SchoolYearsListItemModel>> GetSchoolYears();
 		Task<List<CoursesListItemModel>> GetCourses(Guid studentId);
 		Task<List<AssessmentsListItemModel>> GetAssessments(Guid courseId);
 
