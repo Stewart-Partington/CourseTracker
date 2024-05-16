@@ -1,5 +1,6 @@
 ﻿using CourseTracker.Domain.Assessments;
 using CourseTracker.Domain.Courses;
+using CourseTracker.Domain.SchoolYears;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -23,66 +24,37 @@ namespace CourseTracker.Domain.Students
 		}
 
 		[Test]
-		public void GetAverageFor1Year()
-		{
-
-			double? average;
-			Course course;
-
-			// 2023
-			course = new Course() { Year = 2023 };
-			course.Assessments.Add(new Assessment() { Grade = 100, Weight = 50 });
-			course.Assessments.Add(new Assessment() { Grade = 50, Weight = 50 });
-			_student.Courses.Add(course);
-			course = new Course() { Year = 2023 };
-			course.Assessments.Add(new Assessment() { Grade = 100, Weight = 75 });
-			course.Assessments.Add(new Assessment() { Grade = 50, Weight = 25 });
-			_student.Courses.Add(course);
-
-			// 2024
-			course = new Course() { Year = 2024 };
-			course.Assessments.Add(new Assessment() { Grade = 66.666, Weight = 50 });
-			course.Assessments.Add(new Assessment() { Grade = 33.333, Weight = 50 });
-			_student.Courses.Add(course);
-			course = new Course() { Year = 2024 };
-			course.Assessments.Add(new Assessment() { Grade = 66.666, Weight = 75 });
-			course.Assessments.Add(new Assessment() { Grade = 33.333, Weight = 25 });
-			_student.Courses.Add(course);
-
-			average = _student.GetAverage(2023);
-			Assert.That(average, Is.EqualTo(81.3));
-
-		}
-
-		[Test]
 		public void GetAverageForAllYears()
 		{
 
 			double? average;
+			SchoolYear schoolYear;
 			Course course;
 
 			// 2023
-			course = new Course() { Year = 2023 };
+			schoolYear = new SchoolYear() { Index = 1, Year = 2023 };
+			_student.SchoolYears.Add(schoolYear);
+			course = new Course();
 			course.Assessments.Add(new Assessment() { Grade = 100, Weight = 50 });
 			course.Assessments.Add(new Assessment() { Grade = 50, Weight = 50 });
-			_student.Courses.Add(course);
-			course = new Course() { Year = 2023 };
+            schoolYear.Courses.Add(course);
+			course = new Course();
 			course.Assessments.Add(new Assessment() { Grade = 100, Weight = 75 });
 			course.Assessments.Add(new Assessment() { Grade = 50, Weight = 25 });
-			_student.Courses.Add(course);
+            schoolYear.Courses.Add(course);
 
 			// 2024
-			course = new Course() { Year = 2024 };
-			course.Assessments.Add(new Assessment() { Grade = 66.666, Weight = 50 });
+			course = new Course();
+            _student.SchoolYears.Add(schoolYear);
+            course.Assessments.Add(new Assessment() { Grade = 66.666, Weight = 50 });
 			course.Assessments.Add(new Assessment() { Grade = 33.333, Weight = 50 });
-			_student.Courses.Add(course);
-			course = new Course() { Year = 2024 };
+            schoolYear.Courses.Add(course);
+			course = new Course();
 			course.Assessments.Add(new Assessment() { Grade = 66.666, Weight = 75 });
 			course.Assessments.Add(new Assessment() { Grade = 33.333, Weight = 25 });
-			_student.Courses.Add(course);
+            schoolYear.Courses.Add(course);
 
-			average = _student.GetAverage();
-			Assert.That(average, Is.EqualTo(67.7));
+			Assert.That(_student.Average, Is.EqualTo(67.7));
 
 		}
 

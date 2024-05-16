@@ -1,4 +1,4 @@
-﻿using CourseTracker.Domain.Courses;
+﻿using CourseTracker.Domain.SchoolYears;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace CourseTracker.Domain.Students
 
 		public Student()
 		{
-			Courses = new List<Course>();
+			SchoolYears = new List<SchoolYear>();
 		}
 
 		public string FirstName { get; set; }
@@ -22,7 +22,7 @@ namespace CourseTracker.Domain.Students
 
 		public string ProgramName { get; set; }
 
-		public List<Course> Courses { get; set; }
+		public List<SchoolYear> SchoolYears { get; set; }
 
 		public double? Average
 		{
@@ -30,46 +30,14 @@ namespace CourseTracker.Domain.Students
 			{
 				double? result = null;
 
-				if (Courses.Count == 0)
+				if (SchoolYears.Count == 0)
 					return result;
 
-                var coursesByYear = Courses.GroupBy(x => x.Year).ToList();
-                double average = 0;
-                foreach (var course in coursesByYear)
-                    average = average + course.Sum(x => (x.Grade / course.Count()));
-                result = average / coursesByYear.Count;
+				double average = (double)SchoolYears.Sum(x => x.Average);
+				result = average / SchoolYears.Count;
 
-                return result;
-			}
-		}
-
-		public double? GetAverage(int? year = null)
-		{
-			// Todo: Associated tests are green. Need to refactor.
-
-			double? result = null;
-
-			if (Courses.Count == 0)
-				return result;
-
-			if (year == null)
-			{
-				var coursesByYear = Courses.GroupBy(x => x.Year).ToList();
-				double average = 0;
-				foreach (var course in coursesByYear)
-					average = average + course.Sum(x => (x.Grade / course.Count()));
-				result = average / coursesByYear.Count;
-			}
-			else
-			{
-				int courseCount = Courses.Where(x => x.Year == (int)year).Count();
-				result = Courses
-					.Where(x => x.Year == (int)year)
-					.Sum(x => (x.Grade / courseCount));
-			}
-
-			return Math.Round((double)result, 1, MidpointRounding.AwayFromZero);
-
+                return Math.Round((double)result, 1, MidpointRounding.AwayFromZero);
+            }
 		}
 
 	}

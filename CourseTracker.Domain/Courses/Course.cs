@@ -16,11 +16,9 @@ namespace CourseTracker.Domain.Courses
 			Assessments = new List<Assessment>();
 		}
 
-		public Guid StudentId { get; set; }
+		public Guid SchoolYearId { get; set; }
 
 		public string Name { get; set; }
-
-		public int Year { get; set; }
 
 		public int Semester { get; set; }
 
