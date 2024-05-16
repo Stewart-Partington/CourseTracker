@@ -12,15 +12,13 @@ namespace CourseTracker.Application.Courses.Queries.GetCoursesList
 
 		public Guid Id { get; set; }
 
-		public Guid StudentId { get; set; }
+		public Guid SchoolYearId { get; set; }
 
 		public string Name { get; set; }
 
-		public int Year { get; set; }
-
 		public int Semester { get; set; }
 
-		//public List<Assessment> Assessments { get; set; }
+		//public List<Assessment> Assessments { get; set; S
 
 		public double Grade { get; set; }
 

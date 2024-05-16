@@ -12,7 +12,7 @@ namespace CourseTracker.Application.Courses.Commands.UpdateCourse
 
 		public Guid Id { get; set; }
 
-		public Guid StudentId { get; set; }
+		public Guid SchoolYearId { get; set; }
 
 		public string Name { get; set; }
 

@@ -26,9 +26,8 @@ namespace CourseTracker.Application.Courses.Queries.GetCourseDetail
 				.Select(x => new CourseDetailModel()
 				{
 					Id = x.Id,
-					StudentId = x.StudentId,
+					SchoolYearId = x.SchoolYearId,
 					Name = x.Name,
-					Year = x.Year,
 					Semester = x.Semester,
 					Grade = x.Grade
 				})

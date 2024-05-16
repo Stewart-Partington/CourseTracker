@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CourseTracker.Domain\CourseTracker.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SchoolYear\Queries\" />
-  </ItemGroup>
-
 </Project>

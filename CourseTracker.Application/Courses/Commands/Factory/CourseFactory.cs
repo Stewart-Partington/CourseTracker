@@ -18,11 +18,9 @@ namespace CourseTracker.Application.Courses.Commands.Factory
 		{
 			return new Course()
 			{
-				StudentId = model.StudentId,
+				SchoolYearId = model.SchoolYearId,
 				Name = model.Name,
-				Year = model.Year,
 				Semester = model.Semester,
-				//Grade = model.Grade
 			};
 		}
 
@@ -31,9 +29,8 @@ namespace CourseTracker.Application.Courses.Commands.Factory
 			return new Course()
 			{
 				Id = model.Id,
-				StudentId = model.StudentId,
+				SchoolYearId = model.SchoolYearId,
 				Name = model.Name,
-				Year = model.Year,
 				Semester = model.Semester,
 			};
 		}

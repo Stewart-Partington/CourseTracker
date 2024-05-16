@@ -2,6 +2,7 @@
 using CourseTracker.Domain;
 using CourseTracker.Domain.Assessments;
 using CourseTracker.Domain.Courses;
+using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -40,7 +41,8 @@ namespace CourseTracker.Persistence
 		}
 
 		public DbSet<Student> Students { get; set; }
-		public DbSet<Course> Courses { get; set; }
+        public DbSet<SchoolYear> SchoolYears { get; set; }
+        public DbSet<Course> Courses { get; set; }
 		public DbSet<Assessment> Assessments { get; set; }
 
 		public Guid Insert<t>(EntityBase entity)
