@@ -3,6 +3,7 @@ using CourseTracker.Application.SchoolYears.Commands.DeleteSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
+using CourseTracker.Application.Students.Commands.CreateStudent;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -44,12 +45,12 @@ namespace CourseTracker.API.SchoolYears
         }
 
         [HttpPost]
-        public HttpResponseMessage Create(CreateSchoolYearModel schoolYear)
+        public IActionResult Post(CreateSchoolYearModel schoolYear)
         {
 
-            _createCommand.Execute(schoolYear);
+            Guid id = _createCommand.Execute(schoolYear);
 
-            return new HttpResponseMessage(HttpStatusCode.Created);
+            return CreatedAtAction("Get", new { id = id });
 
         }
 

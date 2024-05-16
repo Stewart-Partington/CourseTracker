@@ -3,6 +3,7 @@ using CourseTracker.Application.Assessments.Commands.DeleteAssessment;
 using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Courses.Commands.CreateCourse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -43,17 +44,17 @@ namespace CourseTracker.API.Assessments
 			return _detailQuery.Execute(id);
 		}
 
-		[HttpPost]
-		public HttpResponseMessage Create(CreateAssessmentModel assessment)
-		{
+        [HttpPost]
+        public IActionResult Post(CreateAssessmentModel assessment)
+        {
 
-			_createCommand.Execute(assessment);
+            Guid id = _createCommand.Execute(assessment);
 
-			return new HttpResponseMessage(HttpStatusCode.Created);
+            return CreatedAtAction("Get", new { id = id });
 
-		}
+        }
 
-		[HttpPut]
+        [HttpPut]
 		public HttpResponseMessage Update(UpdateAssessmentModel assessment)
 		{
 

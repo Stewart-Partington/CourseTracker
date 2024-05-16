@@ -30,10 +30,12 @@ namespace CourseTracker.UI.Students
 		public async Task<IActionResult> Detail(Guid? id)
 		{
 
+			// Write full dal with generics
+
 			// ToDo:
 			// 1. Create VmStudent
 			// 2. If id
-			//		1. Get From DAL (Write method)
+			//		1. Get From DAL (Write method - look at Interview)
 			//		2. Create AutoMapper for Student and VmStudent
 			//		3. Create Question Editor Template
 			//		4. Post, update and redirect

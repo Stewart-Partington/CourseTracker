@@ -4,7 +4,9 @@ using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Linq.Expressions;
 using System.Net;
 
 namespace CourseTracker.API.Students
@@ -44,12 +46,12 @@ namespace CourseTracker.API.Students
         }
 
         [HttpPost]
-        public HttpResponseMessage Create(CreateStudentModel student)
+        public IActionResult Post(CreateStudentModel student)
         {
 
-            _createCommand.Execute(student);
+            Guid id = _createCommand.Execute(student);
 
-            return new HttpResponseMessage(HttpStatusCode.Created);
+            return CreatedAtAction("Get", new { id = id });
 
         }
 

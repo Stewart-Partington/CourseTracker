@@ -10,6 +10,9 @@ using CourseTracker.Application.Students.Queries.GetStudentsList;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using CourseTracker.Domain.SchoolYears;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -21,11 +24,16 @@ namespace CourseTracker.UI.Services.DAL
 
 		private readonly HttpClient _client;
 
-		#endregion
+		private const string _studentsController = "api/Students";
+		private const string _schoolsYearController = "api/SchoolYears";
+		private const string _coursesController = "api/Courses";
+		private const string _assementsController = "api/Assessments";
 
-		#region Constructors
+        #endregion
 
-		public ApiDal(HttpClient client, IConfiguration config)
+        #region Constructors
+
+        public ApiDal(HttpClient client, IConfiguration config)
         {
 
 			_client = client;
@@ -45,7 +53,7 @@ namespace CourseTracker.UI.Services.DAL
 		{
 
 			List<StudentListItemModel> result = null;
-			var response = await _client.GetAsync("api/Students");
+			var response = await _client.GetAsync(_studentsController);
 
 			if (response.StatusCode == HttpStatusCode.OK)
 				result = await response.Content.ReadFromJsonAsync<List<StudentListItemModel>>();
@@ -54,11 +62,11 @@ namespace CourseTracker.UI.Services.DAL
 
 		}
 
-		public async Task<List<SchoolYearsListItemModel>> GetSchoolYears()
-		{
+		public async Task<List<SchoolYearsListItemModel>> GetSchoolYears(Guid studentId)
+        {
 
             List<SchoolYearsListItemModel> result = null;
-            var response = await _client.GetAsync("api/SchoolYears");
+            var response = await _client.GetAsync($"{ _schoolsYearController}/{studentId}");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<List<SchoolYearsListItemModel>>();
@@ -67,11 +75,11 @@ namespace CourseTracker.UI.Services.DAL
 
         }
 
-        public async Task<List<CoursesListItemModel>> GetCourses(Guid studentId)
+        public async Task<List<CoursesListItemModel>> GetCourses(Guid schoolYearId)
 		{
 
 			List<CoursesListItemModel> result = null;
-			var response = await _client.GetAsync($"api/Courses/{studentId}");
+			var response = await _client.GetAsync($"{_coursesController}/{schoolYearId}");
 
 			if (response.StatusCode == HttpStatusCode.OK)
 				result = await response.Content.ReadFromJsonAsync<List<CoursesListItemModel>>();
@@ -84,7 +92,7 @@ namespace CourseTracker.UI.Services.DAL
 		{
 
 			List<AssessmentsListItemModel> result = null;
-			var response = await _client.GetAsync($"api/Assessments/{courseId}");
+			var response = await _client.GetAsync($"{_assementsController}/{courseId}");
 
 			if (response.StatusCode == HttpStatusCode.OK)
 				result = await response.Content.ReadFromJsonAsync<List<AssessmentsListItemModel>>();
@@ -95,6 +103,50 @@ namespace CourseTracker.UI.Services.DAL
 
 		#endregion
 
-	}
+		#region Generics
+
+		public async Task<Guid> AddEntity<t>(EntityBase entity)
+		{
+
+            Guid result = Guid.Empty;
+			string controllerName = GetControllerName<t>();
+			var response = await _client.PostAsJsonAsync(controllerName, entity);
+
+
+            return result;
+
+        }
+
+		private string GetControllerName<t>()
+		{
+
+			string result = null;
+
+            switch (typeof(t).Name)
+            {
+                case nameof(Student):
+                    result = _studentsController;
+                    break;
+
+                case nameof(SchoolYear):
+					result = _schoolsYearController;
+					break;
+
+				case nameof(Course):
+					result = _coursesController;
+					break;
+
+				case nameof(Assessment):
+					result = _assementsController;
+					break;
+            }
+
+            return result;
+
+		}
+
+        #endregion
+
+    }
 
 }

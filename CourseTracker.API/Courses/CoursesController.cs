@@ -3,6 +3,7 @@ using CourseTracker.Application.Courses.Commands.DeleteCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
@@ -47,17 +48,17 @@ namespace CourseTracker.API.Courses
 			return _detailQuery.Execute(id);
 		}
 
-		[HttpPost]
-		public HttpResponseMessage Create(CreateCourseModel course)
-		{
+        [HttpPost]
+        public IActionResult Post(CreateCourseModel course)
+        {
 
-			_createCommand.Execute(course);
+            Guid id = _createCommand.Execute(course);
 
-			return new HttpResponseMessage(HttpStatusCode.Created);
+            return CreatedAtAction("Get", new { id = id });
 
-		}
+        }
 
-		[HttpPut]
+        [HttpPut]
 		public HttpResponseMessage Update(UpdateCourseModel course)
 		{
 
