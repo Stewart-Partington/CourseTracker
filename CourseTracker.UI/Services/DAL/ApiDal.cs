@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using CourseTracker.Domain.SchoolYears;
 using Newtonsoft.Json;
 using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Commands.UpdateStudent;
+using CourseTracker.Application.Students.Queries.GetStudentDetail;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -64,16 +66,39 @@ namespace CourseTracker.UI.Services.DAL
 
 		}
 
-		public async Task<Guid> CreateStudent(CreateStudentModel createStudent)
+		public async Task<StudentDetailModel> GetStudent(Guid Id)
+		{
+
+			StudentDetailModel result = null;
+			var response = await _client.GetAsync($"{_studentsController}/{Id}");
+
+			if (response.StatusCode == HttpStatusCode.OK)
+				result = await response.Content.ReadFromJsonAsync<StudentDetailModel>();
+
+			return result;
+
+		}
+
+        public async Task<Guid> CreateStudent(CreateStudentModel createStudent)
 		{
 
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync(_studentsController, createStudent);
 
 			if (response.StatusCode == HttpStatusCode.Created)
-                createStudent = await response.Content.ReadFromJsonAsync<CreateStudentModel>();
+                result = await response.Content.ReadFromJsonAsync<Guid>();
 
-			return createStudent.Id;
+			return result;
+
+        }
+
+		public async Task UpdateStudent(UpdateStudentModel updateStudent)
+		{
+
+            var response = await _client.PutAsJsonAsync(_studentsController, updateStudent);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
 
         }
 

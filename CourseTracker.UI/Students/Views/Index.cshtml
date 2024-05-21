@@ -28,7 +28,7 @@
             @foreach (StudentListItemModel student in students)
             {
                 <tr>
-                    <td>@Html.ActionLink("Details", "Details", "Students", new { @id = student.Id })</td>
+                    <td>@Html.ActionLink("Details", "Detail", "Students", new { @id = student.Id })</td>
                     <td>
                         @string.Format("{0} {1}", student.FirstName, student.LastName)
                     </td>

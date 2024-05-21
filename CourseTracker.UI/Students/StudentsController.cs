@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Commands.UpdateStudent;
+using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
 using CourseTracker.Domain.Students;
 using CourseTracker.UI.Services.DAL;
@@ -38,22 +40,15 @@ namespace CourseTracker.UI.Students
 		public async Task<IActionResult> Detail(Guid? id)
 		{
 
-			// Write full dal with generics
-
-			// ToDo:
-			// 1. Create VmStudent
-			// 2. If id
-			//		1. Get From DAL (Write method - look at Interview)
-			//		2. Create AutoMapper for Student and VmStudent
-			//		3. Create Question Editor Template
-			//		4. Post, update and redirect
-			// 3. Else
-			// et cetera...
-
 			VmStudent result = null;
 
 			if (id == null)
 				result = new VmStudent();
+			else
+			{
+				StudentDetailModel studentDetail = await _dal.GetStudent((Guid)id);
+				result = _mapper.Map<VmStudent>(studentDetail);
+            }
 
 			return View(result);
 
@@ -71,8 +66,11 @@ namespace CourseTracker.UI.Students
                     var createStudent = _mapper.Map<CreateStudentModel>(vmStudent);
                     await _dal.CreateStudent(createStudent);
 				}
-				//else
-				//	_dal.UpdateEntity<Student>(createStudent);
+				else
+				{
+					var updateStudent = _mapper.Map<UpdateStudentModel>(vmStudent);
+					await _dal.UpdateStudent(updateStudent);
+				}
 
 				return RedirectToAction("Index");
 

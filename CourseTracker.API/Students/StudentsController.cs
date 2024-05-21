@@ -51,9 +51,7 @@ namespace CourseTracker.API.Students
 
             Guid id = await _createCommand.Execute(student);
 
-            student.Id = id;
-
-            return CreatedAtAction("Get", new { id = id }, student);
+            return CreatedAtAction("Get", new { id = id }, id);
 
         }
 
