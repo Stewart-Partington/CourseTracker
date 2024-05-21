@@ -51,7 +51,7 @@ namespace CourseTracker.UI.Services.DAL
 
 		#endregion
 
-		#region Get Lists
+		#region Students
 
 		public async Task<List<StudentListItemModel>> GetStudents()
 		{
@@ -96,6 +96,16 @@ namespace CourseTracker.UI.Services.DAL
 		{
 
             var response = await _client.PutAsJsonAsync(_studentsController, updateStudent);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+		public async Task DeleteStudent(Guid id)
+		{
+
+            var response = await _client.DeleteAsync($"{_studentsController}/{id}");
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());
