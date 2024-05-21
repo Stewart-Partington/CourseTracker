@@ -70,10 +70,10 @@ namespace CourseTracker.UI.Services.DAL
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync(_studentsController, createStudent);
 
-            if (response.StatusCode == HttpStatusCode.Created)
-                result = JsonConvert.DeserializeObject<Guid>(response.Content.ToString());
+			if (response.StatusCode == HttpStatusCode.Created)
+                createStudent = await response.Content.ReadFromJsonAsync<CreateStudentModel>();
 
-            return result;
+			return createStudent.Id;
 
         }
 

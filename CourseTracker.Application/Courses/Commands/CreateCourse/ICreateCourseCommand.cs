@@ -11,7 +11,7 @@ namespace CourseTracker.Application.Courses.Commands.CreateCourse
     public interface ICreateCourseCommand
     {
 
-        Guid Execute(CreateCourseModel model);
+        Task<Guid> Execute(CreateCourseModel model);
 
     }
 

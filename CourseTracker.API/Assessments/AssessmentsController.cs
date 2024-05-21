@@ -45,10 +45,10 @@ namespace CourseTracker.API.Assessments
 		}
 
         [HttpPost]
-        public IActionResult Post(CreateAssessmentModel assessment)
+        public async Task<IActionResult> Post(CreateAssessmentModel assessment)
         {
 
-            Guid id = _createCommand.Execute(assessment);
+            Guid id = await _createCommand.Execute(assessment);
 
             return CreatedAtAction("Get", new { id = id });
 

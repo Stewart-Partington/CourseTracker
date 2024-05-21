@@ -10,6 +10,9 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 	public class CreateStudentModel
 	{
 
+		// This does not belong here. 
+		public Guid Id { get; set; }
+
 		public string FirstName { get; set; }
 
 		public string LastName { get; set; }

@@ -46,12 +46,14 @@ namespace CourseTracker.API.Students
         }
 
         [HttpPost]
-        public IActionResult Post(CreateStudentModel student)
+        public async Task<IActionResult> Post(CreateStudentModel student)
         {
 
-            Guid id = _createCommand.Execute(student);
+            Guid id = await _createCommand.Execute(student);
 
-            return CreatedAtAction("Get", new { id = id });
+            student.Id = id;
+
+            return CreatedAtAction("Get", new { id = id }, student);
 
         }
 

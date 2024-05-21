@@ -45,8 +45,8 @@ namespace CourseTracker.Persistence
         public DbSet<Course> Courses { get; set; }
 		public DbSet<Assessment> Assessments { get; set; }
 
-		public Guid Insert<t>(EntityBase entity)
-		{
+		public async Task<Guid> InsertAsync<t>(EntityBase entity)
+        {
 
 			Guid result;
 
@@ -67,7 +67,7 @@ namespace CourseTracker.Persistence
 
 			}
 
-			this.SaveChanges();
+			await this.SaveChangesAsync();
 			result = (Guid)entity.Id;
 
 			return result;

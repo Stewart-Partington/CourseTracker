@@ -21,7 +21,7 @@ namespace CourseTracker.Application.Interfaces
 		DbSet<Course> Courses { get; set; }
 		DbSet<Assessment> Assessments { get; set; }
 
-		Guid Insert<t>(EntityBase entity);
+		Task<Guid> InsertAsync<t>(EntityBase entity);
 		void Save();
 
 	}

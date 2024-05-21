@@ -23,13 +23,13 @@ namespace CourseTracker.Application.Courses.Commands.CreateCourse
             _factory = factory;
         }
 
-        public Guid Execute(CreateCourseModel model)
+        public async Task<Guid> Execute(CreateCourseModel model)
         {
 
             Guid result = Guid.Empty;
             Course course = _factory.Create(model);
 
-            result = _database.Insert<Course>(course);
+            result = await _database.InsertAsync<Course>(course);
 
             return result;
 

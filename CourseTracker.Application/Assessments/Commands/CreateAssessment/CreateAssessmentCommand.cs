@@ -22,13 +22,13 @@ namespace CourseTracker.Application.Assessments.Commands.CreateAssessment
 			_factory = factory;
 		}
 
-		public Guid Execute(CreateAssessmentModel model)
+		public async Task<Guid> Execute(CreateAssessmentModel model)
 		{
 
 			Guid result = Guid.Empty;
 			Assessment assessment = _factory.Create(model);
 
-			result = _database.Insert<Assessment>(assessment);
+			result = await _database.InsertAsync<Assessment>(assessment);
 
 			return result;
 

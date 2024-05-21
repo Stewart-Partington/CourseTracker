@@ -21,13 +21,13 @@ namespace CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear
             _factory = factory;
         }
 
-        public Guid Execute(CreateSchoolYearModel model)
+        public async Task<Guid> Execute(CreateSchoolYearModel model)
         {
 
             Guid result = Guid.Empty;
             SchoolYear schoolYear = _factory.Create(model);
 
-            result = _database.Insert<SchoolYear>(schoolYear);
+            result = await _database.InsertAsync<SchoolYear>(schoolYear);
 
             return result;
 
