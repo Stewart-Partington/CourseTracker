@@ -13,6 +13,7 @@ using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using CourseTracker.Domain.SchoolYears;
+using Newtonsoft.Json;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -112,12 +113,51 @@ namespace CourseTracker.UI.Services.DAL
 			string controllerName = GetControllerName<t>();
 			var response = await _client.PostAsJsonAsync(controllerName, entity);
 
+			if (response.StatusCode == HttpStatusCode.Created)
+				result = JsonConvert.DeserializeObject<Guid>(response.Content.ToString());
 
             return result;
 
         }
 
-		private string GetControllerName<t>()
+		public async Task UpdateEntity<t>(EntityBase entity)
+		{
+
+            string controllerName = GetControllerName<t>();
+            var response = await _client.PutAsJsonAsync(controllerName, entity);
+
+			if (response.StatusCode != HttpStatusCode.OK)
+				throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+		public async Task<EntityBase> GetEntity<t>(Guid id, bool getChildObjects = false)
+		{
+
+			EntityBase result = null;
+            string controllerName = GetControllerName<t>();
+            var response = await _client.GetAsync($"{controllerName}/{id}");
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                result = await response.Content.ReadFromJsonAsync<EntityBase>();
+
+            return result;
+
+		}
+
+        public async Task DeleteEntity<t>(Guid id)
+		{
+
+            string controllerName = GetControllerName<t>();
+            var response = await _client.DeleteAsync($"{controllerName}/{id}");
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+
+        private string GetControllerName<t>()
 		{
 
 			string result = null;

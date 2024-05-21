@@ -18,11 +18,11 @@ namespace CourseTracker.UI.Services.DAL
 
         // Use of Generics
         Task<Guid> AddEntity<t>(EntityBase entity);
-        //Task UpdateEntity(EntityBase entity);
-        //Task<EntityBase> GetEntity<t>(Guid id, bool getChildObjects = false);
-        //Task DeleteEntity<t>(Guid id);
+		Task UpdateEntity<t>(EntityBase entity);
+		Task<EntityBase> GetEntity<t>(Guid id, bool getChildObjects = false);
+		Task DeleteEntity<t>(Guid id);
 
 
-    }
+	}
 
 }
