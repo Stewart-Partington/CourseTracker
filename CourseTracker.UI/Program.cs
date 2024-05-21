@@ -1,3 +1,4 @@
+using CourseTracker.UI.Services.AutoMapper;
 using CourseTracker.UI.Services.DAL;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -16,6 +17,7 @@ namespace CourseTracker.UI
 					new CustomViewLocationExpander()));
 
 			builder.Services.AddHttpClient<IApiDal, ApiDal>();
+			builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 			var app = builder.Build();
 

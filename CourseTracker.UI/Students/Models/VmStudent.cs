@@ -6,7 +6,7 @@ namespace CourseTracker.UI.Students.Models
     public class VmStudent
     {
 
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }

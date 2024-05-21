@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using CourseTracker.Domain.SchoolYears;
 using Newtonsoft.Json;
+using CourseTracker.Application.Students.Commands.CreateStudent;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -63,7 +64,27 @@ namespace CourseTracker.UI.Services.DAL
 
 		}
 
-		public async Task<List<SchoolYearsListItemModel>> GetSchoolYears(Guid studentId)
+		public async Task<Guid> CreateStudent(CreateStudentModel createStudent)
+		{
+
+            Guid result = Guid.Empty;
+            var response = await _client.PostAsJsonAsync(_studentsController, createStudent);
+
+            if (response.StatusCode == HttpStatusCode.Created)
+                result = JsonConvert.DeserializeObject<Guid>(response.Content.ToString());
+
+            return result;
+
+        }
+
+        #endregion
+
+
+        #region Old
+
+
+
+        public async Task<List<SchoolYearsListItemModel>> GetSchoolYears(Guid studentId)
         {
 
             List<SchoolYearsListItemModel> result = null;

@@ -1,0 +1,33 @@
+﻿@model VmStudent
+@using CourseTracker.UI.Students.Models
+
+@{
+
+    string heading = Model.Id == null ? "Add New Student" : $"{Model.FirstName} {Model.LastName}";
+
+}
+
+<h1>@heading</h1>
+
+<form>
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+
+    @Html.EditorFor(x => x.FirstName, "Question", new { inputControl = Html.TextBoxFor(x => x.FirstName, new { @class = "form-control w-50" }) })
+
+    @Html.EditorFor(x => x.LastName, "Question", new { inputControl = Html.TextBoxFor(x => x.LastName, new { @class = "form-control w-50" }) })
+
+    @Html.EditorFor(x => x.ProgramName, "Question", new { inputControl = Html.TextBoxFor(x => x.ProgramName, new { @class = "form-control w-50" }) })
+
+    <div class="mt-3">
+
+        <input type="submit" value="Save" id="btnSave" class="btn btn-primary mr-2" formaction=@Url.Action("Detail", "Students")
+                formmethod="post" />
+
+        @Html.ActionLink("Cancel", "Index", "Students", null, new { @class = "btn btn-default" })
+
+    </div>
+
+</form>

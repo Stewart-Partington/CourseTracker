@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Html
+
+@{
+
+    TagBuilder inputControl = (TagBuilder)ViewData["inputControl"];
+    string divClass = ViewData["divClass"] != null ? ViewData["divClass"].ToString() : "";
+    string divId = string.Format("div{0}", inputControl.Attributes["id"]);
+    bool isDate = ((!string.IsNullOrEmpty(ViewData.ModelMetadata.DataTypeName)) && (ViewData.ModelMetadata.DataTypeName.ToLower() == "date"));
+
+}
+
+<div id="@divId" class="row form-group @divClass">
+    <div class="col-md-12">
+        @* @Html.CopLabelFor(x => x) *@
+        @Html.LabelFor(x => x)
+    </div>
+    <div class="col-md-12">
+        @Html.ValidationMessageFor(x => x, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-12">
+        @inputControl
+    </div>
+</div>
