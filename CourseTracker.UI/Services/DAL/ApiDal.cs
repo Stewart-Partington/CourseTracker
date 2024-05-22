@@ -17,6 +17,9 @@ using Newtonsoft.Json;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
+using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
+using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -114,16 +117,13 @@ namespace CourseTracker.UI.Services.DAL
 
         #endregion
 
-
-        #region Old
-
-
+        #region SchoolYear
 
         public async Task<List<SchoolYearsListItemModel>> GetSchoolYears(Guid studentId)
         {
 
             List<SchoolYearsListItemModel> result = null;
-            var response = await _client.GetAsync($"{ _schoolsYearController}/{studentId}");
+            var response = await _client.GetAsync($"{_studentsController}/{studentId}/SchoolYears");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<List<SchoolYearsListItemModel>>();
@@ -131,6 +131,56 @@ namespace CourseTracker.UI.Services.DAL
             return result;
 
         }
+
+		public async Task<SchoolYearDetailModel> GetSchoolYear(Guid id)
+		{
+
+            SchoolYearDetailModel result = null;
+            var response = await _client.GetAsync($"{_schoolsYearController}/{id}");
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                result = await response.Content.ReadFromJsonAsync<SchoolYearDetailModel>();
+
+            return result;
+
+        }
+
+		public async Task<Guid> CreateSchoolYear(CreateSchoolYearModel createSchoolYear)
+		{
+
+            Guid result = Guid.Empty;
+            var response = await _client.PostAsJsonAsync(_schoolsYearController, createSchoolYear);
+
+            if (response.StatusCode == HttpStatusCode.Created)
+                result = await response.Content.ReadFromJsonAsync<Guid>();
+
+            return result;
+
+        }
+
+		public async Task UpdateSchoolYear(UpdateSchoolYearModel updateSchoolYear)
+        {
+
+            var response = await _client.PutAsJsonAsync(_schoolsYearController, updateSchoolYear);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+		public async Task DeleteSchoolYear(Guid id)
+		{
+
+            var response = await _client.DeleteAsync($"{_schoolsYearController}/{id}");
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+        #endregion
+
+        #region Old
 
         public async Task<List<CoursesListItemModel>> GetCourses(Guid schoolYearId)
 		{

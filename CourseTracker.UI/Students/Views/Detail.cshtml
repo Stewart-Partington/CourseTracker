@@ -1,9 +1,11 @@
 ﻿@model VmStudent
 @using CourseTracker.UI.Students.Models
+@using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList
 
 @{
 
     string heading = Model.Id == null ? "Add New Student" : $"{Model.FirstName} {Model.LastName}";
+    List<SchoolYearsListItemModel> schoolYears = Model.Id == null ? null : ViewBag.SchoolYears;
 
 }
 
@@ -26,8 +28,19 @@
         <input type="submit" value="Save" id="btnSave" class="btn btn-primary mr-2" formaction=@Url.Action("Detail", "Students")
                 formmethod="post" />
 
-        @Html.ActionLink("Cancel", "Index", "Students", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Cancel", "Index", "Students", null, new { @class = "btn btn-secondary" })
 
     </div>
 
 </form>
+
+@if (Model.Id != null)
+{
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            @Html.ActionLink("Add Year", "Detail", "Years", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    
+}

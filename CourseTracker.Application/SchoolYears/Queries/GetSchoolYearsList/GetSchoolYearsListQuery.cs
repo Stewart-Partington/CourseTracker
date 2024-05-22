@@ -18,10 +18,11 @@ namespace CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList
             _database = database;
         }
 
-        public List<SchoolYearsListItemModel> Execute()
+        public List<SchoolYearsListItemModel> Execute(Guid studentId)
         {
 
             var result = _database.SchoolYears
+                .Where(x => x.StudentId == studentId)
                 .Select(x => new SchoolYearsListItemModel()
                 {
                     Id = x.Id,

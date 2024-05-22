@@ -32,11 +32,12 @@ namespace CourseTracker.API.SchoolYears
             _deleteCommand = deleteCommand;
         }
 
-        [HttpGet]
-        public List<SchoolYearsListItemModel> Get()
-        {
-            return _listQuery.Execute();
-        }
+        //[HttpGet("api/Students/{studentId}/SchoolYears")]
+        //[Route("api/Students/{studentId:guid}/SchoolYears")]
+        //public List<SchoolYearsListItemModel> Get(Guid studentId)
+        //{
+        //    return _listQuery.Execute(studentId);
+        //}
 
         [HttpGet("{id}")]
         public SchoolYearDetailModel Get(Guid id)

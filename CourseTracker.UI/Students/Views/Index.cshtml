@@ -29,8 +29,8 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink("Details", "Detail", "Students", new { @id = student.Id })
-                        @Html.ActionLink("Delete", "Delete", "Students", new { @id = student.Id })
+                        @Html.ActionLink("Details", "Detail", "Students", new { @sid = student.Id })
+                        @Html.ActionLink("Delete", "Delete", "Students", new { @sid = student.Id })
                     </td>
                     <td>
                         @string.Format("{0} {1}", student.FirstName, student.LastName)

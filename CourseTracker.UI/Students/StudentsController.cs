@@ -8,6 +8,7 @@ using CourseTracker.Domain.Students;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 
 namespace CourseTracker.UI.Students
 {
@@ -37,17 +38,18 @@ namespace CourseTracker.UI.Students
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Detail(Guid? id)
+		public async Task<IActionResult> Detail(Guid? sid)
 		{
 
 			VmStudent result = null;
 
-			if (id == null)
+			if (sid == null)
 				result = new VmStudent();
 			else
 			{
-				StudentDetailModel studentDetail = await _dal.GetStudent((Guid)id);
+				StudentDetailModel studentDetail = await _dal.GetStudent((Guid)sid);
 				result = _mapper.Map<VmStudent>(studentDetail);
+                ViewBag.SchoolYears = await _dal.GetSchoolYears((Guid)sid);
             }
 
 			return View(result);
@@ -73,20 +75,20 @@ namespace CourseTracker.UI.Students
 				}
 
 				return RedirectToAction("Index");
-
-			}
-			else
+            }
+            else
 			{
-				return View(vmStudent);
+                ViewBag.SchoolYears = await _dal.GetSchoolYears((Guid)vmStudent.Id);
+                return View(vmStudent);
 			}
 
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Delete(Guid id)
+		public async Task<IActionResult> Delete(Guid sid)
 		{
 
-			await _dal.DeleteStudent(id);
+			await _dal.DeleteStudent(sid);
 
             return RedirectToAction("Index");
 

@@ -10,7 +10,7 @@ namespace CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList
     public interface IGetSchoolYearsListQuery
     {
 
-        List<SchoolYearsListItemModel> Execute();
+        List<SchoolYearsListItemModel> Execute(Guid studentId);
 
     }
 
