@@ -3,6 +3,7 @@ using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
 using Microsoft.AspNetCore.Mvc;
+using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.SchoolYears
 {
@@ -25,7 +26,7 @@ namespace CourseTracker.UI.SchoolYears
             if (syid == null)
                 result = new VmSchoolYear();
 
-            //result.StudentId = 
+            HandleEntityIds(EntityTypes.SchoolYear, result);
 
             return View(result);
 

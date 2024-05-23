@@ -1,0 +1,48 @@
+﻿@using CourseTracker.UI.Models
+
+@{
+
+    EntityIds entityIds = ViewBag.EntityIds;
+
+}
+
+@functions {
+
+    private string GetValue(KeyValuePair<Guid?, string>? kvp)
+    {
+
+        return ((KeyValuePair<Guid?, string>)kvp).Value;
+
+    }
+
+}
+
+<ol class="breadcrumb mt-3">
+
+    @if (entityIds.EntityType == Enums.EntityTypes.Students)
+    {
+        <li class="breadcrumb-item active">Students</li>
+    }
+    else if (entityIds.EntityType == Enums.EntityTypes.Student)
+    {
+        <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
+        <li class="breadcrumb-item active">@GetValue(entityIds.Student)</li>
+    }
+    else if (entityIds.EntityType == Enums.EntityTypes.SchoolYear)
+    {
+        <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
+        <li class="breadcrumb-item">@GetValue(entityIds.SchoolYear)</li>
+    }
+    else if (entityIds.EntityType == Enums.EntityTypes.Course)
+    {
+        
+    }
+    else if (entityIds.EntityType == Enums.EntityTypes.Assessment)
+    {
+        
+    }
+
+
+</ol>
+

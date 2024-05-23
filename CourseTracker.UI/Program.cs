@@ -13,7 +13,8 @@ namespace CourseTracker.UI
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
-			builder.Services.AddControllersWithViews();
+			builder.Services.AddControllersWithViews()
+				.AddRazorRuntimeCompilation();
 			builder.Services.Configure<RazorViewEngineOptions>(
 				p => p.ViewLocationExpanders.Add(
 					new CustomViewLocationExpander()));

@@ -1,9 +1,11 @@
 ﻿@model VmSchoolYear
 @using CourseTracker.UI.SchoolYears.Models
+@using CourseTracker.UI.Models
 
 @{
 
     string heading = Model.Id == null ? "Add New School Year" : $"Year: {Model.Index}";
+    EntityIds entityIds = ViewBag.EntityIds;
 
 }
 
@@ -24,7 +26,7 @@
         <input type="submit" value="Save" id="btnSave" class="btn btn-primary mr-2" formaction=@Url.Action("Detail", "SchoolYears")
                formmethod="post" />
 
-        @Html.ActionLink("Cancel", "Detail", "Students", new { sid  = Model.StudentId }, new { @class = "btn btn-secondary" })
+        @Html.ActionLink("Cancel", "Detail", "Students", new { sid = entityIds.Student.Value.Key }, new { @class = "btn btn-secondary" })
 
     </div>
 

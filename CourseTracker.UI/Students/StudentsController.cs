@@ -10,6 +10,7 @@ using CourseTracker.UI.Services.State;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
+using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.Students
 {
@@ -30,6 +31,7 @@ namespace CourseTracker.UI.Students
 			List<StudentListItemModel> students = await _dal.GetStudents();
 
 			ViewBag.Students = students;
+			HandleEntityIds(EntityTypes.Students, null);
 			
 			return View();
 
@@ -50,7 +52,9 @@ namespace CourseTracker.UI.Students
                 ViewBag.SchoolYears = await _dal.GetSchoolYears((Guid)sid);
             }
 
-			return View(result);
+            HandleEntityIds(EntityTypes.Student, result);
+
+            return View(result);
 
 		}
 
@@ -77,6 +81,7 @@ namespace CourseTracker.UI.Students
             else
 			{
                 ViewBag.SchoolYears = await _dal.GetSchoolYears((Guid)vmStudent.Id);
+                HandleEntityIds(EntityTypes.Student, vmStudent);
                 return View(vmStudent);
 			}
 

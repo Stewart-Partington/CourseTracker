@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
+using CourseTracker.UI.Models;
+using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
+using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI
 {
@@ -18,6 +22,62 @@ namespace CourseTracker.UI
             _dal = dal;
             _mapper = mapper;
             _state = state;
+        }
+
+        public void HandleEntityIds(EntityTypes entityType, object vm)
+        {
+
+            EntityIds entityIds = _state.EntityIds == null ? new EntityIds() : _state.EntityIds;
+
+            switch (entityType)
+            {
+
+                case EntityTypes.Students:
+;
+                    entityIds.Student = null;
+                    entityIds.SchoolYear = null;
+                    entityIds.Course = null;
+                    entityIds.Assessment = null;
+
+                    break;
+
+                case EntityTypes.Student:
+
+                    VmStudent vmStudent = (VmStudent)vm;
+                    KeyValuePair<Guid?, string> kvpStudent = new KeyValuePair<Guid?, string>(vmStudent.Id, vmStudent.FirstName == null ? "Add Student" : vmStudent.FirstName);
+
+                    entityIds.Student = kvpStudent;
+                    entityIds.SchoolYear = null;
+                    entityIds.Course = null;
+                    entityIds.Assessment = null;
+
+                    break;
+
+                case EntityTypes.SchoolYear:
+
+                    VmSchoolYear vmSchoolYear = (VmSchoolYear)vm;
+                    KeyValuePair<Guid?, string> kvpSchoolYear = new KeyValuePair<Guid?, string>(vmSchoolYear.Id, vmSchoolYear.Year == null ? "Add School Year" : vmSchoolYear.Year.ToString());
+
+                    entityIds.SchoolYear = kvpSchoolYear;
+                    entityIds.Course = null;
+                    entityIds.Assessment = null;
+
+                    break;
+
+                case EntityTypes.Course:
+
+                    break;
+
+                case EntityTypes.Assessment:
+
+                    break;
+
+            }
+
+            entityIds.EntityType = entityType;
+            ViewBag.EntityIds = entityIds;
+            _state.EntityIds = entityIds;
+
         }
 
     }
