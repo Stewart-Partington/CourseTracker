@@ -14,18 +14,13 @@ using System.Security.Cryptography;
 namespace CourseTracker.UI.Students
 {
 	
-	public class StudentsController : Controller
+	public class StudentsController : ControllerBase
 	{
 
-		private readonly IApiDal _dal;
-		private readonly IMapper _mapper;
-		private readonly IState _state;
-
         public StudentsController(IApiDal dal, IMapper mapper, IState state)
+			: base (dal, mapper, state)
         {
-			_dal = dal;
-			_mapper = mapper;
-			_state = state;
+
         }
 
 		[HttpGet]
