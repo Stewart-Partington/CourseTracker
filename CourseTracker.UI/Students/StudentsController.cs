@@ -6,6 +6,7 @@ using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
 using CourseTracker.Domain.Students;
 using CourseTracker.UI.Services.DAL;
+using CourseTracker.UI.Services.State;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -18,11 +19,13 @@ namespace CourseTracker.UI.Students
 
 		private readonly IApiDal _dal;
 		private readonly IMapper _mapper;
+		private readonly IState _state;
 
-        public StudentsController(IApiDal dal, IMapper mapper)
+        public StudentsController(IApiDal dal, IMapper mapper, IState state)
         {
 			_dal = dal;
 			_mapper = mapper;
+			_state = state;
         }
 
 		[HttpGet]

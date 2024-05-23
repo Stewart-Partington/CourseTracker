@@ -1,6 +1,8 @@
 using CourseTracker.UI.Services.AutoMapper;
 using CourseTracker.UI.Services.DAL;
+using CourseTracker.UI.Services.State;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Options;
 
 namespace CourseTracker.UI
 {
@@ -19,6 +21,15 @@ namespace CourseTracker.UI
 			builder.Services.AddHttpClient<IApiDal, ApiDal>();
 			builder.Services.AddAutoMapper(typeof(MapperConfig));
 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+			builder.Services.AddHttpContextAccessor();
+			builder.Services.AddScoped<IState, SessionState>();
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
@@ -33,6 +44,7 @@ namespace CourseTracker.UI
 			app.UseStaticFiles();
 
 			app.UseRouting();
+			app.UseSession();
 
 			app.UseAuthorization();
 
