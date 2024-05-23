@@ -11,7 +11,8 @@ using System.Net;
 namespace CourseTracker.API.SchoolYears
 {
 
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class SchoolYearsController : ControllerBase
     {
@@ -32,20 +33,22 @@ namespace CourseTracker.API.SchoolYears
             _deleteCommand = deleteCommand;
         }
 
-        //[HttpGet("api/Students/{studentId}/SchoolYears")]
-        //[Route("api/Students/{studentId:guid}/SchoolYears")]
-        //public List<SchoolYearsListItemModel> Get(Guid studentId)
-        //{
-        //    return _listQuery.Execute(studentId);
-        //}
-
-        [HttpGet("{id}")]
-        public SchoolYearDetailModel Get(Guid id)
+        [HttpGet]
+        [Route("Students/{studentId}/SchoolYears")]
+        public List<SchoolYearsListItemModel> Get(Guid studentId)
         {
-            return _detailQuery.Execute(id);
+            return _listQuery.Execute(studentId);
+        }
+
+        [HttpGet]
+        [Route("Students/{studentId}/SchoolYears/{schoolYearId}")]
+        public SchoolYearDetailModel Get(Guid studentId, Guid schoolYearId)
+        {
+            return _detailQuery.Execute(schoolYearId);
         }
 
         [HttpPost]
+        [Route("SchoolYears")]
         public async Task<IActionResult> Post(CreateSchoolYearModel schoolYear)
         {
 
@@ -56,6 +59,7 @@ namespace CourseTracker.API.SchoolYears
         }
 
         [HttpPut]
+        [Route("SchoolYears")]
         public HttpResponseMessage Update(UpdateSchoolYearModel schoolYear)
         {
 
@@ -65,7 +69,8 @@ namespace CourseTracker.API.SchoolYears
 
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("SchoolYears/{id}")]
         public HttpResponseMessage Delete(Guid id)
         {
 

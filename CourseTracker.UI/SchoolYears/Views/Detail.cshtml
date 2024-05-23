@@ -1,0 +1,31 @@
+﻿@model VmSchoolYear
+@using CourseTracker.UI.SchoolYears.Models
+
+@{
+
+    string heading = Model.Id == null ? "Add New School Year" : $"Year: {Model.Index}";
+
+}
+
+<h1>@heading</h1>
+
+<form>
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+
+    @Html.EditorFor(x => x.Index, "Question", new { inputControl = Html.TextBoxFor(x => x.Index, new { @class = "form-control w-50" }) })
+
+    @Html.EditorFor(x => x.Year, "Question", new { inputControl = Html.TextBoxFor(x => x.Year, new { @class = "form-control w-50" }) })
+
+    <div class="mt-3">
+
+        <input type="submit" value="Save" id="btnSave" class="btn btn-primary mr-2" formaction=@Url.Action("Detail", "SchoolYears")
+               formmethod="post" />
+
+        @Html.ActionLink("Cancel", "Detail", "Students", new { sid  = Model.StudentId }, new { @class = "btn btn-secondary" })
+
+    </div>
+
+</form>
