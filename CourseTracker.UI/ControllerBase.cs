@@ -44,7 +44,7 @@ namespace CourseTracker.UI
                 case EntityTypes.Student:
 
                     VmStudent vmStudent = (VmStudent)vm;
-                    KeyValuePair<Guid?, string> kvpStudent = new KeyValuePair<Guid?, string>(vmStudent.Id, vmStudent.FirstName == null ? "Add Student" : vmStudent.FirstName);
+                    KeyValuePair<Guid?, string> kvpStudent = new KeyValuePair<Guid?, string>(vmStudent.Id, vmStudent.FirstName);
 
                     entityIds.Student = kvpStudent;
                     entityIds.SchoolYear = null;
@@ -56,7 +56,7 @@ namespace CourseTracker.UI
                 case EntityTypes.SchoolYear:
 
                     VmSchoolYear vmSchoolYear = (VmSchoolYear)vm;
-                    KeyValuePair<Guid?, string> kvpSchoolYear = new KeyValuePair<Guid?, string>(vmSchoolYear.Id, vmSchoolYear.Year == null ? "Add School Year" : vmSchoolYear.Year.ToString());
+                    KeyValuePair<Guid?, string> kvpSchoolYear = new KeyValuePair<Guid?, string>(vmSchoolYear.Id, vmSchoolYear.Year.ToString());
 
                     entityIds.SchoolYear = kvpSchoolYear;
                     entityIds.Course = null;

@@ -8,10 +8,20 @@
 
 @functions {
 
-    private string GetValue(KeyValuePair<Guid?, string>? kvp)
+    private string GetValue(KeyValuePair<Guid?, string>? kvp, Enums.EntityTypes entityType)
     {
 
-        return ((KeyValuePair<Guid?, string>)kvp).Value;
+        string result = ((KeyValuePair<Guid?, string>)kvp).Value;
+
+        if (string.IsNullOrEmpty(result))
+        {
+            if (entityType == Enums.EntityTypes.Student)
+                result = "Add Student";
+            else if (entityType == Enums.EntityTypes.SchoolYear)
+                result = "Add School Year";
+        }
+
+        return result;
 
     }
 
@@ -26,13 +36,13 @@
     else if (entityIds.EntityType == Enums.EntityTypes.Student)
     {
         <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
-        <li class="breadcrumb-item active">@GetValue(entityIds.Student)</li>
+        <li class="breadcrumb-item active">@GetValue(entityIds.Student, entityIds.EntityType)</li>
     }
     else if (entityIds.EntityType == Enums.EntityTypes.SchoolYear)
     {
         <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
-        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
-        <li class="breadcrumb-item">@GetValue(entityIds.SchoolYear)</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, entityIds.EntityType), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
+        <li class="breadcrumb-item">@GetValue(entityIds.SchoolYear, entityIds.EntityType)</li>
     }
     else if (entityIds.EntityType == Enums.EntityTypes.Course)
     {
