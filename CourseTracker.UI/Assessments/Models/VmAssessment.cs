@@ -1,4 +1,6 @@
 ﻿using CourseTracker.Domain.Assessments;
+using Microsoft.AspNetCore.Antiforgery;
+using System.ComponentModel.DataAnnotations;
 
 namespace CourseTracker.UI.Assessments.Models
 {
@@ -8,15 +10,19 @@ namespace CourseTracker.UI.Assessments.Models
 
         public Guid? Id { get; set; }
 
-        public Guid? CourseId { get; set; }
+        public Guid CourseId { get; set; }
 
-        public AssessmentTypes AssessmentType { get; set; }
+        [Required]
+        public AssessmentTypes? AssessmentType { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
-        public double Grade { get; set; }
+        [Required]
+        public double? Grade { get; set; }
 
-        public double Weight { get; set; }
+        [Required]
+        public double? Weight { get; set; }
 
     }
 

@@ -1,11 +1,13 @@
 ﻿@model VmCourse
 @using CourseTracker.UI.Courses.Models
 @using CourseTracker.UI.Models
+@using CourseTracker.Application.Assessments.Queries.GetAssessmentList
 
 @{
 
     string heading = Model.Id == null ? "Add New Course" : $"Course: {Model.Name}";
     EntityIds entityIds = ViewBag.EntityIds;
+    List<AssessmentsListItemModel> assessments = ViewBag.Assessments;
 
 }
 
@@ -59,25 +61,33 @@
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
-                            <th>Year #</th>
-                            <th>Year</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Grade</th>
+                            <th>Weight</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @* @foreach (CoursesListItemModel course in courses)
+                        @foreach (AssessmentsListItemModel assessment in assessments)
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink("Details", "Detail", "Courses", new { @cid = course.Id })
+                                    @Html.ActionLink("Details", "Detail", "Assessments", new { @aid = assessment.Id })
                                 </td>
                                 <td>
-                                    @course.Name
+                                    @assessment.Name
                                 </td>
                                 <td>
-                                    @course.Semester
+                                    @assessment.AssessmentType
+                                </td>
+                                <td>
+                                    @assessment.Grade
+                                </td>
+                                <td>
+                                    @assessment.Weight
                                 </td>
                             </tr>
-                        } *@
+                        }
                     </tbody>
                 </table>
             </div>

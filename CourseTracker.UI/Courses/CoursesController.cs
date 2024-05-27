@@ -9,6 +9,7 @@ using CourseTracker.UI.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.Courses
@@ -36,7 +37,7 @@ namespace CourseTracker.UI.Courses
                 CourseDetailModel courseDetailModel = await _dal.GetCourse((Guid)entityIds.Student.Value.Key, 
                     (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
                 result = _mapper.Map<VmCourse>(courseDetailModel);
-                ViewBag.Courses = await _dal.GetAssessments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
+                ViewBag.Assessments = await _dal.GetAssessments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
             }
 
             HandleEntityIds(EntityTypes.Course, result);
@@ -75,6 +76,8 @@ namespace CourseTracker.UI.Courses
             }
             else
             {
+                EntityIds entityIds = _state.EntityIds;
+                ViewBag.Assessments = await _dal.GetAssessments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)vmCourse.Id);
                 HandleEntityIds(EntityTypes.Course, vmCourse);
                 return View(vmCourse);
             }

@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
+using CourseTracker.Application.Assessments.Commands.CreateAssessment;
+using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
+using CourseTracker.Application.Courses.Commands.CreateCourse;
+using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.UI.Assessments.Models;
 using CourseTracker.UI.Courses.Models;
@@ -39,6 +43,43 @@ namespace CourseTracker.UI.Assessments
             HandleEntityIds(EntityTypes.Assessment, result);
 
             return View(result);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Detail(VmAssessment vmAssessment)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                Guid aid;
+                EntityIds entityIds = _state.EntityIds;
+
+                if (vmAssessment.Id == null)
+                {
+                    var createAssessment = _mapper.Map<CreateAssessmentModel>(vmAssessment);
+                    createAssessment.StudentId = (Guid)entityIds.Student.Value.Key;
+                    createAssessment.SchoolYearId = (Guid)entityIds.SchoolYear.Value.Key;
+                    createAssessment.CourseId = (Guid)entityIds.Course.Value.Key;
+                    aid = await _dal.CreateAssessment(createAssessment);
+                }
+                else
+                {
+                    var updateAssessment = _mapper.Map<UpdateAssessmentModel>(vmAssessment);
+                    updateAssessment.CourseId = (Guid)entityIds.Course.Value.Key;
+                    await _dal.UpdateAssessment(updateAssessment);
+                    aid = updateAssessment.Id;
+                }
+
+                return RedirectToAction("Detail", "Assessments", new { aid = aid });
+
+            }
+            else
+            {
+                HandleEntityIds(EntityTypes.Assessment , vmAssessment);
+                return View(vmAssessment);
+            }
 
         }
 
