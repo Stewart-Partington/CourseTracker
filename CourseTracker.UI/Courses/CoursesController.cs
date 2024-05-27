@@ -64,7 +64,7 @@ namespace CourseTracker.UI.Courses
                 else
                 {
                     var updateCourse = _mapper.Map<UpdateCourseModel>(vmCourse);
-                    updateCourse.SchoolYearId = (Guid)entityIds.Student.Value.Key;
+                    updateCourse.SchoolYearId = (Guid)entityIds.SchoolYear.Value.Key;
                     await _dal.UpdateCourse(updateCourse);
                     cid = updateCourse.Id;
                 }
@@ -77,6 +77,16 @@ namespace CourseTracker.UI.Courses
                 HandleEntityIds(EntityTypes.Course, vmCourse);
                 return View(vmCourse);
             }
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete()
+        {
+
+            await _dal.DeleteCourse((Guid)_state.EntityIds.Course.Value.Key);
+
+            return RedirectToAction("Detail", "SchoolYears", new { syid = _state.EntityIds.SchoolYear.Value.Key });
 
         }
 

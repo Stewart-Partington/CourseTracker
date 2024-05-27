@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CourseTracker.Application.Courses.Queries.GetCoursesList
 {
-	
-	public interface IGetCoursesListQuery
-	{
+    
+    public interface IGetCourseListQuery
+    {
 
-		List<CoursesListItemModel> Execute(Guid schoolYearId);
+        List<CoursesListItemModel> Execute(Guid schoolYearId);
 
-	}
+    }
 
 }

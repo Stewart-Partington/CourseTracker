@@ -1,11 +1,13 @@
 ﻿@model VmSchoolYear
 @using CourseTracker.UI.SchoolYears.Models
 @using CourseTracker.UI.Models
+@using CourseTracker.Application.Courses.Queries.GetCoursesList
 
 @{
 
     string heading = Model.Id == null ? "Add New School Year" : $"Year: {Model.Year}";
     EntityIds entityIds = ViewBag.EntityIds;
+    List<CoursesListItemModel> courses = Model.Id == null ? null : ViewBag.Courses;
 
 }
 
@@ -64,20 +66,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @* @foreach (SchoolYearsListItemModel schoolYear in schoolYears)
+                        @foreach (CoursesListItemModel course in courses)
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink("Details", "Detail", "SchoolYears", new { @syid = schoolYear.Id })
+                                    @Html.ActionLink("Details", "Detail", "Courses", new { @cid = course.Id })
                                 </td>
                                 <td>
-                                    @schoolYear.Index
+                                    @course.Name
                                 </td>
                                 <td>
-                                    @schoolYear.Year
+                                    @course.Semester
                                 </td>
                             </tr>
-                        } *@
+                        }
                     </tbody>
                 </table>
             </div>

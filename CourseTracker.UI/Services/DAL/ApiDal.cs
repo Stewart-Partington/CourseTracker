@@ -228,7 +228,7 @@ namespace CourseTracker.UI.Services.DAL
         public async Task UpdateCourse(UpdateCourseModel updateCourse)
         {
 
-            var response = await _client.PutAsJsonAsync(_coursesController, updateCourse);
+            var response = await _client.PutAsJsonAsync($"{_api}{_coursesController}", updateCourse);
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());
