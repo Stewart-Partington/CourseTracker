@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Domain.Students;
@@ -31,6 +32,12 @@ namespace CourseTracker.UI.SchoolYears
 
             if (syid == null)
                 result = new VmSchoolYear();
+            else
+            {
+                SchoolYearDetailModel schoolYearDetail = await _dal.GetSchoolYear((Guid)_state.EntityIds.Student.Value.Key, (Guid)syid);
+                result = _mapper.Map<VmSchoolYear>(schoolYearDetail);
+                ViewBag.Courses = await _dal.GetCourses((Guid)syid);
+            }
 
             HandleEntityIds(EntityTypes.SchoolYear, result);
 

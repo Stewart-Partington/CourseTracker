@@ -25,7 +25,7 @@ namespace CourseTracker.UI.Services.DAL
 
 		// SchoolYears
 		Task<List<SchoolYearsListItemModel>> GetSchoolYears(Guid studentId);
-		Task<SchoolYearDetailModel> GetSchoolYear(Guid id);
+		Task<SchoolYearDetailModel> GetSchoolYear(Guid studentId, Guid schoolYearId);
 		Task<Guid> CreateSchoolYear(CreateSchoolYearModel createSchoolYear);
 		Task UpdateSchoolYear(UpdateSchoolYearModel updateSchoolYear);
 		Task DeleteSchoolYear(Guid id);

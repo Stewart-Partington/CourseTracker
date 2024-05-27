@@ -88,10 +88,10 @@ namespace CourseTracker.UI.Students
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Delete(Guid sid)
+		public async Task<IActionResult> Delete()
 		{
 
-			await _dal.DeleteStudent(sid);
+			await _dal.DeleteStudent((Guid)_state.EntityIds.Student.Value.Key);
 
             return RedirectToAction("Index");
 

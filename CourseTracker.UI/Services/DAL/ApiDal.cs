@@ -132,11 +132,11 @@ namespace CourseTracker.UI.Services.DAL
 
         }
 
-		public async Task<SchoolYearDetailModel> GetSchoolYear(Guid id)
-		{
+		public async Task<SchoolYearDetailModel> GetSchoolYear(Guid studentId, Guid schoolYearId)
+        {
 
             SchoolYearDetailModel result = null;
-            var response = await _client.GetAsync($"{_schoolsYearController}/{id}");
+            var response = await _client.GetAsync($"{studentId}/{_schoolsYearController}/{schoolYearId}");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<SchoolYearDetailModel>();

@@ -30,6 +30,11 @@
 
         @Html.ActionLink("Cancel", "Index", "Students", null, new { @class = "btn btn-secondary" })
 
+        @if (Model.Id != null)
+        {
+            @Html.ActionLink("Delete", "Delete", "Students", null, new { @class = "btn btn-danger" })
+        }
+
     </div>
 
 </form>
@@ -45,31 +50,33 @@
     
 }
 
-<div class="table-responsive">
-    <table id="tblSchoolYears" class="table table-striped">
-        <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>Year #</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (SchoolYearsListItemModel schoolYear in schoolYears)
-            {
-            <tr>
-                <td>
-                    @Html.ActionLink("Details", "Detail", "Students", new { @syid = schoolYear.Id })
-                    @Html.ActionLink("Delete", "Delete", "Students", new { @syid = schoolYear.Id })
-                </td>
-                <td>
-                    @schoolYear.Index
-                </td>
-                <td>
-                    @schoolYear.Year
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+@if (Model.Id != null)
+{
+    <div class="table-responsive">
+        <table id="tblSchoolYears" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Year #</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (SchoolYearsListItemModel schoolYear in schoolYears)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Details", "Detail", "SchoolYears", new { @syid = schoolYear.Id })
+                    </td>
+                    <td>
+                        @schoolYear.Index
+                    </td>
+                    <td>
+                        @schoolYear.Year
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
