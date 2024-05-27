@@ -3,19 +3,14 @@ using CourseTracker.Application.Courses.Commands.DeleteCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
-using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
-using CourseTracker.Application.Students.Commands.CreateStudent;
-using CourseTracker.Application.Students.Commands.UpdateStudent;
-using CourseTracker.Application.Students.Queries.GetStudentDetail;
-using CourseTracker.Application.Students.Queries.GetStudentsList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace CourseTracker.API.Courses
 {
-	
-	[Route("api/[controller]")]
+
+    [Route("api/")]
 	[ApiController]
 	public class CoursesController : ControllerBase
 	{
@@ -37,39 +32,40 @@ namespace CourseTracker.API.Courses
 		}
 
 		[HttpGet]
-		public List<CoursesListItemModel> Get()
+        [Route("SchoolYears/{schoolYearId}/Courses")]
+        public List<CoursesListItemModel> Get(Guid schoolYearId)
 		{
-			return _listQuery.Execute();
+			return _listQuery.Execute(schoolYearId);
 		}
 
-		[HttpGet("{id}")]
-		public CourseDetailModel Get(Guid id)
+		[HttpGet]
+        [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}")]
+        public CourseDetailModel Get(Guid studentId, Guid schoolYearId, Guid courseId)
 		{
-			return _detailQuery.Execute(id);
+			return _detailQuery.Execute(courseId);
 		}
 
         [HttpPost]
+        [Route("Courses")]
         public async Task<IActionResult> Post(CreateCourseModel course)
         {
 
-            Guid id = await _createCommand.Execute(course);
+            Guid courseId = await _createCommand.Execute(course);
 
-            return CreatedAtAction("Get", new { id = id });
-
+            return CreatedAtAction("Get", new { studentId = course.StudentId, schoolYearId = course.SchoolYearId, courseId = courseId }, courseId);
         }
 
         [HttpPut]
-		public HttpResponseMessage Update(UpdateCourseModel course)
-		{
+        [Route("Courses")]
+        public HttpResponseMessage Update(UpdateCourseModel course)
+        {
+            _updateCommand.Execute(course);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
 
-			_updateCommand.Execute(course);
-
-			return new HttpResponseMessage(HttpStatusCode.OK);
-
-		}
-
-		[HttpDelete("{id}")]
-		public HttpResponseMessage Delete(Guid id)
+		[HttpDelete]
+        [Route("Courses/{id}")]
+        public HttpResponseMessage Delete(Guid id)
 		{
 
 			_deleteCommand.Execute(id);

@@ -19,6 +19,8 @@
                 result = "Add Student";
             else if (entityType == Enums.EntityTypes.SchoolYear)
                 result = "Add School Year";
+            else if (entityType == Enums.EntityTypes.Course)
+                result = "Add Course";
         }
 
         return result;
@@ -46,7 +48,10 @@
     }
     else if (entityIds.EntityType == Enums.EntityTypes.Course)
     {
-        
+        <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, entityIds.EntityType), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.SchoolYear, entityIds.EntityType), "Detail", "SchoolYears", new { syid = entityIds.SchoolYear.Value.Key })</li>
+        <li class="breadcrumb-item">@GetValue(entityIds.Course, entityIds.EntityType)</li>
     }
     else if (entityIds.EntityType == Enums.EntityTypes.Assessment)
     {

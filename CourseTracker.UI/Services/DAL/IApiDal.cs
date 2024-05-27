@@ -1,4 +1,7 @@
 ﻿using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Courses.Commands.CreateCourse;
+using CourseTracker.Application.Courses.Commands.UpdateCourse;
+using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
 using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
@@ -32,6 +35,10 @@ namespace CourseTracker.UI.Services.DAL
 
 		// Courses
 		Task<List<CoursesListItemModel>> GetCourses(Guid schoolYearId);
+		Task<CourseDetailModel> GetCourse(Guid studentId, Guid schoolYearId, Guid courseId);
+		Task<Guid> CreateCourse(CreateCourseModel createCourse);
+		Task UpdateCourse(UpdateCourseModel updateCourse);
+		Task DeleteCourse(Guid id);
 
 		// Assessments
 		Task<List<AssessmentsListItemModel>> GetAssessments(Guid courseId);

@@ -11,6 +11,7 @@ namespace CourseTracker.Application.Courses.Commands.CreateCourse
     public class CreateCourseModel
     {
 
+        public Guid StudentId { get; set; }
 		public Guid SchoolYearId { get; set; }
 
 		public string Name { get; set; }

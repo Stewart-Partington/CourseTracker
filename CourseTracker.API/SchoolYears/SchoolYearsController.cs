@@ -11,7 +11,6 @@ using System.Net;
 namespace CourseTracker.API.SchoolYears
 {
 
-    //[Route("api/[controller]")]
     [Route("api/")]
     [ApiController]
     public class SchoolYearsController : ControllerBase

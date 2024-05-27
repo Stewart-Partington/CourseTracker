@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CourseTracker.UI.Courses.Models;
 using CourseTracker.UI.Models;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
@@ -65,6 +66,12 @@ namespace CourseTracker.UI
                     break;
 
                 case EntityTypes.Course:
+
+                    VmCourse vmCourse = (VmCourse)vm;
+                    KeyValuePair<Guid?, string> kvpCourse = new KeyValuePair<Guid?, string>(vmCourse.Id, vmCourse.Name);
+
+                    entityIds.Course = kvpCourse;
+                    entityIds.Assessment = null;
 
                     break;
 

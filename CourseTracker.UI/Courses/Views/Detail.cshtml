@@ -1,0 +1,38 @@
+﻿@model VmCourse
+@using CourseTracker.UI.Courses.Models
+@using CourseTracker.UI.Models
+
+@{
+
+    string heading = Model.Id == null ? "Add New Course" : $"Year: {Model.Name}";
+    EntityIds entityIds = ViewBag.EntityIds;
+
+}
+
+<h1>@heading</h1>
+
+<form>
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+
+    @Html.EditorFor(x => x.Name, "Question", new { inputControl = Html.TextBoxFor(x => x.Name, new { @class = "form-control w-50" }) })
+
+    @Html.EditorFor(x => x.Semester, "Question", new { inputControl = Html.TextBoxFor(x => x.Semester, new { @class = "form-control w-50" }) })
+
+    <div class="mt-3">
+
+        <input type="submit" value="Save" id="btnSave" class="btn btn-primary mr-2" formaction=@Url.Action("Detail", "Courses")
+               formmethod="post" />
+
+        @Html.ActionLink("Cancel", "Detail", "SchoolYears", new { syid = entityIds.SchoolYear.Value.Key }, new { @class = "btn btn-secondary" })
+
+        @if (Model.Id != null)
+        {
+            @Html.ActionLink("Delete", "Delete", "Courses", null, new { @class = "btn btn-danger" })
+        }
+
+    </div>
+
+</form>
