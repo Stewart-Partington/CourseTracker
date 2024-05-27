@@ -23,6 +23,9 @@ using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.Courses.Commands.CreateCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
+using CourseTracker.Application.Assessments.Commands.CreateAssessment;
+using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
+using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -238,7 +241,6 @@ namespace CourseTracker.UI.Services.DAL
         public async Task DeleteCourse(Guid id)
         {
 
-
             var response = await _client.DeleteAsync($"{_api}{_coursesController}/{id}");
 
             if (response.StatusCode != HttpStatusCode.OK)
@@ -247,26 +249,72 @@ namespace CourseTracker.UI.Services.DAL
 
         #endregion
 
-        #region Old
+        #region Assessments
 
-        public async Task<List<AssessmentsListItemModel>> GetAssessments(Guid courseId)
+        public async Task<List<AssessmentsListItemModel>> GetAssessments(Guid studentId, Guid schoolYearId, Guid courseId)
 		{
 
 			List<AssessmentsListItemModel> result = null;
-			var response = await _client.GetAsync($"{_assementsController}/{courseId}");
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}/{courseId}/Assessments");
 
-			if (response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK)
 				result = await response.Content.ReadFromJsonAsync<List<AssessmentsListItemModel>>();
 
 			return result;
 
 		}
 
-		#endregion
+        public async Task<AssessmentDetailModel> GetAssessment(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
+        {
 
-		#region Generics
+            AssessmentDetailModel result = null;
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}/{courseId}/{_assementsController}/{assessmentId}");
 
-		public async Task<Guid> AddEntity<t>(EntityBase entity)
+            if (response.StatusCode == HttpStatusCode.OK)
+                result = await response.Content.ReadFromJsonAsync<AssessmentDetailModel>();
+
+            return result;
+
+        }
+
+        public async Task<Guid> CreateAssessment(CreateAssessmentModel createAssessment)
+        {
+
+            Guid result = Guid.Empty;
+            var response = await _client.PostAsJsonAsync($"{_api}{_assementsController}", createAssessment);
+
+            if (response.StatusCode == HttpStatusCode.Created)
+                result = await response.Content.ReadFromJsonAsync<Guid>();
+
+            return result;
+
+        }
+
+        public async Task UpdateAssessment(UpdateAssessmentModel updateAssessment)
+        {
+
+            var response = await _client.PutAsJsonAsync($"{_api}{_assementsController}", updateAssessment);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+        public async Task DeleteAssessment(Guid id)
+        {
+
+            var response = await _client.DeleteAsync($"{_api}{_assementsController}/{id}");
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+        #endregion
+
+        #region Generics
+
+        public async Task<Guid> AddEntity<t>(EntityBase entity)
 		{
 
             Guid result = Guid.Empty;

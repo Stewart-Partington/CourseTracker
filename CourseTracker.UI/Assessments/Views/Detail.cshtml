@@ -1,0 +1,12 @@
+﻿@model VmAssessment
+@using CourseTracker.UI.Assessments.Models
+@using CourseTracker.UI.Models
+
+@{
+
+    string heading = Model.Id == null ? "Add New Assessment" : $"Assessment: {Model.Name}";
+    EntityIds entityIds = ViewBag.EntityIds;
+
+}
+
+<h1>@heading</h1>

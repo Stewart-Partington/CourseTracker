@@ -19,10 +19,11 @@ namespace CourseTracker.Application.Assessments.Queries.GetAssessmentList
 			_database = database;
 		}
 
-		public List<AssessmentsListItemModel> Execute()
+		public List<AssessmentsListItemModel> Execute(Guid courseId)
 		{
 
 			var result = _database.Assessments
+				.Where(x => x.CourseId == courseId)
 				.Select(x => new AssessmentsListItemModel()
 				{
 					Id = x.Id,

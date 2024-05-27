@@ -32,10 +32,11 @@ namespace CourseTracker.UI.Courses
                 result = new VmCourse();
             else
             {
-                CourseDetailModel courseDetailModel = await _dal.GetCourse((Guid)_state.EntityIds.Student.Value.Key, 
-                    (Guid)_state.EntityIds.SchoolYear.Value.Key, (Guid)cid);
+                EntityIds entityIds = _state.EntityIds;
+                CourseDetailModel courseDetailModel = await _dal.GetCourse((Guid)entityIds.Student.Value.Key, 
+                    (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
                 result = _mapper.Map<VmCourse>(courseDetailModel);
-                ViewBag.Courses = await _dal.GetAssessments((Guid)cid);
+                ViewBag.Courses = await _dal.GetAssessments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
             }
 
             HandleEntityIds(EntityTypes.Course, result);

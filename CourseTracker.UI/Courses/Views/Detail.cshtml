@@ -36,3 +36,54 @@
     </div>
 
 </form>
+
+@if (Model.Id != null)
+{
+
+    <section class="panel panel-default mt-3">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Courses</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    @Html.ActionLink("Add Assessment", "Detail", "Assessments", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="tblSchoolYears" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Year #</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* @foreach (CoursesListItemModel course in courses)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Details", "Detail", "Courses", new { @cid = course.Id })
+                                </td>
+                                <td>
+                                    @course.Name
+                                </td>
+                                <td>
+                                    @course.Semester
+                                </td>
+                            </tr>
+                        } *@
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </section>
+
+}

@@ -11,7 +11,7 @@ namespace CourseTracker.Application.Assessments.Queries.GetAssessmentList
 	public interface IGetAssessmentsListQuery
 	{
 
-		List<AssessmentsListItemModel> Execute();
+		List<AssessmentsListItemModel> Execute(Guid courseId);
 
 	}
 

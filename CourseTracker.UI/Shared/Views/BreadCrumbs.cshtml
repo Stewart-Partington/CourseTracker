@@ -21,6 +21,8 @@
                 result = "Add School Year";
             else if (entityType == Enums.EntityTypes.Course)
                 result = "Add Course";
+            else if (entityType == Enums.EntityTypes.Assessment)
+                result = "Add Assessment";
         }
         else
         {
@@ -30,6 +32,8 @@
                 result = "School Year: " + result;
             else if (entityType == Enums.EntityTypes.Course)
                 result = "Course: " + result;
+            else if (entityType == Enums.EntityTypes.Assessment)
+                result = "Assessment: " + result;
         }
 
         return result;
@@ -64,7 +68,11 @@
     }
     else if (entityIds.EntityType == Enums.EntityTypes.Assessment)
     {
-        
+        <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, Enums.EntityTypes.Student), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.SchoolYear, Enums.EntityTypes.SchoolYear), "Detail", "SchoolYears", new { syid = entityIds.SchoolYear.Value.Key })</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Course, Enums.EntityTypes.Course), "Detail", "Courses", new { cid = entityIds.Course.Value.Key })</li>
+        <li class="breadcrumb-item">@GetValue(entityIds.Assessment, entityIds.EntityType)</li>
     }
 
 

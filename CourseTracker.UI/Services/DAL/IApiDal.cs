@@ -1,4 +1,7 @@
-﻿using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+﻿using CourseTracker.Application.Assessments.Commands.CreateAssessment;
+using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
+using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
+using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Courses.Commands.CreateCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
@@ -41,7 +44,11 @@ namespace CourseTracker.UI.Services.DAL
 		Task DeleteCourse(Guid id);
 
 		// Assessments
-		Task<List<AssessmentsListItemModel>> GetAssessments(Guid courseId);
+		Task<List<AssessmentsListItemModel>> GetAssessments(Guid studentId, Guid schoolYearId, Guid courseId);
+		Task<AssessmentDetailModel> GetAssessment(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId);
+		Task<Guid> CreateAssessment(CreateAssessmentModel createAssessment);
+		Task UpdateAssessment(UpdateAssessmentModel updateAssessment);
+		Task DeleteAssessment(Guid id);
 
 	}
 

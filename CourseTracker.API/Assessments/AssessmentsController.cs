@@ -4,15 +4,16 @@ using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Courses.Commands.CreateCourse;
+using CourseTracker.Domain.Courses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace CourseTracker.API.Assessments
 {
-	
-	[Route("api/[controller]")]
-	[ApiController]
+
+    [Route("api/")]
+    [ApiController]
 	public class AssessmentsController : ControllerBase
 	{
 
@@ -32,43 +33,44 @@ namespace CourseTracker.API.Assessments
 			_deleteCommand = deleteCommand;
 		}
 
-		[HttpGet]
-		public List<AssessmentsListItemModel> Get()
+        [HttpGet]
+        [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments")]
+        public List<AssessmentsListItemModel> Get(Guid studentId, Guid schoolYearId, Guid courseId)
 		{
-			return _listQuery.Execute();
+			return _listQuery.Execute(courseId);
 		}
 
-		[HttpGet("{id}")]
-		public AssessmentDetailModel Get(Guid id)
+		[HttpGet]
+        [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments/{assessmentId}")]
+        public AssessmentDetailModel Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
 		{
-			return _detailQuery.Execute(id);
+			return _detailQuery.Execute(assessmentId);
 		}
 
         [HttpPost]
+        [Route("Assessments")]
         public async Task<IActionResult> Post(CreateAssessmentModel assessment)
         {
 
-            Guid id = await _createCommand.Execute(assessment);
+            Guid assessmentId = await _createCommand.Execute(assessment);
 
-            return CreatedAtAction("Get", new { id = id });
+            return CreatedAtAction("Get", new { studentId = assessment.StudentId, schoolYearId = assessment.SchoolYearId, 
+                courseId = assessment.CourseId, assessmentId = assessmentId }, assessmentId);
 
         }
-
         [HttpPut]
-		public HttpResponseMessage Update(UpdateAssessmentModel assessment)
-		{
+        [Route("Assessments")]
+        public HttpResponseMessage Update(UpdateAssessmentModel assessment)
+        {
+            _updateCommand.Execute(assessment);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
 
-			_updateCommand.Execute(assessment);
-
-			return new HttpResponseMessage(HttpStatusCode.OK);
-
-		}
-
-		[HttpDelete("{id}")]
-		public HttpResponseMessage Delete(Guid id)
-		{
-
-			_deleteCommand.Execute(id);
+        [HttpDelete]
+        [Route("Assessments/{id}")]
+        public HttpResponseMessage Delete(Guid id)
+        {
+            _deleteCommand.Execute(id);
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
 
