@@ -52,9 +52,9 @@ namespace CourseTracker.API.SchoolYears
         public async Task<IActionResult> Post(CreateSchoolYearModel schoolYear)
         {
 
-            Guid id = await _createCommand.Execute(schoolYear);
+            Guid schoolYearId = await _createCommand.Execute(schoolYear);
 
-            return CreatedAtAction("Get", new { id = id });
+            return CreatedAtAction("Get", new { studentId = schoolYear.StudentId, schoolYearId = schoolYearId }, schoolYearId);
 
         }
 

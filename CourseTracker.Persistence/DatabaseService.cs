@@ -55,6 +55,10 @@ namespace CourseTracker.Persistence
 				
 				case nameof(Student):
 					Students.Add((Student)entity);
+						break;
+
+				case nameof(SchoolYear):
+					SchoolYears.Add((SchoolYear)entity);
 					break;
 
 				case nameof(Course):
@@ -68,6 +72,7 @@ namespace CourseTracker.Persistence
 			}
 
 			await this.SaveChangesAsync();
+
 			result = (Guid)entity.Id;
 
 			return result;

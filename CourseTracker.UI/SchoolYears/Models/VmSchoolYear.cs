@@ -6,9 +6,7 @@ namespace CourseTracker.UI.SchoolYears.Models
     public class VmSchoolYear
     {
 
-        public Guid Id { get; set; }   
-
-        public Guid StudentId { get; set; }
+        public Guid? Id { get; set; }   
 
         [Required]
         public int? Index { get; set; }

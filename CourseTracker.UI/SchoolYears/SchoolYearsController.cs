@@ -1,7 +1,13 @@
 ﻿using AutoMapper;
+using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
+using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
+using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Commands.UpdateStudent;
+using CourseTracker.Domain.Students;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using static CourseTracker.UI.Models.Enums;
 
@@ -29,6 +35,47 @@ namespace CourseTracker.UI.SchoolYears
             HandleEntityIds(EntityTypes.SchoolYear, result);
 
             return View(result);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Detail(VmSchoolYear vmSchoolYear)
+        {
+
+            if (ModelState.IsValid)
+            {
+                
+                if (vmSchoolYear.Id == null)
+                {
+                    var createSchoolYear = _mapper.Map<CreateSchoolYearModel>(vmSchoolYear);
+                    createSchoolYear.StudentId = (Guid)_state.EntityIds.Student.Value.Key;
+                    await _dal.CreateSchoolYear(createSchoolYear);
+                }
+                else
+                {
+                    var updaetSchoolYear = _mapper.Map<UpdateSchoolYearModel>(vmSchoolYear);
+                    updaetSchoolYear.StudentId = (Guid)_state.EntityIds.Student.Value.Key;
+                    await _dal.UpdateSchoolYear(updaetSchoolYear);
+                }
+
+                return RedirectToAction("Detail", "Students", new { sid = _state.EntityIds.Student.Value.Key });
+
+            }
+            else
+            {
+                HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
+                return View(vmSchoolYear);
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid syid)
+        {
+
+            await _dal.DeleteSchoolYear(syid);
+
+            return RedirectToAction("Index");
 
         }
 
