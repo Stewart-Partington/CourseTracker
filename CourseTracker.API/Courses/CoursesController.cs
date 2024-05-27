@@ -18,22 +18,29 @@ namespace CourseTracker.API.Courses
 		private readonly IGetCoursesListQuery _listQuery;
 		private readonly IGetCourseDetailQuery _detailQuery;
 		private readonly ICreateCourseCommand _createCommand;
-		private readonly IUpdateCourseCommand _updateCommand;
-		private readonly IDeleteCourseCommand _deleteCommand;
+		//private readonly IUpdateCourseCommand _updateCommand;
+		//private readonly IDeleteCourseCommand _deleteCommand;
 
-        public CoursesController(IGetCoursesListQuery listQuery, IGetCourseDetailQuery detailQuery, ICreateCourseCommand createCommand,
-			IUpdateCourseCommand updateCommand, IDeleteCourseCommand deleteCommand)
+  //      public CoursesController(IGetCoursesListQuery listQuery, IGetCourseDetailQuery detailQuery, ICreateCourseCommand createCommand,
+		//	IUpdateCourseCommand updateCommand, IDeleteCourseCommand deleteCommand)
+  //      {
+		//	_listQuery = listQuery;
+		//	_detailQuery = detailQuery;
+		//	_createCommand = createCommand;
+		//	_updateCommand = updateCommand;
+		//	_deleteCommand = deleteCommand;
+		//}
+
+        public CoursesController(IGetCoursesListQuery listQuery, IGetCourseDetailQuery detailQuery, ICreateCourseCommand createCommand)
         {
-			_listQuery = listQuery;
-			_detailQuery = detailQuery;
-			_createCommand = createCommand;
-			_updateCommand = updateCommand;
-			_deleteCommand = deleteCommand;
-		}
+            _listQuery = listQuery;
+            _detailQuery = detailQuery;
+            _createCommand = createCommand;
+        }
 
 		[HttpGet]
-        [Route("SchoolYears/{schoolYearId}/Courses")]
-        public List<CoursesListItemModel> Get(Guid schoolYearId)
+		[Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses")]
+		public List<CoursesListItemModel> Get(Guid studentId, Guid schoolYearId)
 		{
 			return _listQuery.Execute(schoolYearId);
 		}
@@ -55,24 +62,24 @@ namespace CourseTracker.API.Courses
             return CreatedAtAction("Get", new { studentId = course.StudentId, schoolYearId = course.SchoolYearId, courseId = courseId }, courseId);
         }
 
-        [HttpPut]
-        [Route("Courses")]
-        public HttpResponseMessage Update(UpdateCourseModel course)
-        {
-            _updateCommand.Execute(course);
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
+  //      [HttpPut]
+  //      [Route("Courses")]
+  //      public HttpResponseMessage Update(UpdateCourseModel course)
+  //      {
+  //          _updateCommand.Execute(course);
+  //          return new HttpResponseMessage(HttpStatusCode.OK);
+  //      }
 
-		[HttpDelete]
-        [Route("Courses/{id}")]
-        public HttpResponseMessage Delete(Guid id)
-		{
+		//[HttpDelete]
+  //      [Route("Courses/{id}")]
+  //      public HttpResponseMessage Delete(Guid id)
+		//{
 
-			_deleteCommand.Execute(id);
+		//	_deleteCommand.Execute(id);
 
-			return new HttpResponseMessage(HttpStatusCode.OK);
+		//	return new HttpResponseMessage(HttpStatusCode.OK);
 
-		}
+		//}
 
 	}
 

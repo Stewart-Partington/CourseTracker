@@ -186,11 +186,11 @@ namespace CourseTracker.UI.Services.DAL
 
         #region Courses
 
-        public async Task<List<CoursesListItemModel>> GetCourses(Guid schoolYearId)
+        public async Task<List<CoursesListItemModel>> GetCourses(Guid studentId, Guid schoolYearId)
         {
 
             List<CoursesListItemModel> result = null;
-            var response = await _client.GetAsync($"{_schoolsYearController}/{schoolYearId}/{_coursesController}");
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<List<CoursesListItemModel>>();

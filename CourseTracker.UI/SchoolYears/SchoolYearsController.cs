@@ -37,7 +37,7 @@ namespace CourseTracker.UI.SchoolYears
             {
                 SchoolYearDetailModel schoolYearDetail = await _dal.GetSchoolYear((Guid)_state.EntityIds.Student.Value.Key, (Guid)syid);
                 result = _mapper.Map<VmSchoolYear>(schoolYearDetail);
-                ViewBag.Courses = await _dal.GetCourses((Guid)syid);
+                ViewBag.Courses = await _dal.GetCourses((Guid)_state.EntityIds.Student.Value.Key, (Guid)syid);
             }
 
             HandleEntityIds(EntityTypes.SchoolYear, result);

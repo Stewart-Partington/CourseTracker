@@ -34,7 +34,7 @@ namespace CourseTracker.UI.Services.DAL
 		Task DeleteSchoolYear(Guid id);
 
 		// Courses
-		Task<List<CoursesListItemModel>> GetCourses(Guid schoolYearId);
+		Task<List<CoursesListItemModel>> GetCourses(Guid studentId, Guid schoolYearId);
 		Task<CourseDetailModel> GetCourse(Guid studentId, Guid schoolYearId, Guid courseId);
 		Task<Guid> CreateCourse(CreateCourseModel createCourse);
 		Task UpdateCourse(UpdateCourseModel updateCourse);
