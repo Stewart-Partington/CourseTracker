@@ -31,10 +31,11 @@ namespace CourseTracker.UI.Services.DAL
 
 		private readonly HttpClient _client;
 
-		private const string _studentsController = "api/Students";
-		private const string _schoolsYearController = "api/SchoolYears";
-		private const string _coursesController = "api/Courses";
-		private const string _assementsController = "api/Assessments";
+		private const string _api = "api/";
+		private const string _studentsController = "Students";
+		private const string _schoolsYearController = "SchoolYears";
+		private const string _coursesController = "Courses";
+		private const string _assementsController = "Assessments";
 
         #endregion
 
@@ -60,7 +61,7 @@ namespace CourseTracker.UI.Services.DAL
 		{
 
 			List<StudentListItemModel> result = null;
-			var response = await _client.GetAsync(_studentsController);
+			var response = await _client.GetAsync($"{_api}{_studentsController}");
 
 			if (response.StatusCode == HttpStatusCode.OK)
 				result = await response.Content.ReadFromJsonAsync<List<StudentListItemModel>>();
@@ -73,7 +74,7 @@ namespace CourseTracker.UI.Services.DAL
 		{
 
 			StudentDetailModel result = null;
-			var response = await _client.GetAsync($"{_studentsController}/{Id}");
+			var response = await _client.GetAsync($"{_api}{_studentsController}/{Id}");
 
 			if (response.StatusCode == HttpStatusCode.OK)
 				result = await response.Content.ReadFromJsonAsync<StudentDetailModel>();
@@ -86,7 +87,7 @@ namespace CourseTracker.UI.Services.DAL
 		{
 
             Guid result = Guid.Empty;
-            var response = await _client.PostAsJsonAsync(_studentsController, createStudent);
+            var response = await _client.PostAsJsonAsync($"{_api}{_studentsController}", createStudent);
 
 			if (response.StatusCode == HttpStatusCode.Created)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
@@ -98,7 +99,7 @@ namespace CourseTracker.UI.Services.DAL
 		public async Task UpdateStudent(UpdateStudentModel updateStudent)
 		{
 
-            var response = await _client.PutAsJsonAsync(_studentsController, updateStudent);
+            var response = await _client.PutAsJsonAsync($"{_api}{_studentsController}", updateStudent);
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());
@@ -108,7 +109,7 @@ namespace CourseTracker.UI.Services.DAL
 		public async Task DeleteStudent(Guid id)
 		{
 
-            var response = await _client.DeleteAsync($"{_studentsController}/{id}");
+            var response = await _client.DeleteAsync($"{_api}{_studentsController}/{id}");
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());
@@ -123,7 +124,7 @@ namespace CourseTracker.UI.Services.DAL
         {
 
             List<SchoolYearsListItemModel> result = null;
-            var response = await _client.GetAsync($"{_studentsController}/{studentId}/SchoolYears");
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/SchoolYears");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<List<SchoolYearsListItemModel>>();
@@ -136,7 +137,7 @@ namespace CourseTracker.UI.Services.DAL
         {
 
             SchoolYearDetailModel result = null;
-            var response = await _client.GetAsync($"{studentId}/{_schoolsYearController}/{schoolYearId}");
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<SchoolYearDetailModel>();
@@ -171,7 +172,7 @@ namespace CourseTracker.UI.Services.DAL
 		public async Task DeleteSchoolYear(Guid id)
 		{
 
-            var response = await _client.DeleteAsync($"{_schoolsYearController}/{id}");
+            var response = await _client.DeleteAsync($"{_api}{_schoolsYearController}/{id}");
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());

@@ -77,12 +77,12 @@ namespace CourseTracker.UI.SchoolYears
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(Guid syid)
+        public async Task<IActionResult> Delete()
         {
 
-            await _dal.DeleteSchoolYear(syid);
+            await _dal.DeleteSchoolYear((Guid)_state.EntityIds.SchoolYear.Value.Key);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Detail", "Students", new { sid = _state.EntityIds.Student.Value.Key });
 
         }
 
