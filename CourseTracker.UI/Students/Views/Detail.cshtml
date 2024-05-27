@@ -4,7 +4,7 @@
 
 @{
 
-    string heading = Model.Id == null ? "Add New Student" : $"{Model.FirstName} {Model.LastName}";
+    string heading = Model.Id == null ? "Add New Student" : $"Student: {Model.FirstName} {Model.LastName}";
     List<SchoolYearsListItemModel> schoolYears = Model.Id == null ? null : ViewBag.SchoolYears;
 
 }

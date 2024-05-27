@@ -22,6 +22,15 @@
             else if (entityType == Enums.EntityTypes.Course)
                 result = "Add Course";
         }
+        else
+        {
+            if (entityType == Enums.EntityTypes.Student)
+                result = "Student: " + result;
+            else if (entityType == Enums.EntityTypes.SchoolYear)
+                result = "School Year: " + result;
+            else if (entityType == Enums.EntityTypes.Course)
+                result = "Course: " + result;
+        }
 
         return result;
 
@@ -43,14 +52,14 @@
     else if (entityIds.EntityType == Enums.EntityTypes.SchoolYear)
     {
         <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
-        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, entityIds.EntityType), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, Enums.EntityTypes.Student), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
         <li class="breadcrumb-item">@GetValue(entityIds.SchoolYear, entityIds.EntityType)</li>
     }
     else if (entityIds.EntityType == Enums.EntityTypes.Course)
     {
         <li class="breadcrumb-item">@Html.ActionLink("Students", "Index", "Students")</li>
-        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, entityIds.EntityType), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
-        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.SchoolYear, entityIds.EntityType), "Detail", "SchoolYears", new { syid = entityIds.SchoolYear.Value.Key })</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.Student, Enums.EntityTypes.Student), "Detail", "Students", new { sid = entityIds.Student.Value.Key })</li>
+        <li class="breadcrumb-item">@Html.ActionLink(@GetValue(entityIds.SchoolYear, Enums.EntityTypes.SchoolYear), "Detail", "SchoolYears", new { syid = entityIds.SchoolYear.Value.Key })</li>
         <li class="breadcrumb-item">@GetValue(entityIds.Course, entityIds.EntityType)</li>
     }
     else if (entityIds.EntityType == Enums.EntityTypes.Assessment)
