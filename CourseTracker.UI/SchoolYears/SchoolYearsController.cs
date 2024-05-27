@@ -10,6 +10,7 @@ using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.SchoolYears
@@ -51,21 +52,24 @@ namespace CourseTracker.UI.SchoolYears
 
             if (ModelState.IsValid)
             {
-                
+
+                Guid syid;
+
                 if (vmSchoolYear.Id == null)
                 {
                     var createSchoolYear = _mapper.Map<CreateSchoolYearModel>(vmSchoolYear);
                     createSchoolYear.StudentId = (Guid)_state.EntityIds.Student.Value.Key;
-                    await _dal.CreateSchoolYear(createSchoolYear);
+                    syid = await _dal.CreateSchoolYear(createSchoolYear);
                 }
                 else
                 {
                     var updaetSchoolYear = _mapper.Map<UpdateSchoolYearModel>(vmSchoolYear);
                     updaetSchoolYear.StudentId = (Guid)_state.EntityIds.Student.Value.Key;
                     await _dal.UpdateSchoolYear(updaetSchoolYear);
+                    syid = updaetSchoolYear.Id;
                 }
 
-                return RedirectToAction("Detail", "Students", new { sid = _state.EntityIds.Student.Value.Key });
+                return RedirectToAction("Detail", "SchoolYears", new { syid = syid });
 
             }
             else

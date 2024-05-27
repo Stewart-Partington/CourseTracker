@@ -4,7 +4,7 @@
 
 @{
 
-    string heading = Model.Id == null ? "Add New School Year" : $"Year: {Model.Index}";
+    string heading = Model.Id == null ? "Add New School Year" : $"Year: {Model.Year}";
     EntityIds entityIds = ViewBag.EntityIds;
 
 }
@@ -37,3 +37,53 @@
 
 </form>
 
+@if (Model.Id != null)
+{
+
+    <section class="panel panel-default mt-3">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Courses</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    @Html.ActionLink("Add Course", "Detail", "Courses", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table id="tblSchoolYears" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Year #</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* @foreach (SchoolYearsListItemModel schoolYear in schoolYears)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Details", "Detail", "SchoolYears", new { @syid = schoolYear.Id })
+                                </td>
+                                <td>
+                                    @schoolYear.Index
+                                </td>
+                                <td>
+                                    @schoolYear.Year
+                                </td>
+                            </tr>
+                        } *@
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </section>
+
+}

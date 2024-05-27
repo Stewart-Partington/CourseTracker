@@ -65,18 +65,21 @@ namespace CourseTracker.UI.Students
 			if (ModelState.IsValid)
 			{
 
+				Guid sid;
+
 				if (vmStudent.Id == null)
 				{
                     var createStudent = _mapper.Map<CreateStudentModel>(vmStudent);
-                    await _dal.CreateStudent(createStudent);
+                    sid = await _dal.CreateStudent(createStudent);
 				}
 				else
 				{
 					var updateStudent = _mapper.Map<UpdateStudentModel>(vmStudent);
 					await _dal.UpdateStudent(updateStudent);
+					sid = updateStudent.Id;
 				}
 
-				return RedirectToAction("Index");
+				return RedirectToAction("Detail", "Students", new { sid = sid } );
             }
             else
 			{
