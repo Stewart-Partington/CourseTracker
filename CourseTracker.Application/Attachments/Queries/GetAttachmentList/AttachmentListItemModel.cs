@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CourseTracker.Application.Attachments.Queries.GetAttachmentList
 {
     
-    public class AttahcmentListModel
+    public class AttachmentListItemModel
     {
 
         public Guid Id { get; set; }

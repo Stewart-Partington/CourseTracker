@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Attachments.Queries.GetAttachmentList
     public interface IGetAttachmentsListQuery
     {
 
-        List<AttahcmentListModel> Execute(Guid assessmentId);
+        List<AttachmentListItemModel> Execute(Guid assessmentId);
 
     }
 

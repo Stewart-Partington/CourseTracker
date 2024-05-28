@@ -2,6 +2,10 @@
 using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Attachments.Commands.CreateAttachment;
+using CourseTracker.Application.Attachments.Commands.UpdateAttachment;
+using CourseTracker.Application.Attachments.Queries.GetAttachmentDetail;
+using CourseTracker.Application.Attachments.Queries.GetAttachmentList;
 using CourseTracker.Application.Courses.Commands.CreateCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
@@ -49,6 +53,13 @@ namespace CourseTracker.UI.Services.DAL
 		Task<Guid> CreateAssessment(CreateAssessmentModel createAssessment);
 		Task UpdateAssessment(UpdateAssessmentModel updateAssessment);
 		Task DeleteAssessment(Guid id);
+
+		// Attachments
+		Task<List<AttachmentListItemModel>> GetAttachments(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId);
+		Task<AttachmentDetailModel> GetAttachment(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId, Guid attachmentid);
+		Task<Guid> CreateAttachment(CreateAttachmentModel createAttachment);
+		Task UpdateAttachment(UpdateAttachmentModel updateAttachment);
+		Task DeleteAttachment(Guid id);
 
 	}
 

@@ -33,7 +33,7 @@ namespace CourseTracker.API.Attachments
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments/{assessmentId}/Attachments")]
-        public List<AttahcmentListModel> Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
+        public List<AttachmentListItemModel> Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
         {
             return _listQuery.Execute(assessmentId);
         }

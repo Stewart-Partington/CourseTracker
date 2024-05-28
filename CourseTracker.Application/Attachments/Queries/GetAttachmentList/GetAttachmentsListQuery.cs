@@ -19,12 +19,12 @@ namespace CourseTracker.Application.Attachments.Queries.GetAttachmentList
             _database = database;
         }
 
-        public List<AttahcmentListModel> Execute(Guid assessmentId)
+        public List<AttachmentListItemModel> Execute(Guid assessmentId)
         {
 
             var result = _database.Attachments
                 .Where(x => x.AssessmentId == assessmentId)
-                .Select(x => new AttahcmentListModel()
+                .Select(x => new AttachmentListItemModel()
                 {
                     Id = x.Id,
                     AssessmentId = x.AssessmentId,

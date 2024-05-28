@@ -26,6 +26,10 @@ using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.Application.Assessments.Commands.CreateAssessment;
 using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
+using CourseTracker.Application.Attachments.Commands.CreateAttachment;
+using CourseTracker.Application.Attachments.Commands.UpdateAttachment;
+using CourseTracker.Application.Attachments.Queries.GetAttachmentDetail;
+using CourseTracker.Application.Attachments.Queries.GetAttachmentList;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -42,6 +46,7 @@ namespace CourseTracker.UI.Services.DAL
 		private const string _schoolsYearController = "SchoolYears";
 		private const string _coursesController = "Courses";
 		private const string _assementsController = "Assessments";
+        private const string _attachmentsController = "Attachments";
 
         #endregion
 
@@ -304,6 +309,69 @@ namespace CourseTracker.UI.Services.DAL
         {
 
             var response = await _client.DeleteAsync($"{_api}{_assementsController}/{id}");
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+        #endregion
+
+        #region Attachments
+
+        public async Task<List<AttachmentListItemModel>> GetAttachments(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
+        {
+
+            List<AttachmentListItemModel> result = null;
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}/{courseId}/Assessments/{assessmentId}");
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                result = await response.Content.ReadFromJsonAsync<List<AttachmentListItemModel>>();
+
+            return result;
+
+        }
+
+        public async Task<AttachmentDetailModel> GetAttachment(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId, Guid attachmentid)
+        {
+
+            AttachmentDetailModel result = null;
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}/{courseId}/{_assementsController}/{assessmentId}/{_attachmentsController}/{attachmentid}");
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                result = await response.Content.ReadFromJsonAsync<AttachmentDetailModel>();
+
+            return result;
+
+        }
+
+        public async Task<Guid> CreateAttachment(CreateAttachmentModel createAttachment)
+        {
+
+            Guid result = Guid.Empty;
+            var response = await _client.PostAsJsonAsync($"{_api}{_attachmentsController}", createAttachment);
+
+            if (response.StatusCode == HttpStatusCode.Created)
+                result = await response.Content.ReadFromJsonAsync<Guid>();
+
+            return result;
+
+        }
+
+        public async Task UpdateAttachment(UpdateAttachmentModel updateAttachment)
+        {
+
+            var response = await _client.PutAsJsonAsync($"{_api}{_attachmentsController}", updateAttachment);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(response.RequestMessage.ToString());
+
+        }
+
+        public async Task DeleteAttachment(Guid id)
+        {
+
+            var response = await _client.DeleteAsync($"{_api}{_attachmentsController}/{id}");
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());
