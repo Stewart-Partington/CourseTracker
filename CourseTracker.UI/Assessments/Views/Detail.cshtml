@@ -1,11 +1,15 @@
 ﻿@model VmAssessment
 @using CourseTracker.UI.Assessments.Models
 @using CourseTracker.UI.Models
+@using CourseTracker.Domain.Assessments
 
 @{
 
     string heading = Model.Id == null ? "Add New Assessment" : $"Assessment: {Model.Name}";
     EntityIds entityIds = ViewBag.EntityIds;
+
+    var assessmentTypeItems = Html.GetEnumSelectList<AssessmentTypes>().ToList();
+    assessmentTypeItems.Insert(0, new SelectListItem("Please Select", ""));
 
 }
 
@@ -19,7 +23,7 @@
 
     @Html.EditorFor(x => x.Name, "Question", new { inputControl = Html.TextBoxFor(x => x.Name, new { @class = "form-control w-50" }) })
 
-    @Html.EditorFor(x => x.AssessmentType, "Question", new { inputControl = Html.TextBoxFor(x => x.AssessmentType, new { @class = "form-control w-50" }) })
+    @Html.EditorFor(x => x.AssessmentType, "Question", new { inputControl = @Html.DropDownList("AssessmentType", assessmentTypeItems, new { @class = "form-control w-50" }) })
 
     @Html.EditorFor(x => x.Grade, "Question", new { inputControl = Html.TextBoxFor(x => x.Grade, new { @class = "form-control w-50" }) })
 
