@@ -21,7 +21,13 @@ body {
   margin-bottom: 60px;
 }
 
-label.required::before {
+label.required::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: 500;
+}
+
+/*label.required::before {
     content: "* ";
     color: #dc3545;
     font-weight: 500;
@@ -31,4 +37,4 @@ label.required::after {
     content: " (Required)";
     color: #dc3545;
     font-weight: 500;
-}
+}*/

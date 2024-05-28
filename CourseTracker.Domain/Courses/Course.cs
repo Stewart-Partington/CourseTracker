@@ -20,7 +20,7 @@ namespace CourseTracker.Domain.Courses
 
 		public string Name { get; set; }
 
-		public int Semester { get; set; }
+		public int? Semester { get; set; }
 
 		public List<Assessment> Assessments { get; set; }
 

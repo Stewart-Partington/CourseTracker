@@ -13,7 +13,6 @@ namespace CourseTracker.UI.Courses.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public int? Semester { get; set; }
 
     }

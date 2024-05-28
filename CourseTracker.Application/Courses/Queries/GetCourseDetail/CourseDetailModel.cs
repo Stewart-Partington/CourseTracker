@@ -17,7 +17,7 @@ namespace CourseTracker.Application.Courses.Queries.GetCourseDetail
 
 		public string Name { get; set; }
 
-		public int Semester { get; set; }
+		public int? Semester { get; set; }
 
 		//public List<Assessment> Assessments { get; set; }
 
