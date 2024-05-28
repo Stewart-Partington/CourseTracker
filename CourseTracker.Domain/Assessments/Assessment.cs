@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseTracker.Domain.Attachments;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,12 @@ namespace CourseTracker.Domain.Assessments
 	public class Assessment : EntityBase
 	{
 
-		public Guid CourseId { get; set; }
+        public Assessment()
+        {
+			Attachments = new List<Attachment>();
+        }
+
+        public Guid CourseId { get; set; }
 
 		public AssessmentTypes AssessmentType { get; set;  }
 
@@ -19,6 +25,8 @@ namespace CourseTracker.Domain.Assessments
 		public double Grade { get; set; }
 
 		public double Weight { get; set; }
+
+		public List<Attachment> Attachments { get; set; }
 
 	}
 

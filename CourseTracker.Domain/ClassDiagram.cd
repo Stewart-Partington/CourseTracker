@@ -11,7 +11,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CourseTracker.Domain.SchoolYears.SchoolYear">
-    <Position X="3" Y="1" Width="1.5" />
+    <Position X="3" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAABACAAA=</HashCode>
       <FileName>SchoolYears\SchoolYear.cs</FileName>
@@ -21,7 +21,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CourseTracker.Domain.Courses.Course">
-    <Position X="5.25" Y="1.75" Width="1.5" />
+    <Position X="5.25" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAIAAAAAQAAAAAAIAAAAAAAAEAAAA=</HashCode>
       <FileName>Courses\Course.cs</FileName>
@@ -31,10 +31,20 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="CourseTracker.Domain.Assessments.Assessment">
-    <Position X="8" Y="2.5" Width="1.5" />
+    <Position X="7.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAQAACAAAAAgAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAEAAAAAAAQAACAAAAAgAAAAAAEAAAA=</HashCode>
       <FileName>Assessments\Assessment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Attachments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseTracker.Domain.Attachments.Attachment">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAQAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Attachments\Attachment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

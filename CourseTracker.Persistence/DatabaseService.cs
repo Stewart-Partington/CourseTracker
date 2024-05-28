@@ -1,6 +1,7 @@
 ﻿using CourseTracker.Application.Interfaces;
 using CourseTracker.Domain;
 using CourseTracker.Domain.Assessments;
+using CourseTracker.Domain.Attachments;
 using CourseTracker.Domain.Courses;
 using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
@@ -44,8 +45,9 @@ namespace CourseTracker.Persistence
         public DbSet<SchoolYear> SchoolYears { get; set; }
         public DbSet<Course> Courses { get; set; }
 		public DbSet<Assessment> Assessments { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
 
-		public async Task<Guid> InsertAsync<t>(EntityBase entity)
+        public async Task<Guid> InsertAsync<t>(EntityBase entity)
         {
 
 			Guid result;
@@ -67,6 +69,10 @@ namespace CourseTracker.Persistence
 
 				case nameof(Assessment):
 					Assessments.Add((Assessment)entity);
+					break;
+
+				case nameof(Attachment):
+					Attachments.Add((Attachment)entity);
 					break;
 
 			}
