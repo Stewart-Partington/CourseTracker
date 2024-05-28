@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CourseTracker.Domain.Students.Student">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAEAAAAAAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAg=</HashCode>
+      <FileName>Students\Student.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="SchoolYears" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseTracker.Domain.SchoolYears.SchoolYear">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAABACAAA=</HashCode>
+      <FileName>SchoolYears\SchoolYear.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Courses" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseTracker.Domain.Courses.Course">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAIAAAAAQAAAAAAIAAAAAAAAEAAAA=</HashCode>
+      <FileName>Courses\Course.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Assessments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CourseTracker.Domain.Assessments.Assessment">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAQAACAAAAAgAAAAAAEAAAA=</HashCode>
+      <FileName>Assessments\Assessment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
