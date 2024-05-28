@@ -83,5 +83,15 @@ namespace CourseTracker.UI.Assessments
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete()
+        {
+
+            await _dal.DeleteAssessment((Guid)_state.EntityIds.Assessment.Value.Key);
+
+            return RedirectToAction("Detail", "Courses", new { cid = _state.EntityIds.Course.Value.Key });
+
+        }
+
     }
 }
