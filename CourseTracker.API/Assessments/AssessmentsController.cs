@@ -40,7 +40,7 @@ namespace CourseTracker.API.Assessments
 			return _listQuery.Execute(courseId);
 		}
 
-		[HttpGet]
+        [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments/{assessmentId}")]
         public AssessmentDetailModel Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
 		{
@@ -58,6 +58,7 @@ namespace CourseTracker.API.Assessments
                 courseId = assessment.CourseId, assessmentId = assessmentId }, assessmentId);
 
         }
+
         [HttpPut]
         [Route("Assessments")]
         public HttpResponseMessage Update(UpdateAssessmentModel assessment)

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace CourseTracker.Application.Attachments.Commands.Factory
 {
     
-    public class AttachmentFactory
+    public class AttachmentFactory : IAttachmentFactory
     {
 
         public Attachment Create(CreateAttachmentModel model)
