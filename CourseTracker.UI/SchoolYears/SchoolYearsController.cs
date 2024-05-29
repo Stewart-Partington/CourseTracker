@@ -35,9 +35,9 @@ namespace CourseTracker.UI.SchoolYears
                 result = new VmSchoolYear();
             else
             {
-                SchoolYearDetailModel schoolYearDetail = await _dal.GetSchoolYear((Guid)_state.EntityIds.Student.Value.Key, (Guid)syid);
+                SchoolYearDetailModel schoolYearDetail = await _dal.GetSchoolYear(StudentId, (Guid)syid);
                 result = _mapper.Map<VmSchoolYear>(schoolYearDetail);
-                ViewBag.Courses = await _dal.GetCourses((Guid)_state.EntityIds.Student.Value.Key, (Guid)syid);
+                ViewBag.Courses = await _dal.GetCourses(StudentId, (Guid)syid);
             }
 
             HandleEntityIds(EntityTypes.SchoolYear, result);
@@ -58,13 +58,13 @@ namespace CourseTracker.UI.SchoolYears
                 if (vmSchoolYear.Id == null)
                 {
                     var createSchoolYear = _mapper.Map<CreateSchoolYearModel>(vmSchoolYear);
-                    createSchoolYear.StudentId = (Guid)_state.EntityIds.Student.Value.Key;
+                    createSchoolYear.StudentId = StudentId;
                     syid = await _dal.CreateSchoolYear(createSchoolYear);
                 }
                 else
                 {
                     var updaetSchoolYear = _mapper.Map<UpdateSchoolYearModel>(vmSchoolYear);
-                    updaetSchoolYear.StudentId = (Guid)_state.EntityIds.Student.Value.Key;
+                    updaetSchoolYear.StudentId = StudentId;
                     await _dal.UpdateSchoolYear(updaetSchoolYear);
                     syid = updaetSchoolYear.Id;
                 }
@@ -74,7 +74,7 @@ namespace CourseTracker.UI.SchoolYears
             }
             else
             {
-                ViewBag.Courses = await _dal.GetCourses((Guid)_state.EntityIds.Student.Value.Key, (Guid)vmSchoolYear.Id);
+                ViewBag.Courses = await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
                 HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
                 return View(vmSchoolYear);
             }
@@ -85,9 +85,9 @@ namespace CourseTracker.UI.SchoolYears
         public async Task<IActionResult> Delete()
         {
 
-            await _dal.DeleteSchoolYear((Guid)_state.EntityIds.SchoolYear.Value.Key);
+            await _dal.DeleteSchoolYear(SchoolYearId);
 
-            return RedirectToAction("Detail", "Students", new { sid = _state.EntityIds.Student.Value.Key });
+            return RedirectToAction("Detail", "Students", new { sid = StudentId });
 
         }
 

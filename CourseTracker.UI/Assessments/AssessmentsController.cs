@@ -34,12 +34,9 @@ namespace CourseTracker.UI.Assessments
                 result = new VmAssessment();
             else
             {
-                EntityIds entityIds = _state.EntityIds;
-                AssessmentDetailModel assessmentDetailModel = await _dal.GetAssessment((Guid)entityIds.Student.Value.Key,
-                    (Guid)entityIds.SchoolYear.Value.Key, (Guid)entityIds.Course.Value.Key, (Guid)aid);
+                AssessmentDetailModel assessmentDetailModel = await _dal.GetAssessment(StudentId, SchoolYearId, CourseId, (Guid)aid);
                 result = _mapper.Map<VmAssessment>(assessmentDetailModel);
-                ViewBag.Attachments = await _dal.GetAttachments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)entityIds.Course.Value.Key,
-                    (Guid)aid);
+                ViewBag.Attachments = await _dal.GetAttachments(StudentId, SchoolYearId, CourseId, (Guid)aid);
             }
 
             HandleEntityIds(EntityTypes.Assessment, result);
@@ -56,20 +53,19 @@ namespace CourseTracker.UI.Assessments
             {
 
                 Guid aid;
-                EntityIds entityIds = _state.EntityIds;
 
                 if (vmAssessment.Id == null)
                 {
                     var createAssessment = _mapper.Map<CreateAssessmentModel>(vmAssessment);
-                    createAssessment.StudentId = (Guid)entityIds.Student.Value.Key;
-                    createAssessment.SchoolYearId = (Guid)entityIds.SchoolYear.Value.Key;
-                    createAssessment.CourseId = (Guid)entityIds.Course.Value.Key;
+                    createAssessment.StudentId = StudentId;
+                    createAssessment.SchoolYearId = SchoolYearId;
+                    createAssessment.CourseId = CourseId;
                     aid = await _dal.CreateAssessment(createAssessment);
                 }
                 else
                 {
                     var updateAssessment = _mapper.Map<UpdateAssessmentModel>(vmAssessment);
-                    updateAssessment.CourseId = (Guid)entityIds.Course.Value.Key;
+                    updateAssessment.CourseId = CourseId;
                     await _dal.UpdateAssessment(updateAssessment);
                     aid = updateAssessment.Id;
                 }
@@ -79,9 +75,7 @@ namespace CourseTracker.UI.Assessments
             }
             else
             {
-                EntityIds entityIds = _state.EntityIds;
-                ViewBag.Attachments = await _dal.GetAttachments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)entityIds.Course.Value.Key,
-                    (Guid)entityIds.Assessment.Value.Key);
+                ViewBag.Attachments = await _dal.GetAttachments(StudentId, SchoolYearId, CourseId, AssessmentId);
                 HandleEntityIds(EntityTypes.Assessment , vmAssessment);
                 return View(vmAssessment);
             }
@@ -92,9 +86,9 @@ namespace CourseTracker.UI.Assessments
         public async Task<IActionResult> Delete()
         {
 
-            await _dal.DeleteAssessment((Guid)_state.EntityIds.Assessment.Value.Key);
+            await _dal.DeleteAssessment(AssessmentId);
 
-            return RedirectToAction("Detail", "Courses", new { cid = _state.EntityIds.Course.Value.Key });
+            return RedirectToAction("Detail", "Courses", new { cid = CourseId });
 
         }
 

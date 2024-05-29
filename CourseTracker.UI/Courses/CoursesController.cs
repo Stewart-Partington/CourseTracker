@@ -34,10 +34,9 @@ namespace CourseTracker.UI.Courses
             else
             {
                 EntityIds entityIds = _state.EntityIds;
-                CourseDetailModel courseDetailModel = await _dal.GetCourse((Guid)entityIds.Student.Value.Key, 
-                    (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
+                CourseDetailModel courseDetailModel = await _dal.GetCourse(StudentId, SchoolYearId, (Guid)cid);
                 result = _mapper.Map<VmCourse>(courseDetailModel);
-                ViewBag.Assessments = await _dal.GetAssessments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)cid);
+                ViewBag.Assessments = await _dal.GetAssessments(StudentId, SchoolYearId, (Guid)cid);
             }
 
             HandleEntityIds(EntityTypes.Course, result);
@@ -54,19 +53,18 @@ namespace CourseTracker.UI.Courses
             {
 
                 Guid cid;
-                EntityIds entityIds = _state.EntityIds;
 
                 if (vmCourse.Id == null)
                 {
                     var createCourse = _mapper.Map<CreateCourseModel>(vmCourse);
-                    createCourse.StudentId = (Guid)entityIds.Student.Value.Key;
-                    createCourse.SchoolYearId = (Guid)entityIds.SchoolYear.Value.Key;
+                    createCourse.StudentId = StudentId;
+                    createCourse.SchoolYearId = SchoolYearId;
                     cid = await _dal.CreateCourse(createCourse);
                 }
                 else
                 {
                     var updateCourse = _mapper.Map<UpdateCourseModel>(vmCourse);
-                    updateCourse.SchoolYearId = (Guid)entityIds.SchoolYear.Value.Key;
+                    updateCourse.SchoolYearId = SchoolYearId;
                     await _dal.UpdateCourse(updateCourse);
                     cid = updateCourse.Id;
                 }
@@ -76,8 +74,7 @@ namespace CourseTracker.UI.Courses
             }
             else
             {
-                EntityIds entityIds = _state.EntityIds;
-                ViewBag.Assessments = await _dal.GetAssessments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)vmCourse.Id);
+                ViewBag.Assessments = await _dal.GetAssessments(StudentId, SchoolYearId, (Guid)vmCourse.Id);
                 HandleEntityIds(EntityTypes.Course, vmCourse);
                 return View(vmCourse);
             }
@@ -88,9 +85,9 @@ namespace CourseTracker.UI.Courses
         public async Task<IActionResult> Delete()
         {
 
-            await _dal.DeleteCourse((Guid)_state.EntityIds.Course.Value.Key);
+            await _dal.DeleteCourse(CourseId);
 
-            return RedirectToAction("Detail", "SchoolYears", new { syid = _state.EntityIds.SchoolYear.Value.Key });
+            return RedirectToAction("Detail", "SchoolYears", new { syid = SchoolYearId });
 
         }
 

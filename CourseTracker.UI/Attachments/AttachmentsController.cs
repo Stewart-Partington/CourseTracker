@@ -23,8 +23,6 @@ namespace CourseTracker.UI.Attachments
         public async Task<ActionResult> Upload(List<IFormFile> files)
         {
 
-            EntityIds entityIds = _state.EntityIds;
-
             if (files.Count == 1)
             {
 
@@ -39,10 +37,10 @@ namespace CourseTracker.UI.Attachments
 
                         CreateAttachmentModel createAttachment = new CreateAttachmentModel()
                         {
-                            StudentId = (Guid)entityIds.Student.Value.Key,
-                            SchoolYearId = (Guid)entityIds.SchoolYear.Value.Key,
-                            CourseId = (Guid)entityIds.Course.Value.Key,
-                            AssessmentId = (Guid)entityIds.Assessment.Value.Key,
+                            StudentId = StudentId,
+                            SchoolYearId = SchoolYearId,
+                            CourseId = CourseId,
+                            AssessmentId = AssessmentId,
                             Name = Path.GetFileName(formFile.FileName),
                             Type = formFile.ContentType,
                             Payload = memoryStream.ToArray()
@@ -55,7 +53,7 @@ namespace CourseTracker.UI.Attachments
 
             }
 
-            return RedirectToAction("Detail", "Assessments", new { aid = entityIds.Assessment.Value.Key });
+            return RedirectToAction("Detail", "Assessments", new { aid = AssessmentId });
 
         }
 
@@ -86,7 +84,7 @@ namespace CourseTracker.UI.Attachments
 
             await _dal.DeleteAttachment(id);
 
-            return RedirectToAction("Detail", "Assessments", new { aid = _state.EntityIds.Assessment.Value.Key });
+            return RedirectToAction("Detail", "Assessments", new { aid = AssessmentId });
 
         }
 

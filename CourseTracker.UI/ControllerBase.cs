@@ -19,11 +19,47 @@ namespace CourseTracker.UI
         protected readonly IMapper _mapper;
         protected readonly IState _state;
 
+        private readonly EntityIds _entityIds;
+
         public ControllerBase(IApiDal dal, IMapper mapper, IState state)
         {
             _dal = dal;
             _mapper = mapper;
             _state = state;
+
+            _entityIds = _state.EntityIds;
+        }
+
+        public Guid StudentId
+        {
+            get
+            {
+                return (Guid)_entityIds.Student.Value.Key;
+            }
+        }
+
+        public Guid SchoolYearId
+        {
+            get
+            {
+                return (Guid)_entityIds.SchoolYear.Value.Key;
+            }
+        }
+
+        public Guid CourseId
+        {
+            get
+            {
+                return (Guid)_entityIds.Course.Value.Key;
+            }
+        }
+
+        public Guid AssessmentId
+        {
+            get
+            {
+                return (Guid)_entityIds.Assessment.Value.Key;
+            }
         }
 
         public void HandleEntityIds(EntityTypes entityType, object vm)
