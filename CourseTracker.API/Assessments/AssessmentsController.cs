@@ -49,13 +49,12 @@ namespace CourseTracker.API.Assessments
 
         [HttpPost]
         [Route("Assessments")]
-        public async Task<IActionResult> Post(CreateAssessmentModel assessment)
+        public async Task<Guid> Post(CreateAssessmentModel assessment)
         {
 
-            Guid assessmentId = await _createCommand.Execute(assessment);
+            Guid result = await _createCommand.Execute(assessment);
 
-            return CreatedAtAction("Get", new { studentId = assessment.StudentId, schoolYearId = assessment.SchoolYearId, 
-                courseId = assessment.CourseId, assessmentId = assessmentId }, assessmentId);
+            return result;
 
         }
 

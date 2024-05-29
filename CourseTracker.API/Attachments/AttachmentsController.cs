@@ -47,18 +47,12 @@ namespace CourseTracker.API.Attachments
 
         [HttpPost]
         [Route("Attachments")]
-        public async Task<IActionResult> Post(CreateAttachmentModel attachment)
+        public async Task<Guid> Post(CreateAttachmentModel attachment)
         {
 
-            Guid attachmentId = await _createCommand.Execute(attachment);
+            Guid result = await _createCommand.Execute(attachment);
 
-            return CreatedAtAction("Get", new
-            {
-                studentId = attachment.StudentId,
-                schoolYearId = attachment.SchoolYearId,
-                courseId = attachment.CourseId,
-                assessmentId = attachment.AssessmentId
-            }, attachmentId);
+            return result;
 
         }
 

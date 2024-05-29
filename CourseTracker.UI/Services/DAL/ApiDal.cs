@@ -100,7 +100,7 @@ namespace CourseTracker.UI.Services.DAL
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync($"{_api}{_studentsController}", createStudent);
 
-			if (response.StatusCode == HttpStatusCode.Created)
+			if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
 
 			return result;
@@ -163,7 +163,7 @@ namespace CourseTracker.UI.Services.DAL
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync($"{_api}{_schoolsYearController}", createSchoolYear);
 
-            if (response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
 
             return result;
@@ -226,7 +226,7 @@ namespace CourseTracker.UI.Services.DAL
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync($"{_api}{_coursesController}", createCourse);
 
-            if (response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
 
             return result;
@@ -288,7 +288,7 @@ namespace CourseTracker.UI.Services.DAL
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync($"{_api}{_assementsController}", createAssessment);
 
-            if (response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
 
             return result;
@@ -351,7 +351,7 @@ namespace CourseTracker.UI.Services.DAL
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync($"{_api}{_attachmentsController}", createAttachment);
 
-            if (response.StatusCode == HttpStatusCode.Created)
+            if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
 
             return result;

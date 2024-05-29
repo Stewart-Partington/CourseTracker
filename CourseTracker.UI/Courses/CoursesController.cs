@@ -57,7 +57,6 @@ namespace CourseTracker.UI.Courses
                 if (vmCourse.Id == null)
                 {
                     var createCourse = _mapper.Map<CreateCourseModel>(vmCourse);
-                    createCourse.StudentId = StudentId;
                     createCourse.SchoolYearId = SchoolYearId;
                     cid = await _dal.CreateCourse(createCourse);
                 }

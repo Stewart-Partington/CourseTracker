@@ -37,9 +37,6 @@ namespace CourseTracker.UI.Attachments
 
                         CreateAttachmentModel createAttachment = new CreateAttachmentModel()
                         {
-                            StudentId = StudentId,
-                            SchoolYearId = SchoolYearId,
-                            CourseId = CourseId,
                             AssessmentId = AssessmentId,
                             Name = Path.GetFileName(formFile.FileName),
                             Type = formFile.ContentType,
