@@ -44,3 +44,7 @@
     </div>
 
 </form>
+
+@if (Model.Id != null) {
+    await Html.RenderPartialAsync("~/Attachments/Views/Index.cshtml");
+}

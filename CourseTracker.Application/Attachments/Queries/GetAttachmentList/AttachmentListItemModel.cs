@@ -18,8 +18,6 @@ namespace CourseTracker.Application.Attachments.Queries.GetAttachmentList
 
         public string Type { get; set; }
 
-        public byte[] Payload { get; set; }
-
     }
 
 }

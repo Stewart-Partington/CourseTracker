@@ -29,8 +29,7 @@ namespace CourseTracker.Application.Attachments.Queries.GetAttachmentList
                     Id = x.Id,
                     AssessmentId = x.AssessmentId,
                     Name = x.Name,
-                    Type = x.Type,
-                    Payload = x.Payload,
+                    Type = x.Type
                 });
 
             return result.ToList();

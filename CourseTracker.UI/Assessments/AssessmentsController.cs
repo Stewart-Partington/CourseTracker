@@ -38,6 +38,8 @@ namespace CourseTracker.UI.Assessments
                 AssessmentDetailModel assessmentDetailModel = await _dal.GetAssessment((Guid)entityIds.Student.Value.Key,
                     (Guid)entityIds.SchoolYear.Value.Key, (Guid)entityIds.Course.Value.Key, (Guid)aid);
                 result = _mapper.Map<VmAssessment>(assessmentDetailModel);
+                ViewBag.Attachments = await _dal.GetAttachments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)entityIds.Course.Value.Key,
+                    (Guid)aid);
             }
 
             HandleEntityIds(EntityTypes.Assessment, result);
@@ -77,6 +79,9 @@ namespace CourseTracker.UI.Assessments
             }
             else
             {
+                EntityIds entityIds = _state.EntityIds;
+                ViewBag.Attachments = await _dal.GetAttachments((Guid)entityIds.Student.Value.Key, (Guid)entityIds.SchoolYear.Value.Key, (Guid)entityIds.Course.Value.Key,
+                    (Guid)entityIds.Assessment.Value.Key);
                 HandleEntityIds(EntityTypes.Assessment , vmAssessment);
                 return View(vmAssessment);
             }

@@ -323,7 +323,7 @@ namespace CourseTracker.UI.Services.DAL
         {
 
             List<AttachmentListItemModel> result = null;
-            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}/{courseId}/Assessments/{assessmentId}");
+            var response = await _client.GetAsync($"{_api}{_studentsController}/{studentId}/{_schoolsYearController}/{schoolYearId}/{_coursesController}/{courseId}/{_assementsController}/{assessmentId}/{_attachmentsController}");
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<List<AttachmentListItemModel>>();
