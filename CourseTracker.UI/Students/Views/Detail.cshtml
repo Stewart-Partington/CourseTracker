@@ -11,6 +11,12 @@
 
 <h1>@heading</h1>
 
+<div class="row">
+    <div class="col-12 h3">
+        @Html.LabelFor(x => x.Average): @Model.Average %
+    </div>
+</div>
+
 <form>
 
     @Html.AntiForgeryToken()
@@ -63,6 +69,7 @@
                             <th>&nbsp;</th>
                             <th>Year #</th>
                             <th>Year</th>
+                            <th>Average</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,6 +84,9 @@
                             </td>
                             <td>
                                 @schoolYear.Year
+                            </td>
+                            <td>
+                                @schoolYear.Average %
                             </td>
                         </tr>
                         }

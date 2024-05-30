@@ -17,6 +17,8 @@ namespace CourseTracker.UI.Students.Models
         [Required]
         public string ProgramName { get; set; }
 
+        public double? Average { get; set; }
+
     }
 
 }

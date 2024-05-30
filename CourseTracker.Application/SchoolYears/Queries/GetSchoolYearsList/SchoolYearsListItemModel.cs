@@ -18,6 +18,8 @@ namespace CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList
 
         public int Year { get; set; }
 
+        public double? Average { get; set; }
+
     }
 
 }

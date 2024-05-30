@@ -1,4 +1,5 @@
 ﻿using CourseTracker.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +25,16 @@ namespace CourseTracker.Application.Students.Queries.GetStudentDetail
 
 			var result = _database.Students
 				.Where(x => x.Id == studentId)
+				.Include(x => x.SchoolYears)
+				.ThenInclude(x => x.Courses)
+				.ThenInclude(x => x.Assessments)
 				.Select(x => new StudentDetailModel()
 				{
 					Id = x.Id,
 					FirstName = x.FirstName,
 					LastName = x.LastName,
-					ProgramName = x.ProgramName
+					ProgramName = x.ProgramName,
+					Average = x.Average
 				})
 				.Single();
 

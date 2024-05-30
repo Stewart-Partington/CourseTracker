@@ -1,4 +1,5 @@
 ﻿using CourseTracker.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,15 @@ namespace CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList
 
             var result = _database.SchoolYears
                 .Where(x => x.StudentId == studentId)
+                .Include(x => x.Courses)
+                .ThenInclude(x => x.Assessments)
                 .Select(x => new SchoolYearsListItemModel()
                 {
                     Id = x.Id,
                     StudentId = x.StudentId,
                     Index = x.Index,
-                    Year = x.Year
+                    Year = x.Year,
+                    Average = x.Average
                 });
 
             return result.ToList();
