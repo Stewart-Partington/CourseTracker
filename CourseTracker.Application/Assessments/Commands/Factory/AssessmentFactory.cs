@@ -29,6 +29,7 @@ namespace CourseTracker.Application.Assessments.Commands.Factory
 		{
 			return new Assessment()
 			{
+				Id = model.Id,
 				CourseId = model.CourseId,
 				AssessmentType = model.AssessmentType,
 				Name = model.Name,

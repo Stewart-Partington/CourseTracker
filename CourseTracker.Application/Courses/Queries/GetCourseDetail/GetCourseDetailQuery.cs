@@ -1,4 +1,5 @@
 ﻿using CourseTracker.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace CourseTracker.Application.Courses.Queries.GetCourseDetail
 
 			var result = _database.Courses
 				.Where(x => x.Id == courseId)
+				.Include(x => x.Assessments)
 				.Select(x => new CourseDetailModel()
 				{
 					Id = x.Id,

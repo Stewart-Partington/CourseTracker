@@ -13,6 +13,12 @@
 
 <h1>@heading</h1>
 
+<div class="row">
+    <div class="col-12 h3">
+        @Html.LabelFor(x => x.Grade): @Model.Grade
+    </div>
+</div>
+
 <form>
 
     @Html.AntiForgeryToken()
