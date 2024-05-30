@@ -14,6 +14,8 @@ namespace CourseTracker.UI.SchoolYears.Models
         [Required]
         public int? Year { get; set; }
 
+        public double? Average { get; set; }
+
     }
 
 }
