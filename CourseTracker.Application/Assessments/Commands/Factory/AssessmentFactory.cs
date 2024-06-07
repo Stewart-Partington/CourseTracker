@@ -21,7 +21,8 @@ namespace CourseTracker.Application.Assessments.Commands.Factory
 				AssessmentType = model.AssessmentType,
 				Name = model.Name,
 				Grade = model.Grade,
-				Weight = model.Weight
+				Weight = model.Weight,
+				Notes = model.Notes,
 			};
 		}
 
@@ -34,7 +35,8 @@ namespace CourseTracker.Application.Assessments.Commands.Factory
 				AssessmentType = model.AssessmentType,
 				Name = model.Name,
 				Grade = model.Grade,
-				Weight = model.Weight
+				Weight = model.Weight,
+				Notes = model.Notes
 			};
 		}
 

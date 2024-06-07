@@ -26,7 +26,9 @@ namespace CourseTracker.Domain.Assessments
 
 		public double Weight { get; set; }
 
-		public List<Attachment> Attachments { get; set; }
+        public string? Notes { get; set; }
+
+        public List<Attachment> Attachments { get; set; }
 
 	}
 

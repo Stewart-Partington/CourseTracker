@@ -23,6 +23,8 @@ namespace CourseTracker.Application.Assessments.Queries.GetAssementDetail
 
 		public double Weight { get; set; }
 
-	}
+        public string? Notes { get; set; }
+
+    }
 
 }

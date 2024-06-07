@@ -21,13 +21,25 @@
 
     @Html.HiddenFor(x => x.Id)
 
-    @Html.EditorFor(x => x.Name, "Question", new { inputControl = Html.TextBoxFor(x => x.Name, new { @class = "form-control w-50" }) })
-
-    @Html.EditorFor(x => x.AssessmentType, "Question", new { inputControl = @Html.DropDownList("AssessmentType", assessmentTypeItems, new { @class = "form-control w-50" }) })
-
-    @Html.EditorFor(x => x.Grade, "Question", new { inputControl = Html.TextBoxFor(x => x.Grade, new { @class = "form-control w-50" }) })
-
-    @Html.EditorFor(x => x.Weight, "Question", new { inputControl = Html.TextBoxFor(x => x.Weight, new { @class = "form-control w-50" }) })
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                @Html.EditorFor(x => x.Name, "Question", new { inputControl = Html.TextBoxFor(x => x.Name, new { @class = "form-control" }) })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.AssessmentType, "Question", new { inputControl = @Html.DropDownList("AssessmentType", assessmentTypeItems, new { @class = "form-control" }) })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.Grade, "Question", new { inputControl = Html.TextBoxFor(x => x.Grade, new { @class = "form-control" }) })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.Weight, "Question", new { inputControl = Html.TextBoxFor(x => x.Weight, new { @class = "form-control" }) })
+            </div>
+        </div>
+        <div class="col-6">
+            @Html.EditorFor(x => x.Notes, "Question", new { inputControl = Html.TextAreaFor(x => x.Notes, new { @class = "form-control" }) })
+        </div>
+    </div>    
 
     <div class="mt-3">
 

@@ -24,6 +24,8 @@ namespace CourseTracker.UI.Assessments.Models
         [Required]
         public double? Weight { get; set; }
 
+        public string? Notes { get; set; }
+
     }
 
 }

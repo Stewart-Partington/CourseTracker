@@ -32,6 +32,7 @@ namespace CourseTracker.Application.Assessments.Queries.GetAssementDetail
 					Name = x.Name,
 					Grade = x.Grade,
 					Weight = x.Weight,
+					Notes = x.Notes
 				})
 				.Single();
 
