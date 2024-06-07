@@ -28,7 +28,6 @@ namespace CourseTracker.UI.Attachments
 
                 FormFile formFile = (FormFile)files[0];
                 
-
                 if (formFile.Length > 0)
                 {
                     using (MemoryStream memoryStream = new MemoryStream())

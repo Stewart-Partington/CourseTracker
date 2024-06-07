@@ -14,7 +14,7 @@
 
     <div class="panel-body">
 
-        <form method="post" enctype="multipart/form-data" action="@Url.Action("Upload", "Attachments")">
+        <form method="post" enctype="multipart/form-data">
 
             @Html.AntiForgeryToken()
 
@@ -22,7 +22,7 @@
                 <input id="filesInput" type="file" name="files" />
             </div>
 
-            <input id="btnSubmitModal" type="submit" value="Upload" class="btn btn-primary mt-3" />
+            <input id="btnSubmitUpload" type="submit" value="Upload" class="btn btn-primary mt-3" />
 
         </form>
 
@@ -58,3 +58,5 @@
     </div>
 
 </section>
+
+<script src="~/js/attachments/index.js" defer></script>
