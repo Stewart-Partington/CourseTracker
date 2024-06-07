@@ -22,6 +22,8 @@ namespace CourseTracker.Domain.Courses
 
 		public int? Semester { get; set; }
 
+		public string? Notes { get; set; }
+
 		public List<Assessment> Assessments { get; set; }
 
 		public double Grade { 

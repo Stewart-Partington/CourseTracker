@@ -20,6 +20,8 @@ namespace CourseTracker.Application.Courses.Commands.UpdateCourse
 
 		public int Semester { get; set; }
 
-	}
+        public string? Notes { get; set; }
+
+    }
 
 }

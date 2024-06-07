@@ -21,6 +21,7 @@ namespace CourseTracker.Application.Courses.Commands.Factory
 				SchoolYearId = model.SchoolYearId,
 				Name = model.Name,
 				Semester = model.Semester,
+				Notes = model.Notes
 			};
 		}
 
@@ -32,6 +33,7 @@ namespace CourseTracker.Application.Courses.Commands.Factory
 				SchoolYearId = model.SchoolYearId,
 				Name = model.Name,
 				Semester = model.Semester,
+				Notes = model.Notes
 			};
 		}
 

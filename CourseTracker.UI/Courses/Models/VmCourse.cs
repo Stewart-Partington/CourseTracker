@@ -17,6 +17,8 @@ namespace CourseTracker.UI.Courses.Models
 
         public double Grade { get; set; }
 
+        public string? Notes { get; set; }
+
     }
 
 }

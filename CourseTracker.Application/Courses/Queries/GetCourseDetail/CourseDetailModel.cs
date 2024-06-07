@@ -23,6 +23,8 @@ namespace CourseTracker.Application.Courses.Queries.GetCourseDetail
 
 		public double Grade { get; set; }
 
-	}
+        public string? Notes { get; set; }
+
+    }
 
 }

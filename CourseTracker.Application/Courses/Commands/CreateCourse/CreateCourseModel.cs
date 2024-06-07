@@ -21,6 +21,8 @@ namespace CourseTracker.Application.Courses.Commands.CreateCourse
 
         public double Grade { get; set; }
 
+        public string? Notes { get; set; }
+
     }
 
 }

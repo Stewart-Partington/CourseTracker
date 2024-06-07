@@ -25,9 +25,19 @@
 
     @Html.HiddenFor(x => x.Id)
 
-    @Html.EditorFor(x => x.Name, "Question", new { inputControl = Html.TextBoxFor(x => x.Name, new { @class = "form-control w-50" }) })
-
-    @Html.EditorFor(x => x.Semester, "Question", new { inputControl = Html.TextBoxFor(x => x.Semester, new { @class = "form-control w-50" }) })
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                @Html.EditorFor(x => x.Name, "Question", new { inputControl = Html.TextBoxFor(x => x.Name, new { @class = "form-control" }) })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.Semester, "Question", new { inputControl = Html.TextBoxFor(x => x.Semester, new { @class = "form-control" }) })
+            </div>
+        </div>
+        <div class="col-6">
+            @Html.EditorFor(x => x.Notes, "Question", new { inputControl = Html.TextAreaFor(x => x.Notes, new { @class = "form-control" }) })
+        </div>
+    </div>
 
     <div class="mt-3">
 

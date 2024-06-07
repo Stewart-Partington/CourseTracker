@@ -31,7 +31,8 @@ namespace CourseTracker.Application.Courses.Queries.GetCourseDetail
 					SchoolYearId = x.SchoolYearId,
 					Name = x.Name,
 					Semester = x.Semester,
-					Grade = x.Grade
+					Grade = x.Grade,
+					Notes = x.Notes
 				})
 				.Single();
 
