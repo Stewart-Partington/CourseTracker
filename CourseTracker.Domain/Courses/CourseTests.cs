@@ -40,6 +40,16 @@ namespace CourseTracker.Domain.Courses
 		}
 
 		[Test]
+		public void Assert1AssesmentWith0Percent()
+		{
+
+            _course.Assessments.Add(new Assessment() { Grade = 0, Weight = 50 });
+
+            Assert.That(_course.Grade, Is.EqualTo(0));
+
+        }
+
+		[Test]
 		public void Assert50PercentGrade()
 		{
 
@@ -58,7 +68,7 @@ namespace CourseTracker.Domain.Courses
 			_course.Assessments.Add(new Assessment() { Grade = 100, Weight = 33.3 });
 			_course.Assessments.Add(new Assessment() { Grade = 0, Weight = 33.3 });
 
-			Assert.That(_course.Grade, Is.EqualTo(66.6));
+			Assert.That(_course.Grade, Is.EqualTo(66.7));
 
 		}
 
@@ -73,6 +83,16 @@ namespace CourseTracker.Domain.Courses
 			Assert.That(_course.Grade, Is.EqualTo(100.0));
 
 		}
+
+		[Test]
+		public void Assert100PercentCeiling()
+		{
+
+            _course.Assessments.Add(new Assessment() { Grade = 100, Weight = 33.333 });
+
+			Assert.That(_course.Grade, Is.EqualTo(100.0));
+
+        }
 
 	}
 }

@@ -27,9 +27,14 @@ namespace CourseTracker.Domain.Courses
 		public double Grade { 
 			get
 			{
-				double result = Assessments
-					.Where(x => x.Grade != 0 && x.Weight != 0)
-					.Sum(x => (x.Grade * (x.Weight / 100)));
+				double result = 0;
+				double totalGrades = Assessments
+                    .Sum(x => (x.Grade * (x.Weight / 100)));
+                double totalWeight = Assessments
+					.Sum(x => x.Weight);
+
+				if (totalGrades != 0 && totalWeight != 0)
+					result = (totalGrades / totalWeight) * 100;
 
 				return Math.Round(result, 1, MidpointRounding.AwayFromZero);
 			}
