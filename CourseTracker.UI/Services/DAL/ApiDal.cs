@@ -173,7 +173,7 @@ namespace CourseTracker.UI.Services.DAL
 		public async Task UpdateSchoolYear(UpdateSchoolYearModel updateSchoolYear)
         {
 
-            var response = await _client.PutAsJsonAsync(_schoolsYearController, updateSchoolYear);
+            var response = await _client.PutAsJsonAsync($"{_api}{_schoolsYearController}", updateSchoolYear);
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception(response.RequestMessage.ToString());

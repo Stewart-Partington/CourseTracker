@@ -3,7 +3,9 @@ using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
 using CourseTracker.UI.Shared.Filters;
 using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Localization;
 
 namespace CourseTracker.UI
 {
@@ -36,7 +38,36 @@ namespace CourseTracker.UI
 			builder.Services.AddHttpContextAccessor();
 			builder.Services.AddScoped<IState, SessionState>();
 
-			var app = builder.Build();
+			#region Localization
+
+			builder.Services.Configure<RequestLocalizationOptions>(options =>
+			{
+				options.SupportedCultures = new List<CultureInfo>
+				{
+					new CultureInfo("en-CA")
+				};
+				options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en-CA");
+			});
+            CultureInfo cultureInfo = new CultureInfo("en-CA");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            IMvcBuilder mvcBuilder = builder.Services.AddMvc();
+			mvcBuilder.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
+				options =>
+				{
+					options.ResourcesPath = "Shared.Resources";
+				})
+				.AddDataAnnotationsLocalization();
+
+			builder.Services.Configure<LocalizationOptions>(options =>
+			{
+				options.ResourcesPath = "Shared.Resources";
+			});
+
+            #endregion
+
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())

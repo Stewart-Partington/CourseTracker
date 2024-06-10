@@ -18,12 +18,13 @@ namespace CourseTracker.UI.Shared.Helpers
             Type type = html.ViewData.ModelExplorer.Container.Model.GetType();
             string propertyName = ((Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper)html).ViewData.ModelMetadata.Name;
             var metaData = html.MetadataProvider.GetMetadataForProperty(type, propertyName);
+            string content = string.IsNullOrEmpty(metaData.DisplayName) ? metaData.Name : metaData.DisplayName;
             bool isRequired = false;
 
             if (metaData.ContainerType != null)
                 isRequired = metaData.ContainerType.GetProperty(metaData.PropertyName).GetCustomAttributes(typeof(RequiredAttribute), false).Length == 1;
 
-            result.InnerHtml.SetContent(metaData.Name);     // Change to metaData.DisplayName if using Display attribute on models.
+            result.InnerHtml.SetContent(content);     // Change to metaData.DisplayName if using Display attribute on models.
             result.Attributes.Add("for", metaData.Name);
 
             if (isRequired)

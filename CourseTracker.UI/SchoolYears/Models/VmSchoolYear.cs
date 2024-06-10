@@ -12,6 +12,8 @@ namespace CourseTracker.UI.SchoolYears.Models
         public int? Index { get; set; }
 
         [Required]
+        [Display(Name = "Year")]
+        [RegularExpression(@"^\d{4}$", ErrorMessage = "InvalidYear")]
         public int? Year { get; set; }
 
         public double? Average { get; set; }

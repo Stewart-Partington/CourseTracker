@@ -74,7 +74,7 @@ namespace CourseTracker.UI.SchoolYears
             }
             else
             {
-                ViewBag.Courses = await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
+                ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
                 HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
                 return View(vmSchoolYear);
             }
