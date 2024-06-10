@@ -1,6 +1,7 @@
 using CourseTracker.UI.Services.AutoMapper;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Filters;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 
@@ -13,7 +14,11 @@ namespace CourseTracker.UI
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
-			builder.Services.AddControllersWithViews()
+			builder.Services.AddControllersWithViews(options =>
+				{
+					options.Filters.Add(typeof(ExceptionFilter));
+				}
+			)
 				.AddRazorRuntimeCompilation();
 			builder.Services.Configure<RazorViewEngineOptions>(
 				p => p.ViewLocationExpanders.Add(

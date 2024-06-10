@@ -5,6 +5,7 @@ using CourseTracker.UI.Models;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Exceptions;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using static CourseTracker.UI.Models.Enums;
@@ -34,7 +35,14 @@ namespace CourseTracker.UI
         {
             get
             {
-                return (Guid)_entityIds.Student.Value.Key;
+                try
+                {
+                    return (Guid)_entityIds.Student.Value.Key;
+                }
+                catch
+                {
+                    throw new InvalidEntityIdException();
+                }
             }
         }
 
@@ -42,7 +50,14 @@ namespace CourseTracker.UI
         {
             get
             {
-                return (Guid)_entityIds.SchoolYear.Value.Key;
+                try
+                {
+                    return (Guid)_entityIds.SchoolYear.Value.Key;
+                }
+                catch
+                {
+                    throw new InvalidEntityIdException();
+                }
             }
         }
 
@@ -50,7 +65,14 @@ namespace CourseTracker.UI
         {
             get
             {
-                return (Guid)_entityIds.Course.Value.Key;
+                try
+                {
+                    return (Guid)_entityIds.Course.Value.Key;
+                }
+                catch
+                {
+                    throw new InvalidEntityIdException();
+                }
             }
         }
 
@@ -58,7 +80,14 @@ namespace CourseTracker.UI
         {
             get
             {
-                return (Guid)_entityIds.Assessment.Value.Key;
+                try
+                {
+                    return (Guid)_entityIds.Assessment.Value.Key;
+                }
+                catch
+                {
+                    throw new InvalidEntityIdException();
+                }
             }
         }
 
