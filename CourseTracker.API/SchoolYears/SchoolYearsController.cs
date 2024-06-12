@@ -57,6 +57,10 @@ namespace CourseTracker.API.SchoolYears
 
             List<SchoolYearsListItemModel> schoolYearItemModels = _listQuery.Execute(schoolYear.StudentId);
             List<SchoolYear> schoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
+            var spec = new DuplicateMovieSpecification(schoolYear.Year);
+
+            if (!spec.IsSatisfiedBy(schoolYears))
+                throw new DuplicateMovieException();
 
             Guid result = await _createCommand.Execute(schoolYear);
 

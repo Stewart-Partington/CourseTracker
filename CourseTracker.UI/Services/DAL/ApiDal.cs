@@ -162,9 +162,12 @@ namespace CourseTracker.UI.Services.DAL
 
             Guid result = Guid.Empty;
             var response = await _client.PostAsJsonAsync($"{_api}{_schoolsYearController}", createSchoolYear);
+            object ex;
 
             if (response.StatusCode == HttpStatusCode.OK)
                 result = await response.Content.ReadFromJsonAsync<Guid>();
+            else if (response.StatusCode == HttpStatusCode.InternalServerError)
+                ex = await response.Content.ReadFromJsonAsync<object>();
 
             return result;
 
