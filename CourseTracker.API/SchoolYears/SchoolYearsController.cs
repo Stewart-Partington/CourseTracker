@@ -51,6 +51,8 @@ namespace CourseTracker.API.SchoolYears
         public async Task<Guid> Post(CreateSchoolYearModel schoolYear)
         {
 
+            List<SchoolYearsListItemModel> schoolYears = await _listQuery.Execute(schoolYear.StudentId);
+
             Guid result = await _createCommand.Execute(schoolYear);
 
             return result;
