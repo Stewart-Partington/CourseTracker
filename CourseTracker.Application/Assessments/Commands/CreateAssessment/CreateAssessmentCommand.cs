@@ -22,7 +22,7 @@ namespace CourseTracker.Application.Assessments.Commands.CreateAssessment
 			_factory = factory;
 		}
 
-		public async Task<Guid> Execute(CreateAssessmentModel model)
+		public async Task<Guid> ExecuteAsync(CreateAssessmentModel model)
 		{
 
 			Guid result = Guid.Empty;

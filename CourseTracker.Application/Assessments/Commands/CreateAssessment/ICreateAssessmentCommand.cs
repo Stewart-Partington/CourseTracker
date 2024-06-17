@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Assessments.Commands.CreateAssessment
 	public interface ICreateAssessmentCommand
 	{
 
-		Task<Guid> Execute(CreateAssessmentModel model);
+		Task<Guid> ExecuteAsync(CreateAssessmentModel model);
 
 	}
 

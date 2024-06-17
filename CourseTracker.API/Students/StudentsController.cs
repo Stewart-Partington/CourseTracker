@@ -49,7 +49,7 @@ namespace CourseTracker.API.Students
         public async Task<ActionResult<Guid>> Post(CreateStudentModel student)
         {
 
-            Guid result = await _createCommand.Execute(student);
+            Guid result = await _createCommand.ExecuteAsync(student);
 
             return CreatedAtAction("Get", new { id = result }, result);
 

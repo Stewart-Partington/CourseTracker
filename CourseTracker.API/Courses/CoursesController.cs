@@ -50,7 +50,7 @@ namespace CourseTracker.API.Courses
         [Route("Courses")]
         public async Task<ActionResult<Guid>> Post(CreateCourseModel course)
         {
-            Guid result = await _createCommand.Execute(course);
+            Guid result = await _createCommand.ExecuteAsync(course);
 
             return Created($"Students/{course.StudentId}/SchoolYears/{course.SchoolYearId}/Courses/{result}", result);
         }

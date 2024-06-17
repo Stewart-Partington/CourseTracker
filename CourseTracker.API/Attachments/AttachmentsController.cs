@@ -50,7 +50,7 @@ namespace CourseTracker.API.Attachments
         public async Task<ActionResult<Guid>> Post(CreateAttachmentModel attachment)
         {
 
-            Guid result = await _createCommand.Execute(attachment);
+            Guid result = await _createCommand.ExecuteAsync(attachment);
 
             return Created($"Students/{attachment.StudentId}/SchoolYears/{attachment.SchoolYearId}/Courses/{attachment.CourseId}/Assessments/{attachment.AssessmentId}/Attachments/{result}", result);
 

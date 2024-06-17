@@ -62,7 +62,7 @@ namespace CourseTracker.API.SchoolYears
             if (!spec.IsSatisfiedBy(schoolYears))
                 throw new DuplicateMovieException();
 
-            Guid result = await _createCommand.Execute(schoolYear);
+            Guid result = await _createCommand.ExecuteAsync(schoolYear);
 
             return Created($"Students/{schoolYear.StudentId}/SchoolYears/{result}", result);
 

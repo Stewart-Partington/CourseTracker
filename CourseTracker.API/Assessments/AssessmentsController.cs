@@ -52,7 +52,7 @@ namespace CourseTracker.API.Assessments
         public async Task<ActionResult<Guid>> Post(CreateAssessmentModel assessment)
         {
 
-            Guid result = await _createCommand.Execute(assessment);
+            Guid result = await _createCommand.ExecuteAsync(assessment);
 
             return Created($"Students/{assessment.StudentId}/SchoolYears/{assessment.SchoolYearId}/Courses/{assessment.CourseId}/Assessments/{result}", result);
 
