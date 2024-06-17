@@ -18,13 +18,13 @@ namespace CourseTracker.Application.Courses.Commands.DeleteCourse
 			_database = database;
 		}
 
-		public void Execute(Guid courseId)
+		public async Task ExecuteAsync(Guid courseId)
 		{
 
 			var course = _database.Courses.Find(courseId);
 
 			_database.Courses.Remove(course);
-			_database.Save();
+			_database.SaveAsync();
 
 		}
 

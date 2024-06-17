@@ -10,7 +10,7 @@ namespace CourseTracker.Application.SchoolYears.Commands.DeleteSchoolYear
     public interface IDeleteSchoolYearCommand
     {
 
-        void Execute(Guid schoolYearId);
+        Task ExecuteAsync(Guid schoolYearId);
 
     }
 

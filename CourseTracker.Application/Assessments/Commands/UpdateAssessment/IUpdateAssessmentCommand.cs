@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Assessments.Commands.UpdateAssessment
 	public interface IUpdateAssessmentCommand
 	{
 
-		void Execute(UpdateAssessmentModel model);
+		Task ExecuteAsync(UpdateAssessmentModel model);
 
 	}
 

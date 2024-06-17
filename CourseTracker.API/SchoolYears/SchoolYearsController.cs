@@ -70,10 +70,10 @@ namespace CourseTracker.API.SchoolYears
 
         [HttpPut]
         [Route("SchoolYears")]
-        public ActionResult<HttpResponseMessage> Update(UpdateSchoolYearModel schoolYear)
+        public async Task<ActionResult<HttpResponseMessage>> Update(UpdateSchoolYearModel schoolYear)
         {
 
-            _updateCommand.Execute(schoolYear);
+            await _updateCommand.ExecuteAsync(schoolYear);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
 
@@ -81,10 +81,10 @@ namespace CourseTracker.API.SchoolYears
 
         [HttpDelete]
         [Route("SchoolYears/{id}")]
-        public ActionResult<HttpResponseMessage> Delete(Guid id)
+        public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
 
-            _deleteCommand.Execute(id);
+            await _deleteCommand.ExecuteAsync(id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
 

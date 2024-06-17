@@ -60,17 +60,17 @@ namespace CourseTracker.API.Assessments
 
         [HttpPut]
         [Route("Assessments")]
-        public ActionResult<HttpResponseMessage> Update(UpdateAssessmentModel assessment)
+        public async Task<ActionResult<HttpResponseMessage>> Update(UpdateAssessmentModel assessment)
         {
-            _updateCommand.Execute(assessment);
+            await _updateCommand.ExecuteAsync(assessment);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpDelete]
         [Route("Assessments/{id}")]
-        public ActionResult<HttpResponseMessage> Delete(Guid id)
+        public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
-            _deleteCommand.Execute(id);
+            await _deleteCommand.ExecuteAsync(id);
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
 

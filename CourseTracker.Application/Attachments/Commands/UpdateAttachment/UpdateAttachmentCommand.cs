@@ -22,12 +22,12 @@ namespace CourseTracker.Application.Attachments.Commands.UpdateAttachment
             _factory = factory;
         }
 
-        public void Execute(UpdateAttachmentModel model) {
+        public async Task ExecuteAsync(UpdateAttachmentModel model) {
 
             Attachment attachment = _factory.Create(model);
 
             _database.Attachments.Update(attachment);
-            _database.Save();
+            _database.SaveAsync();
         
         }
 

@@ -56,20 +56,20 @@ namespace CourseTracker.API.Students
         }
 
         [HttpPut]
-        public ActionResult<HttpResponseMessage> Update(UpdateStudentModel student)
+        public async Task<ActionResult<HttpResponseMessage>> Update(UpdateStudentModel student)
         {
 
-            _updateCommand.Execute(student);
+            await _updateCommand.ExecuteAsync(student);
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
 
 		}
 
         [HttpDelete("{id}")]
-        public ActionResult<HttpResponseMessage> Delete(Guid id)
+        public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
 
-            _deleteCommand.Execute(id);
+            await _deleteCommand.ExecuteAsync(id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
 

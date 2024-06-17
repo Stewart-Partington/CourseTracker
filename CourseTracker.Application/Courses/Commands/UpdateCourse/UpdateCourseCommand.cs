@@ -25,13 +25,13 @@ namespace CourseTracker.Application.Courses.Commands.UpdateCourse
 			_factory = factory;
 		}
 
-		public void Execute(UpdateCourseModel model)
+		public async Task ExecuteAsync(UpdateCourseModel model)
 		{
 
 			Course course = _factory.Create(model);
 
 			_database.Courses.Update(course);
-			_database.Save();
+			await _database.SaveAsync();
 
 		}
 

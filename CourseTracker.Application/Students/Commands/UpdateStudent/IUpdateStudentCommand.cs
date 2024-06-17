@@ -11,7 +11,7 @@ namespace CourseTracker.Application.Students.Commands.UpdateStudent
 	public interface IUpdateStudentCommand
 	{
 
-		void Execute(UpdateStudentModel model);
+		Task ExecuteAsync(UpdateStudentModel model);
 
 	}
 

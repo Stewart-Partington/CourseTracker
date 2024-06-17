@@ -18,13 +18,13 @@ namespace CourseTracker.Application.SchoolYears.Commands.DeleteSchoolYear
             _database = database;
         }
 
-        public void Execute(Guid schoolYearId)
+        public async Task ExecuteAsync(Guid schoolYearId)
         {
 
             var student = _database.SchoolYears.Find(schoolYearId);
 
             _database.SchoolYears.Remove(student);
-            _database.Save();
+            await _database.SaveAsync();
 
         }
 

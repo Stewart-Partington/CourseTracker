@@ -57,18 +57,18 @@ namespace CourseTracker.API.Courses
 
 		[HttpPut]
 		[Route("Courses")]
-		public ActionResult<HttpResponseMessage> Update(UpdateCourseModel course)
+		public async Task<ActionResult<HttpResponseMessage>> Update(UpdateCourseModel course)
 		{
-			_updateCommand.Execute(course);
+			await _updateCommand.ExecuteAsync(course);
 			return new HttpResponseMessage(HttpStatusCode.OK);
 		}
 
 		[HttpDelete]
 		[Route("Courses/{id}")]
-		public ActionResult<HttpResponseMessage> Delete(Guid id)
+		public async Task <ActionResult<HttpResponseMessage>> Delete(Guid id)
 		{
 
-			_deleteCommand.Execute(id);
+			await _deleteCommand.ExecuteAsync(id);
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
 

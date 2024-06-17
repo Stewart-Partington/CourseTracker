@@ -85,9 +85,9 @@ namespace CourseTracker.Persistence
 
 		}
 
-		public void Save()
+		public async Task SaveAsync()
 		{
-			this.SaveChanges();
+			await this.SaveChangesAsync();
 		}
 
 	}

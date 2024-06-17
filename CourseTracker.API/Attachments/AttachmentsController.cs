@@ -58,17 +58,17 @@ namespace CourseTracker.API.Attachments
 
         [HttpPut]
         [Route("Attachments")]
-        public ActionResult<HttpResponseMessage> Update(UpdateAttachmentModel attachment)
+        public async Task<ActionResult<HttpResponseMessage>> Update(UpdateAttachmentModel attachment)
         {
-            _updateCommand.Execute(attachment);
+            await _updateCommand.ExecuteAsync(attachment);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpDelete]
         [Route("Attachments/{id}")]
-        public ActionResult<HttpResponseMessage> Delete(Guid id)
+        public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
-            _deleteCommand.Execute(id);
+            await _deleteCommand.ExecuteAsync(id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

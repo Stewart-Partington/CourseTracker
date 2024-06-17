@@ -11,7 +11,7 @@ namespace CourseTracker.Application.Attachments.Commands.UpdateAttachment
     public interface IUpdateAttachmentCommand
     {
 
-        void Execute(UpdateAttachmentModel model);
+        Task ExecuteAsync(UpdateAttachmentModel model);
 
     }
 

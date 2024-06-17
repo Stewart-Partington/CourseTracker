@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Attachments.Commands.DeleteAttachment
     public interface IDeleteAttachmentCommand
     {
 
-        void Execute(Guid attachmentId);
+        Task ExecuteAsync(Guid attachmentId);
 
     }
 
