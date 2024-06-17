@@ -11,9 +11,11 @@ using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
+using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
 using CourseTracker.UI.Assessments.Models;
 using CourseTracker.UI.Courses.Models;
@@ -40,6 +42,7 @@ namespace CourseTracker.UI.Services.AutoMapper
             CreateMap<VmSchoolYear, CreateSchoolYearModel>();
             CreateMap<VmSchoolYear, UpdateSchoolYearModel>();
             CreateMap<SchoolYearDetailModel, VmSchoolYear>();
+            CreateMap<SchoolYearsListItemModel, SchoolYear>();
 
             // Course
             CreateMap<VmCourse, CourseDetailModel>();

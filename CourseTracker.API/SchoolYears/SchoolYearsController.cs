@@ -5,6 +5,7 @@ using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Domain;
 using CourseTracker.Domain.SchoolYears;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,13 +55,6 @@ namespace CourseTracker.API.SchoolYears
         [Route("SchoolYears")]
         public async Task<ActionResult<Guid>> Post(CreateSchoolYearModel schoolYear)
         {
-
-            List<SchoolYearsListItemModel> schoolYearItemModels = _listQuery.Execute(schoolYear.StudentId);
-            List<SchoolYear> schoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
-            var spec = new DuplicateMovieSpecification(schoolYear.Year);
-
-            if (!spec.IsSatisfiedBy(schoolYears))
-                throw new DuplicateMovieException();
 
             Guid result = await _createCommand.ExecuteAsync(schoolYear);
 

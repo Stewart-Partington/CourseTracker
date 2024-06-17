@@ -2,8 +2,10 @@
 using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
+using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
@@ -37,10 +39,9 @@ namespace CourseTracker.UI.SchoolYears
             {
                 SchoolYearDetailModel schoolYearDetail = await _dal.GetSchoolYear(StudentId, (Guid)syid);
                 result = _mapper.Map<VmSchoolYear>(schoolYearDetail);
-                ViewBag.Courses = await _dal.GetCourses(StudentId, (Guid)syid);
             }
 
-            HandleEntityIds(EntityTypes.SchoolYear, result);
+            await HandleViewBag(result);
 
             return View(result);
 
@@ -52,6 +53,12 @@ namespace CourseTracker.UI.SchoolYears
 
             if (ModelState.IsValid)
             {
+
+                if (!await IsComplexValidationValid(vmSchoolYear))
+                {
+                    await HandleViewBag(vmSchoolYear);
+                    return View(vmSchoolYear);
+                }
 
                 Guid syid;
 
@@ -74,10 +81,34 @@ namespace CourseTracker.UI.SchoolYears
             }
             else
             {
-                ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
-                HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
+                await HandleViewBag(vmSchoolYear);
                 return View(vmSchoolYear);
             }
+
+        }
+
+        private async Task<bool> IsComplexValidationValid(VmSchoolYear vmSchoolYear)
+        {
+
+            bool result = false;
+            List<SchoolYearsListItemModel> schoolYearItemModels = await _dal.GetSchoolYears(StudentId);
+            List<SchoolYear> schoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
+            var spec = new DuplicateMovieSpecification((int)vmSchoolYear.Year);
+
+            result = spec.IsSatisfiedBy(schoolYears);
+
+            if (!result)
+                ModelState.AddModelError("Year", "This School Year already exists.");
+
+            return result;
+
+        }
+
+        private async Task HandleViewBag(VmSchoolYear vmSchoolYear)
+        {
+
+            ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
+            HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
 
         }
 
