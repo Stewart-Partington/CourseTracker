@@ -3,6 +3,7 @@ using CourseTracker.Application.Courses.Commands.DeleteCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
 using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Domain.SchoolYears;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -33,30 +34,30 @@ namespace CourseTracker.API.Courses
 
         [HttpGet]
 		[Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses")]
-		public List<CoursesListItemModel> Get(Guid studentId, Guid schoolYearId)
+		public ActionResult<List<CoursesListItemModel>> Get(Guid studentId, Guid schoolYearId)
 		{
 			return _listQuery.Execute(schoolYearId);
 		}
 
 		[HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}")]
-        public CourseDetailModel Get(Guid studentId, Guid schoolYearId, Guid courseId)
+        public ActionResult<CourseDetailModel> Get(Guid studentId, Guid schoolYearId, Guid courseId)
 		{
 			return _detailQuery.Execute(courseId);
 		}
 
         [HttpPost]
         [Route("Courses")]
-        public async Task<Guid> Post(CreateCourseModel course)
+        public async Task<ActionResult<Guid>> Post(CreateCourseModel course)
         {
             Guid result = await _createCommand.Execute(course);
 
-            return result;
+            return Created($"Students/{course.StudentId}/SchoolYears/{course.SchoolYearId}/Courses/{result}", result);
         }
 
 		[HttpPut]
 		[Route("Courses")]
-		public HttpResponseMessage Update(UpdateCourseModel course)
+		public ActionResult<HttpResponseMessage> Update(UpdateCourseModel course)
 		{
 			_updateCommand.Execute(course);
 			return new HttpResponseMessage(HttpStatusCode.OK);
@@ -64,7 +65,7 @@ namespace CourseTracker.API.Courses
 
 		[HttpDelete]
 		[Route("Courses/{id}")]
-		public HttpResponseMessage Delete(Guid id)
+		public ActionResult<HttpResponseMessage> Delete(Guid id)
 		{
 
 			_deleteCommand.Execute(id);

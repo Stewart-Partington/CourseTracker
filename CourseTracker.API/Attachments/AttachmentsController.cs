@@ -33,32 +33,32 @@ namespace CourseTracker.API.Attachments
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments/{assessmentId}/Attachments")]
-        public List<AttachmentListItemModel> Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
+        public ActionResult<List<AttachmentListItemModel>> Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
         {
             return _listQuery.Execute(assessmentId);
         }
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments/{assessmentId}/Attachments/{attachmentId}")]
-        public AttachmentDetailModel Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId, Guid attachmentId)
+        public ActionResult<AttachmentDetailModel> Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId, Guid attachmentId)
         {
             return _detailQuery.Execute(attachmentId);
         }
 
         [HttpPost]
         [Route("Attachments")]
-        public async Task<Guid> Post(CreateAttachmentModel attachment)
+        public async Task<ActionResult<Guid>> Post(CreateAttachmentModel attachment)
         {
 
             Guid result = await _createCommand.Execute(attachment);
 
-            return result;
+            return Created($"Students/{attachment.StudentId}/SchoolYears/{attachment.SchoolYearId}/Courses/{attachment.CourseId}/Assessments/{attachment.AssessmentId}/Attachments/{result}", result);
 
         }
 
         [HttpPut]
         [Route("Attachments")]
-        public HttpResponseMessage Update(UpdateAttachmentModel attachment)
+        public ActionResult<HttpResponseMessage> Update(UpdateAttachmentModel attachment)
         {
             _updateCommand.Execute(attachment);
             return new HttpResponseMessage(HttpStatusCode.OK);
@@ -66,7 +66,7 @@ namespace CourseTracker.API.Attachments
 
         [HttpDelete]
         [Route("Attachments/{id}")]
-        public HttpResponseMessage Delete(Guid id)
+        public ActionResult<HttpResponseMessage> Delete(Guid id)
         {
             _deleteCommand.Execute(id);
 

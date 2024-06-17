@@ -38,21 +38,21 @@ namespace CourseTracker.API.SchoolYears
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears")]
-        public List<SchoolYearsListItemModel> Get(Guid studentId)
+        public ActionResult<List<SchoolYearsListItemModel>> Get(Guid studentId)
         {
             return _listQuery.Execute(studentId);
         }
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}")]
-        public SchoolYearDetailModel Get(Guid studentId, Guid schoolYearId)
+        public ActionResult<SchoolYearDetailModel> Get(Guid studentId, Guid schoolYearId)
         {
             return _detailQuery.Execute(schoolYearId);
         }
 
         [HttpPost]
         [Route("SchoolYears")]
-        public async Task<Guid> Post(CreateSchoolYearModel schoolYear)
+        public async Task<ActionResult<Guid>> Post(CreateSchoolYearModel schoolYear)
         {
 
             List<SchoolYearsListItemModel> schoolYearItemModels = _listQuery.Execute(schoolYear.StudentId);
@@ -64,13 +64,13 @@ namespace CourseTracker.API.SchoolYears
 
             Guid result = await _createCommand.Execute(schoolYear);
 
-            return result;
+            return Created($"Students/{schoolYear.StudentId}/SchoolYears/{result}", result);
 
         }
 
         [HttpPut]
         [Route("SchoolYears")]
-        public HttpResponseMessage Update(UpdateSchoolYearModel schoolYear)
+        public ActionResult<HttpResponseMessage> Update(UpdateSchoolYearModel schoolYear)
         {
 
             _updateCommand.Execute(schoolYear);
@@ -81,7 +81,7 @@ namespace CourseTracker.API.SchoolYears
 
         [HttpDelete]
         [Route("SchoolYears/{id}")]
-        public HttpResponseMessage Delete(Guid id)
+        public ActionResult<HttpResponseMessage> Delete(Guid id)
         {
 
             _deleteCommand.Execute(id);

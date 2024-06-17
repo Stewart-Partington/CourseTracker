@@ -57,6 +57,8 @@ namespace CourseTracker.UI.Assessments
                 if (vmAssessment.Id == null)
                 {
                     var createAssessment = _mapper.Map<CreateAssessmentModel>(vmAssessment);
+                    createAssessment.StudentId = StudentId;
+                    createAssessment.SchoolYearId = SchoolYearId;
                     createAssessment.CourseId = CourseId;
                     aid = await _dal.CreateAssessment(createAssessment);
                 }

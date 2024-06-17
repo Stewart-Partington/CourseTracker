@@ -11,6 +11,10 @@ namespace CourseTracker.Application.Assessments.Commands.CreateAssessment
 	public class CreateAssessmentModel
 	{
 
+		public Guid StudentId { get; set; }
+
+		public Guid SchoolYearId { get; set; }
+
 		public Guid CourseId { get; set; }
 
 		public AssessmentTypes AssessmentType { get; set; }

@@ -10,6 +10,12 @@ namespace CourseTracker.Application.Attachments.Commands.CreateAttachment
     public class CreateAttachmentModel
     {
 
+        public Guid StudentId { get; set; }
+
+        public Guid SchoolYearId { get; set; }
+
+        public Guid CourseId { get; set; }
+
         public Guid AssessmentId { get; set; }
 
         public string Name { get; set; }
