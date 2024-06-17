@@ -41,6 +41,7 @@ namespace CourseTracker.UI.Services.AutoMapper
             CreateMap<VmSchoolYear, SchoolYearDetailModel>();
             CreateMap<VmSchoolYear, CreateSchoolYearModel>();
             CreateMap<VmSchoolYear, UpdateSchoolYearModel>();
+            CreateMap<VmSchoolYear, SchoolYear>();
             CreateMap<SchoolYearDetailModel, VmSchoolYear>();
             CreateMap<SchoolYearsListItemModel, SchoolYear>();
 

@@ -12,17 +12,17 @@ namespace CourseTracker.Domain.SchoolYears
     public sealed class DuplicateMovieSpecification : SpecificationBase<List<SchoolYear>>
     {
 
-        private readonly int _year;
+        private readonly SchoolYear _schoolYear;
 
-        public DuplicateMovieSpecification(int year)
+        public DuplicateMovieSpecification(SchoolYear schoolYear)
         {
-            _year = year;
+            _schoolYear = schoolYear;
         }
 
         public override Expression<Func<List<SchoolYear>, bool>> ToExpression()
         {
 
-            return schoolYears => !schoolYears.Any(x => x.Year ==  _year);
+            return schoolYears => !schoolYears.Any(x => (x.Year == _schoolYear.Year && x.Id != _schoolYear.Id));
 
         }
 

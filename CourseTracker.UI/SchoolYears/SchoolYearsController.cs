@@ -39,9 +39,10 @@ namespace CourseTracker.UI.SchoolYears
             {
                 SchoolYearDetailModel schoolYearDetail = await _dal.GetSchoolYear(StudentId, (Guid)syid);
                 result = _mapper.Map<VmSchoolYear>(schoolYearDetail);
+                ViewBag.Courses = await _dal.GetCourses(StudentId, (Guid)syid);
             }
 
-            await HandleViewBag(result);
+            HandleEntityIds(EntityTypes.SchoolYear, result);
 
             return View(result);
 
@@ -56,7 +57,8 @@ namespace CourseTracker.UI.SchoolYears
 
                 if (!await IsComplexValidationValid(vmSchoolYear))
                 {
-                    await HandleViewBag(vmSchoolYear);
+                    ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
+                    HandleEntityIds(EntityTypes.SchoolYear, null);
                     return View(vmSchoolYear);
                 }
 
@@ -81,7 +83,8 @@ namespace CourseTracker.UI.SchoolYears
             }
             else
             {
-                await HandleViewBag(vmSchoolYear);
+                ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
+                HandleEntityIds(EntityTypes.SchoolYear, null);
                 return View(vmSchoolYear);
             }
 
@@ -92,10 +95,11 @@ namespace CourseTracker.UI.SchoolYears
 
             bool result = false;
             List<SchoolYearsListItemModel> schoolYearItemModels = await _dal.GetSchoolYears(StudentId);
-            List<SchoolYear> schoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
-            var spec = new DuplicateMovieSpecification((int)vmSchoolYear.Year);
+            List<SchoolYear> existingSchoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
+            SchoolYear postedSchoolYear = _mapper.Map<SchoolYear>(vmSchoolYear);
+            var spec = new DuplicateMovieSpecification(postedSchoolYear);
 
-            result = spec.IsSatisfiedBy(schoolYears);
+            result = spec.IsSatisfiedBy(existingSchoolYears);
 
             if (!result)
                 ModelState.AddModelError("Year", "This School Year already exists.");

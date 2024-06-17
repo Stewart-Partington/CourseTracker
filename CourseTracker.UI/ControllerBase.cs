@@ -96,60 +96,63 @@ namespace CourseTracker.UI
 
             EntityIds entityIds = _state.EntityIds == null ? new EntityIds() : _state.EntityIds;
 
-            switch (entityType)
+            if (vm != null)
             {
+                switch (entityType)
+                {
 
-                case EntityTypes.Students:
-;
-                    entityIds.Student = null;
-                    entityIds.SchoolYear = null;
-                    entityIds.Course = null;
-                    entityIds.Assessment = null;
+                    case EntityTypes.Students:
 
-                    break;
+                        entityIds.Student = null;
+                        entityIds.SchoolYear = null;
+                        entityIds.Course = null;
+                        entityIds.Assessment = null;
 
-                case EntityTypes.Student:
+                        break;
 
-                    VmStudent vmStudent = (VmStudent)vm;
-                    KeyValuePair<Guid?, string> kvpStudent = new KeyValuePair<Guid?, string>(vmStudent.Id, vmStudent.FirstName);
+                    case EntityTypes.Student:
 
-                    entityIds.Student = kvpStudent;
-                    entityIds.SchoolYear = null;
-                    entityIds.Course = null;
-                    entityIds.Assessment = null;
+                        VmStudent vmStudent = (VmStudent)vm;
+                        KeyValuePair<Guid?, string> kvpStudent = new KeyValuePair<Guid?, string>(vmStudent.Id, vmStudent.FirstName);
 
-                    break;
+                        entityIds.Student = kvpStudent;
+                        entityIds.SchoolYear = null;
+                        entityIds.Course = null;
+                        entityIds.Assessment = null;
 
-                case EntityTypes.SchoolYear:
+                        break;
 
-                    VmSchoolYear vmSchoolYear = (VmSchoolYear)vm;
-                    KeyValuePair<Guid?, string> kvpSchoolYear = new KeyValuePair<Guid?, string>(vmSchoolYear.Id, vmSchoolYear.Year.ToString());
+                    case EntityTypes.SchoolYear:
 
-                    entityIds.SchoolYear = kvpSchoolYear;
-                    entityIds.Course = null;
-                    entityIds.Assessment = null;
+                        VmSchoolYear vmSchoolYear = (VmSchoolYear)vm;
+                        KeyValuePair<Guid?, string> kvpSchoolYear = new KeyValuePair<Guid?, string>(vmSchoolYear.Id, vmSchoolYear.Year.ToString());
 
-                    break;
+                        entityIds.SchoolYear = kvpSchoolYear;
+                        entityIds.Course = null;
+                        entityIds.Assessment = null;
 
-                case EntityTypes.Course:
+                        break;
 
-                    VmCourse vmCourse = (VmCourse)vm;
-                    KeyValuePair<Guid?, string> kvpCourse = new KeyValuePair<Guid?, string>(vmCourse.Id, vmCourse.Name);
+                    case EntityTypes.Course:
 
-                    entityIds.Course = kvpCourse;
-                    entityIds.Assessment = null;
+                        VmCourse vmCourse = (VmCourse)vm;
+                        KeyValuePair<Guid?, string> kvpCourse = new KeyValuePair<Guid?, string>(vmCourse.Id, vmCourse.Name);
 
-                    break;
+                        entityIds.Course = kvpCourse;
+                        entityIds.Assessment = null;
 
-                case EntityTypes.Assessment:
+                        break;
 
-                    VmAssessment vmAssessment = (VmAssessment)vm;
-                    KeyValuePair<Guid?, string> kvpAssessment = new KeyValuePair<Guid?, string>(vmAssessment.Id, vmAssessment.Name);
+                    case EntityTypes.Assessment:
 
-                    entityIds.Assessment = kvpAssessment;
+                        VmAssessment vmAssessment = (VmAssessment)vm;
+                        KeyValuePair<Guid?, string> kvpAssessment = new KeyValuePair<Guid?, string>(vmAssessment.Id, vmAssessment.Name);
 
-                    break;
+                        entityIds.Assessment = kvpAssessment;
 
+                        break;
+
+                }
             }
 
             entityIds.EntityType = entityType;
