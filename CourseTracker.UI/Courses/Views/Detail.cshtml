@@ -5,8 +5,8 @@
 
 @{
 
-    string heading = Model.Id == null ? "Add New Course" : $"Course: {Model.Name}";
     EntityIds entityIds = ViewBag.EntityIds;
+    string heading = entityIds.Course == null ? "Add New Course" : $"Course: {entityIds.Course.Value.Value}";
     List<AssessmentsListItemModel> assessments = ViewBag.Assessments;
 
 }

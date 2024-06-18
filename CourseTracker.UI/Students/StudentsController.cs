@@ -84,7 +84,7 @@ namespace CourseTracker.UI.Students
             else
 			{
                 ViewBag.SchoolYears = await _dal.GetSchoolYears((Guid)vmStudent.Id);
-                HandleEntityIds(EntityTypes.Student, vmStudent);
+                HandleEntityIds(EntityTypes.Student, null);
                 return View(vmStudent);
 			}
 

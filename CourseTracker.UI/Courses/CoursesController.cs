@@ -2,10 +2,11 @@
 using CourseTracker.Application.Courses.Commands.CreateCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Application.Courses.Queries.GetCourseDetail;
-using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
-using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
+using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Domain.Courses;
 using CourseTracker.UI.Courses.Models;
 using CourseTracker.UI.Models;
+using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,13 @@ namespace CourseTracker.UI.Courses
             if (ModelState.IsValid)
             {
 
+                if (!await IsComplexValidationValid(vmCourse))
+                {
+                    ViewBag.Assessments = vmCourse.Id == null ? null : await _dal.GetAssessments(StudentId, SchoolYearId, (Guid)vmCourse.Id);
+                    HandleEntityIds(EntityTypes.Course, null);
+                    return View(vmCourse);
+                }
+
                 Guid cid;
 
                 if (vmCourse.Id == null)
@@ -75,9 +83,27 @@ namespace CourseTracker.UI.Courses
             else
             {
                 ViewBag.Assessments = await _dal.GetAssessments(StudentId, SchoolYearId, (Guid)vmCourse.Id);
-                HandleEntityIds(EntityTypes.Course, vmCourse);
+                HandleEntityIds(EntityTypes.Course, null);
                 return View(vmCourse);
             }
+
+        }
+
+        private async Task<bool> IsComplexValidationValid(VmCourse vmCourse)
+        {
+
+            bool result = false;
+            List<CoursesListItemModel> coursesListItemModel = await _dal.GetCourses(StudentId, SchoolYearId);
+            List<Course> existingCourses = _mapper.Map<List<Course>>(coursesListItemModel);
+            Course postedCourse = _mapper.Map<Course>(vmCourse);
+            var spec = new DuplicateCourseSpecification(postedCourse);
+
+            result = spec.IsSatisfiedBy(existingCourses);
+
+            if (!result)
+                ModelState.AddModelError("Name", "This Course already exists.");
+
+            return result;
 
         }
 
