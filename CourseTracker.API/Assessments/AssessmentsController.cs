@@ -35,42 +35,42 @@ namespace CourseTracker.API.Assessments
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments")]
-        public List<AssessmentsListItemModel> Get(Guid studentId, Guid schoolYearId, Guid courseId)
+        public ActionResult<List<AssessmentsListItemModel>> Get(Guid studentId, Guid schoolYearId, Guid courseId)
 		{
 			return _listQuery.Execute(courseId);
 		}
 
         [HttpGet]
         [Route("Students/{studentId}/SchoolYears/{schoolYearId}/Courses/{courseId}/Assessments/{assessmentId}")]
-        public AssessmentDetailModel Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
+        public ActionResult<AssessmentDetailModel> Get(Guid studentId, Guid schoolYearId, Guid courseId, Guid assessmentId)
 		{
 			return _detailQuery.Execute(assessmentId);
 		}
 
         [HttpPost]
         [Route("Assessments")]
-        public async Task<Guid> Post(CreateAssessmentModel assessment)
+        public async Task<ActionResult<Guid>> Post(CreateAssessmentModel assessment)
         {
 
-            Guid result = await _createCommand.Execute(assessment);
+            Guid result = await _createCommand.ExecuteAsync(assessment);
 
-            return result;
+            return Created($"Students/{assessment.StudentId}/SchoolYears/{assessment.SchoolYearId}/Courses/{assessment.CourseId}/Assessments/{result}", result);
 
         }
 
         [HttpPut]
         [Route("Assessments")]
-        public HttpResponseMessage Update(UpdateAssessmentModel assessment)
+        public async Task<ActionResult<HttpResponseMessage>> Update(UpdateAssessmentModel assessment)
         {
-            _updateCommand.Execute(assessment);
+            await _updateCommand.ExecuteAsync(assessment);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpDelete]
         [Route("Assessments/{id}")]
-        public HttpResponseMessage Delete(Guid id)
+        public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
-            _deleteCommand.Execute(id);
+            await _deleteCommand.ExecuteAsync(id);
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
 

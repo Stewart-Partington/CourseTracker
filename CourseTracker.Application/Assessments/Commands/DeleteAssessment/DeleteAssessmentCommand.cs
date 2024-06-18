@@ -18,13 +18,13 @@ namespace CourseTracker.Application.Assessments.Commands.DeleteAssessment
 			_database = database;
 		}
 
-		public void Execute(Guid assesssmentId)
+		public async Task ExecuteAsync(Guid assesssmentId)
 		{
 
 			var assessment = _database.Assessments.Find(assesssmentId);
 
 			_database.Assessments.Remove(assessment);
-			_database.Save();
+			await _database.SaveAsync();
 
 		}
 

@@ -25,13 +25,13 @@ namespace CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear
             _factory = factory;
         }
 
-        public void Execute(UpdateSchoolYearModel model)
+        public async Task ExecuteAsync(UpdateSchoolYearModel model)
         {
 
             SchoolYear schoolYear = _factory.Create(model);
 
             _database.SchoolYears.Update(schoolYear);
-            _database.Save();
+            await _database.SaveAsync();
 
         }
 

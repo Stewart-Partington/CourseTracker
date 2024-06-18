@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Attachments.Commands.CreateAttachment
     public interface ICreateAttachmentCommand
     {
 
-        Task<Guid> Execute(CreateAttachmentModel model);
+        Task<Guid> ExecuteAsync(CreateAttachmentModel model);
 
     }
 

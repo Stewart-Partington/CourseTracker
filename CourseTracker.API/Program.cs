@@ -1,4 +1,5 @@
 
+using CourseTracker.API.Services.AutoMapper;
 using System.Runtime.Loader;
 
 namespace CourseTracker.API
@@ -21,8 +22,9 @@ namespace CourseTracker.API
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(MapperConfig));
 
-			builder.Services.AddAdvancedDependencyInjection();
+            builder.Services.AddAdvancedDependencyInjection();
 
 			builder.Services.Scan(p => p.FromAssemblies(assemblies)
 				.AddClasses()

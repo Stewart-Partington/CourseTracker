@@ -2,9 +2,10 @@
 using CourseTracker.Application.Assessments.Commands.CreateAssessment;
 using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
-using CourseTracker.Application.Courses.Commands.CreateCourse;
-using CourseTracker.Application.Courses.Commands.UpdateCourse;
-using CourseTracker.Application.Courses.Queries.GetCourseDetail;
+using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Domain.Assessments;
+using CourseTracker.Domain.Courses;
 using CourseTracker.UI.Assessments.Models;
 using CourseTracker.UI.Courses.Models;
 using CourseTracker.UI.Models;
@@ -52,11 +53,20 @@ namespace CourseTracker.UI.Assessments
             if (ModelState.IsValid)
             {
 
+                if (!await IsComplexValidationValid(vmAssessment))
+                {
+                    ViewBag.Attachments = vmAssessment.Id == null ? null : await _dal.GetAttachments(StudentId, SchoolYearId, CourseId, AssessmentId);
+                    HandleEntityIds(EntityTypes.Assessment, null);
+                    return View(vmAssessment);
+                }
+
                 Guid aid;
 
                 if (vmAssessment.Id == null)
                 {
                     var createAssessment = _mapper.Map<CreateAssessmentModel>(vmAssessment);
+                    createAssessment.StudentId = StudentId;
+                    createAssessment.SchoolYearId = SchoolYearId;
                     createAssessment.CourseId = CourseId;
                     aid = await _dal.CreateAssessment(createAssessment);
                 }
@@ -73,10 +83,31 @@ namespace CourseTracker.UI.Assessments
             }
             else
             {
-                ViewBag.Attachments = await _dal.GetAttachments(StudentId, SchoolYearId, CourseId, AssessmentId);
-                HandleEntityIds(EntityTypes.Assessment , vmAssessment);
+                ViewBag.Attachments = vmAssessment.Id == null ? null : await _dal.GetAttachments(StudentId, SchoolYearId, CourseId, AssessmentId);
+                HandleEntityIds(EntityTypes.Assessment, null);
                 return View(vmAssessment);
             }
+
+        }
+
+        private async Task<bool> IsComplexValidationValid(VmAssessment vmAssessment)
+        {
+
+            bool result = false;
+            List<AssessmentsListItemModel> assessmentsListItemModel = await _dal.GetAssessments(StudentId, SchoolYearId, CourseId);
+            List<Assessment> existingAssessments = _mapper.Map<List<Assessment>>(assessmentsListItemModel);
+            Assessment postedAssessment = _mapper.Map<Assessment>(vmAssessment);
+            var spec = new DuplicateAssessmentSpecification(postedAssessment);
+
+            result = spec.IsSatisfiedBy(existingAssessments);
+
+            if (!result)
+            {
+                ModelState.AddModelError("Name", "This combination of Name and Assessment Type already exists.");
+                ModelState.AddModelError("AssessmentType", "This combination of Name and Assessment Type already exists.");
+            }
+
+            return result;
 
         }
 

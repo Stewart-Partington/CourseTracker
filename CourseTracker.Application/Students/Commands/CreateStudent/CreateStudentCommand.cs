@@ -22,7 +22,7 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 			_factory = factory;
         }
 
-        public async Task<Guid> Execute(CreateStudentModel model)
+        public async Task<Guid> ExecuteAsync(CreateStudentModel model)
 		{
 			
 			Guid result = Guid.Empty;

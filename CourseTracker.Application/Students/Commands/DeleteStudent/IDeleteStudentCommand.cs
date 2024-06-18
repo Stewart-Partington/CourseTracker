@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Students.Commands.DeleteStudent
 	public interface IDeleteStudentCommand
 	{
 
-		void Execute(Guid studentId);
+		Task ExecuteAsync(Guid studentId);
 
 	}
 

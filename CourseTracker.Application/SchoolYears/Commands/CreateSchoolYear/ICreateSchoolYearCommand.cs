@@ -10,7 +10,7 @@ namespace CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear
     public interface ICreateSchoolYearCommand
     {
 
-        Task<Guid> Execute(CreateSchoolYearModel model);
+        Task<Guid> ExecuteAsync(CreateSchoolYearModel model);
 
     }
 

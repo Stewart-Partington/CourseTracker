@@ -21,7 +21,7 @@ namespace CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear
             _factory = factory;
         }
 
-        public async Task<Guid> Execute(CreateSchoolYearModel model)
+        public async Task<Guid> ExecuteAsync(CreateSchoolYearModel model)
         {
 
             Guid result = Guid.Empty;

@@ -24,7 +24,7 @@ namespace CourseTracker.Application.Interfaces
 		DbSet<Attachment> Attachments { get; set; }
 
 		Task<Guid> InsertAsync<t>(EntityBase entity);
-		void Save();
+		Task SaveAsync();
 
 	}
 

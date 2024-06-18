@@ -22,13 +22,13 @@ namespace CourseTracker.Application.Assessments.Commands.UpdateAssessment
 			_factory = factory;
 		}
 
-		public void Execute(UpdateAssessmentModel model)
+		public async Task ExecuteAsync(UpdateAssessmentModel model)
 		{
 
 			Assessment assessment = _factory.Create(model);
 
 			_database.Assessments.Update(assessment);
-			_database.Save();
+			await _database.SaveAsync();
 
 		}
 

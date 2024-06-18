@@ -10,7 +10,7 @@ namespace CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear
     public interface IUpdateSchoolYearCommand
     {
 
-        void Execute(UpdateSchoolYearModel model);
+        Task ExecuteAsync(UpdateSchoolYearModel model);
 
     }
 

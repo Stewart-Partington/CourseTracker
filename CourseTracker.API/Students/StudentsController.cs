@@ -34,43 +34,42 @@ namespace CourseTracker.API.Students
 		}
 
         [HttpGet]
-        public List<StudentListItemModel> Get()
+        public ActionResult<List<StudentListItemModel>> Get()
         {
             return _listQuery.Execute();
         }
 
         [HttpGet("{id}")]
-        public StudentDetailModel Get(Guid id)
+        public ActionResult<StudentDetailModel> Get(Guid id)
         {
             return _detailQuery.Execute(id);
         }
 
         [HttpPost]
-        public async Task<Guid> Post(CreateStudentModel student)
+        public async Task<ActionResult<Guid>> Post(CreateStudentModel student)
         {
 
-            Guid result = await _createCommand.Execute(student);
+            Guid result = await _createCommand.ExecuteAsync(student);
 
-            //return CreatedAtAction("Get", new { id = id }, id);
-            return result;
+            return CreatedAtAction("Get", new { id = result }, result);
 
         }
 
         [HttpPut]
-        public HttpResponseMessage Update(UpdateStudentModel student)
+        public async Task<ActionResult<HttpResponseMessage>> Update(UpdateStudentModel student)
         {
 
-            _updateCommand.Execute(student);
+            await _updateCommand.ExecuteAsync(student);
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
 
 		}
 
         [HttpDelete("{id}")]
-        public HttpResponseMessage Delete(Guid id)
+        public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
 
-            _deleteCommand.Execute(id);
+            await _deleteCommand.ExecuteAsync(id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
 

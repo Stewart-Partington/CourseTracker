@@ -51,7 +51,7 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 		[Test]
 		public void TestExecuteShouldAddStudentToTheDatabase()
 		{
-			_command.Execute(_model);
+			_command.ExecuteAsync(_model);
 
 			_mocker.GetMock<DbSet<Student>>()
 				.Verify(p => p.Add(_student), Times.Once);

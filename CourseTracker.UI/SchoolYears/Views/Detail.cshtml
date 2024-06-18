@@ -5,8 +5,8 @@
 
 @{
 
-    string heading = Model.Id == null ? "Add New School Year" : $"Year: {Model.Year}";
     EntityIds entityIds = ViewBag.EntityIds;
+    string heading = entityIds.SchoolYear == null ? "Add New School Year" : $"Year: {entityIds.SchoolYear.Value.Value}";
     List<CoursesListItemModel> courses = Model.Id == null ? null : ViewBag.Courses;
 
 }

@@ -10,7 +10,7 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 	public interface ICreateStudentCommand
 	{
 
-		Task<Guid> Execute(CreateStudentModel model);
+		Task<Guid> ExecuteAsync(CreateStudentModel model);
 
 	}
 

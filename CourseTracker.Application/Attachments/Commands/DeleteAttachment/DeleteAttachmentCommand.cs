@@ -18,13 +18,13 @@ namespace CourseTracker.Application.Attachments.Commands.DeleteAttachment
             _database = database;
         }
 
-        public void Execute(Guid attachmentId)
+        public async Task ExecuteAsync(Guid attachmentId)
         {
 
             var attachment = _database.Attachments.Find(attachmentId);
 
             _database.Attachments.Remove(attachment);
-            _database.Save();
+            await _database.SaveAsync();
 
         }
 

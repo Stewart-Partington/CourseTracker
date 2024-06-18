@@ -2,8 +2,10 @@
 using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
+using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
+using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
@@ -53,6 +55,13 @@ namespace CourseTracker.UI.SchoolYears
             if (ModelState.IsValid)
             {
 
+                if (!await IsComplexValidationValid(vmSchoolYear))
+                {
+                    ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
+                    HandleEntityIds(EntityTypes.SchoolYear, null);
+                    return View(vmSchoolYear);
+                }
+
                 Guid syid;
 
                 if (vmSchoolYear.Id == null)
@@ -75,9 +84,35 @@ namespace CourseTracker.UI.SchoolYears
             else
             {
                 ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
-                HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
+                HandleEntityIds(EntityTypes.SchoolYear, null);
                 return View(vmSchoolYear);
             }
+
+        }
+
+        private async Task<bool> IsComplexValidationValid(VmSchoolYear vmSchoolYear)
+        {
+
+            bool result = false;
+            List<SchoolYearsListItemModel> schoolYearItemModels = await _dal.GetSchoolYears(StudentId);
+            List<SchoolYear> existingSchoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
+            SchoolYear postedSchoolYear = _mapper.Map<SchoolYear>(vmSchoolYear);
+            var spec = new DuplicateMovieSpecification(postedSchoolYear);
+
+            result = spec.IsSatisfiedBy(existingSchoolYears);
+
+            if (!result)
+                ModelState.AddModelError("Year", "This School Year already exists.");
+
+            return result;
+
+        }
+
+        private async Task HandleViewBag(VmSchoolYear vmSchoolYear)
+        {
+
+            ViewBag.Courses = vmSchoolYear.Id == null ? null : await _dal.GetCourses(StudentId, (Guid)vmSchoolYear.Id);
+            HandleEntityIds(EntityTypes.SchoolYear, vmSchoolYear);
 
         }
 

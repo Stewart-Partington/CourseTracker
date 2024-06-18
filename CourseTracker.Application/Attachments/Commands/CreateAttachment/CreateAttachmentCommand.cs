@@ -22,7 +22,7 @@ namespace CourseTracker.Application.Attachments.Commands.CreateAttachment
             _factory = factory;
         }
 
-        public async Task<Guid> Execute(CreateAttachmentModel model)
+        public async Task<Guid> ExecuteAsync(CreateAttachmentModel model)
         {
 
             Guid result = Guid.Empty;

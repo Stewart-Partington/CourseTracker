@@ -1,10 +1,13 @@
 ﻿@model VmStudent
 @using CourseTracker.UI.Students.Models
+@using CourseTracker.UI.Models
 @using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList
 
 @{
 
-    string heading = Model.Id == null ? "Add New Student" : $"Student: {Model.FirstName} {Model.LastName}";
+    // string heading = Model.Id == null ? "Add New Student" : $"Student: {Model.FirstName} {Model.LastName}";
+    EntityIds entityIds = ViewBag.EntityIds;
+    string heading = entityIds.Student == null ? "Add New Student" : $"Student: {entityIds.Student.Value.Value}";
     List<SchoolYearsListItemModel> schoolYears = Model.Id == null ? null : ViewBag.SchoolYears;
 
 }
