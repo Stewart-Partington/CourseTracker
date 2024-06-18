@@ -18,10 +18,10 @@ namespace CourseTracker.UI.Assessments.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
+        //[Required]
         public double? Grade { get; set; }
 
-        [Required]
+        //[Required]
         public double? Weight { get; set; }
 
         public string? Notes { get; set; }

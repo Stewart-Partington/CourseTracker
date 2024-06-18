@@ -97,15 +97,36 @@ namespace CourseTracker.UI.Assessments
             List<AssessmentsListItemModel> assessmentsListItemModel = await _dal.GetAssessments(StudentId, SchoolYearId, CourseId);
             List<Assessment> existingAssessments = _mapper.Map<List<Assessment>>(assessmentsListItemModel);
             Assessment postedAssessment = _mapper.Map<Assessment>(vmAssessment);
-            var spec = new DuplicateAssessmentSpecification(postedAssessment);
 
-            result = spec.IsSatisfiedBy(existingAssessments);
+            // Duplicate
+            var specDuplicate = new DuplicateAssessmentSpecification(postedAssessment);
+            bool duplicateResult = specDuplicate.IsSatisfiedBy(existingAssessments);
 
-            if (!result)
+            if (!duplicateResult)
             {
                 ModelState.AddModelError("Name", "This combination of Name and Assessment Type already exists.");
                 ModelState.AddModelError("AssessmentType", "This combination of Name and Assessment Type already exists.");
             }
+
+            // Weight
+            if (postedAssessment.Id == Guid.Empty)
+                existingAssessments.Add(postedAssessment);
+            else
+            {
+                int index = existingAssessments.FindIndex(x => x.Id == postedAssessment.Id);
+                if (index != -1)
+                    existingAssessments[index] = postedAssessment;
+            }
+
+            var specWeight = new CumulativeAssessmentWeightSpecification();
+            bool weightResult = specWeight.IsSatisfiedBy(existingAssessments);
+
+            if (!weightResult)
+            {
+                ModelState.AddModelError("Weight", "The cumulative weight for this course exceeds 100%");
+            }
+
+            result = duplicateResult && weightResult;
 
             return result;
 
