@@ -2,6 +2,7 @@
 using CourseTracker.Application.Assessments.Commands.CreateAssessment;
 using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
+using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Attachments.Commands.CreateAttachment;
 using CourseTracker.Application.Attachments.Commands.UpdateAttachment;
 using CourseTracker.Application.Attachments.Queries.GetAttachmentDetail;
@@ -16,6 +17,7 @@ using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
+using CourseTracker.Domain.Assessments;
 using CourseTracker.Domain.Courses;
 using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
@@ -59,7 +61,9 @@ namespace CourseTracker.UI.Services.AutoMapper
             CreateMap<VmAssessment, AssessmentDetailModel>();
             CreateMap<VmAssessment, CreateAssessmentModel>();
             CreateMap<VmAssessment, UpdateAssessmentModel>();
+            CreateMap<VmAssessment, Assessment>();
             CreateMap<AssessmentDetailModel, VmAssessment>();
+            CreateMap<AssessmentsListItemModel, Assessment>();
 
             // Attachments
             CreateMap<VmAttachment, AttachmentDetailModel>();

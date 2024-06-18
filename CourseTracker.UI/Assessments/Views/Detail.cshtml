@@ -4,9 +4,9 @@
 @using CourseTracker.Domain.Assessments
 
 @{
-
-    string heading = Model.Id == null ? "Add New Assessment" : $"Assessment: {Model.Name}";
+  
     EntityIds entityIds = ViewBag.EntityIds;
+    string heading = entityIds.Assessment == null ? "Add New Assessment" : $"Assessment: {entityIds.Assessment.Value.Value}";
 
     var assessmentTypeItems = Html.GetEnumSelectList<AssessmentTypes>().ToList();
     assessmentTypeItems.Insert(0, new SelectListItem("Please Select", ""));
