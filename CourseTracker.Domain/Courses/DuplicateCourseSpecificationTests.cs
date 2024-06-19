@@ -35,7 +35,7 @@ namespace CourseTracker.Domain.Courses
         }
 
         [Test]
-        public void AddNewYearToHydratedListAssertTrue()
+        public void AddNewCourseToHydratedListAssertTrue()
         {
 
             bool result;
@@ -54,7 +54,7 @@ namespace CourseTracker.Domain.Courses
         }
 
         [Test]
-        public void AddExistingYearToHydratedListAssertFalse()
+        public void AddExistingCourseToHydratedListAssertFalse()
         {
 
             bool result;
@@ -73,7 +73,7 @@ namespace CourseTracker.Domain.Courses
         }
 
         [Test]
-        public void AddExistingYearWithSameIdToHydratedListAssertTrue()
+        public void AddExistingCourseWithSameIdToHydratedListAssertTrue()
         {
 
             bool result;
