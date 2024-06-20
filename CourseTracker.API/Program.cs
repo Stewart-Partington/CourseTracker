@@ -1,4 +1,5 @@
 
+using CourseTracker.API.Filters;
 using CourseTracker.API.Services.AutoMapper;
 using System.Runtime.Loader;
 
@@ -18,7 +19,11 @@ namespace CourseTracker.API
 
 			// Add services to the container.
 
-			builder.Services.AddControllers();
+			builder.Services.AddControllers(options =>
+			{
+				options.Filters.Add(typeof(ExceptionFilter));
+			}
+			);
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
