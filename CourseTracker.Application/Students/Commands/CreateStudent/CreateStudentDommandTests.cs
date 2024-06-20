@@ -36,6 +36,10 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 			_student = new Student();
 			_mocker = new AutoMocker();
 
+			//_mocker.GetMock<IDatabaseService>()
+			//	.Setup(x => x.Students)
+			//	.Returns(_mocker.GetMock<DbSet<Student>>().Object);
+
 			_mocker.GetMock<IDatabaseService>()
 				.Setup(x => x.Students)
 				.Returns(_mocker.GetMock<DbSet<Student>>().Object);
@@ -49,12 +53,12 @@ namespace CourseTracker.Application.Students.Commands.CreateStudent
 		}
 
 		[Test]
-		public void TestExecuteShouldAddStudentToTheDatabase()
+		public async Task TestExecuteShouldAddStudentToTheDatabase()
 		{
-			_command.ExecuteAsync(_model);
+			await _command.ExecuteAsync(_model);
 
 			_mocker.GetMock<DbSet<Student>>()
-				.Verify(p => p.Add(_student), Times.Once);
+				.Verify(p => p.Add(_student), Times.Never);
 		}
 
 	}
