@@ -34,6 +34,8 @@ namespace CourseTracker.Persistence
 				.Build();
 
 			_connectionString = config.GetConnectionString("SQLConnectionString");
+
+
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
