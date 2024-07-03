@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "coursetracker.api": "StartDebugging"
+        "coursetracker.api": "StartDebugging",
+        "coursetracker.ui": "StartDebugging"
       }
     }
   }
