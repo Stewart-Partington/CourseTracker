@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  coursetracker.api:
+    image: ${DOCKER_REGISTRY-}coursetrackerapi
+    build:
+      context: .
+      dockerfile: CourseTracker.API/Dockerfile
