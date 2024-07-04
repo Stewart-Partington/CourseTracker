@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   coursetracker.api:
-    # image: ${DOCKER_REGISTRY-}coursetrackerapi
+    image: coursetrackercr.azurecr.io/coursetrackerapi
     build:
       context: .
       dockerfile: CourseTracker.API/Dockerfile
@@ -13,7 +13,7 @@ services:
       - "5006:5006"
 
   coursetracker.ui:
-    # image: ${DOCKER_REGISTRY-}coursetrackerui
+    image: coursetrackercr.azurecr.io/coursetrackerui
     build:
       context: .
       dockerfile: CourseTracker.UI/Dockerfile
@@ -22,5 +22,3 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5005:5005"
-    
-
