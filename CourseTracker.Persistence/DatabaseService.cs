@@ -1,4 +1,5 @@
-﻿using CourseTracker.Application.Interfaces;
+﻿using Castle.Core.Logging;
+using CourseTracker.Application.Interfaces;
 using CourseTracker.Domain;
 using CourseTracker.Domain.Assessments;
 using CourseTracker.Domain.Attachments;
@@ -7,9 +8,12 @@ using CourseTracker.Domain.SchoolYears;
 using CourseTracker.Domain.Students;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,23 +24,25 @@ namespace CourseTracker.Persistence
 	{
 
 		private string _connectionString;
+        private readonly ILogger<DatabaseService> _logger;
 
-        public DatabaseService(string connectionString)
+        //     public DatabaseService(string connectionString)
+        //     {
+        //_connectionString = connectionString;
+        //     }
+
+        public DatabaseService(ILogger<DatabaseService> logger)
         {
-			_connectionString = connectionString;
+            
+			IConfigurationRoot config = new ConfigurationBuilder()
+            .AddUserSecrets<DatabaseService>()
+            .Build();
+
+            _logger = logger;
+
+			_connectionString = GetConnectionString();
+
         }
-
-        public DatabaseService()
-        {
-			IConfiguration config = new ConfigurationBuilder()
-				.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-				.AddJsonFile("appsettings.json")
-				.Build();
-
-			_connectionString = config.GetConnectionString("SQLConnectionString");
-
-
-		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -90,6 +96,32 @@ namespace CourseTracker.Persistence
 		public async Task SaveAsync()
 		{
 			await this.SaveChangesAsync();
+		}
+
+		private string GetConnectionString()
+		{
+
+			string result = null;
+
+			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").ToLower() == "development")
+			{
+
+                IConfigurationRoot config = new ConfigurationBuilder()
+				.AddUserSecrets<DatabaseService>()
+				.Build();
+
+                result = config["sqlconnectionstring"];
+
+            }
+			else
+			{
+				result = Environment.GetEnvironmentVariable("sqlconnectionstring");
+            }
+
+            _logger.LogInformation($"CourseTracker.Persistence.DatabaseService _connectionString = {_connectionString}");
+
+            return result;
+
 		}
 
 	}

@@ -36,6 +36,9 @@ namespace CourseTracker.API.Students
         [HttpGet]
         public ActionResult<List<StudentListItemModel>> Get()
         {
+
+            //throw new Exception("Wups");
+            
             return _listQuery.Execute();
         }
 
