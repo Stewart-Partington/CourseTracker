@@ -13,7 +13,7 @@ services:
       - "5006:5006"
 
   coursetracker.ui:
-    image: coursetrackercr.azurecr.io/coursetrackerui
+    image: coursetrackercr.azurecr.io/coursetrackeruimvc
     build:
       context: .
       dockerfile: CourseTracker.UI/Dockerfile
