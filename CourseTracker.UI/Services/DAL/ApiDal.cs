@@ -30,6 +30,7 @@ using CourseTracker.Application.Attachments.Commands.CreateAttachment;
 using CourseTracker.Application.Attachments.Commands.UpdateAttachment;
 using CourseTracker.Application.Attachments.Queries.GetAttachmentDetail;
 using CourseTracker.Application.Attachments.Queries.GetAttachmentList;
+using CourseTracker.Application.Interfaces;
 
 namespace CourseTracker.UI.Services.DAL
 {
@@ -40,6 +41,7 @@ namespace CourseTracker.UI.Services.DAL
 		#region Declarations
 
 		private readonly HttpClient _client;
+        private readonly ILogger<ApiDal> _logger;
 
 		private const string _api = "api/";
 		private const string _studentsController = "Students";
@@ -52,12 +54,13 @@ namespace CourseTracker.UI.Services.DAL
 
         #region Constructors
 
-        public ApiDal(HttpClient client, IConfiguration config)
+        public ApiDal(HttpClient client, IConfiguration config, ILogger<ApiDal> logger)
         {
 
 			_client = client;
+            _logger = logger;
 
-			_client.BaseAddress = new Uri(config.GetValue<string>("ApiUrl"));
+			_client.BaseAddress = GetApiUrl(config);
 
 			_client.DefaultRequestHeaders.Accept.Clear();
 			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
@@ -472,6 +475,30 @@ namespace CourseTracker.UI.Services.DAL
             return result;
 
 		}
+
+        #endregion
+
+        #region Private Methods
+
+        private Uri GetApiUrl(IConfiguration config)
+        {
+
+            Uri result = null;
+
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT").ToLower() == "development")
+            {
+                result = new Uri(config.GetValue<string>("ApiUrl"));
+            }
+            else
+            {
+                result = new Uri(Environment.GetEnvironmentVariable("apiurl"));
+            }
+
+            _logger.LogInformation($"CourseTracker.UI.ApiDal apiUrl = {result.ToString()}");
+
+            return result;
+
+        }
 
         #endregion
 
