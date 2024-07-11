@@ -1,28 +1,31 @@
 import { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
-    const [students, setStudents] = useState();
+    const [forecasts, setForecasts] = useState();
 
     useEffect(() => {
-        populateStudentsData();
+        populateWeatherData();
     }, []);
 
-    const contents = students === undefined
+    const contents = forecasts === undefined
         ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>&nbsp;</th>
-                    <th>Name</th>
-                    <th>Program</th>
-                    <th>Average</th>
+                    <th>Date</th>
+                    <th>Temp. (C)</th>
+                    <th>Temp. (F)</th>
+                    <th>Summary</th>
                 </tr>
             </thead>
             <tbody>
-                {students.map(forecast =>
-                    <tr key={forecast.Name}>
-                        <td>{forecast.Program}</td>
-                        <td>{forecast.Average}</td>
+                {forecasts.map(forecast =>
+                    <tr key={forecast.date}>
+                        <td>{forecast.date}</td>
+                        <td>{forecast.temperatureC}</td>
+                        <td>{forecast.temperatureF}</td>
+                        <td>{forecast.summary}</td>
                     </tr>
                 )}
             </tbody>
@@ -30,18 +33,17 @@ function App() {
 
     return (
         <div>
-            <h1 id="tableLabel">Students</h1>
+            <h1 id="tableLabel">Weather forecast</h1>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
         </div>
     );
-
-    async function populateStudentsData() {
-        const response = await fetch('students');
+    
+    async function populateWeatherData() {
+        const response = await fetch('weatherforecast');
         const data = await response.json();
-        setStudents(data);
+        setForecasts(data);
     }
-
 }
 
 export default App;
