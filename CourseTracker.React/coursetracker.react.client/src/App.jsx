@@ -37,10 +37,20 @@ function App() {
     );
 
     async function populateStudentsData() {
-        const response = await fetch('students');
-        const data = await response.json();
-        setStudents(data);
+
+        fetch('https://localhost:7147/api/Students')
+            .then(response => response.json())
+            .then(data => console.log(data));
+            //.then(json => setStudents(json))
+            //.catch(error => console.error(error));
+
     }
+
+    //async function populateStudentsData() {
+    //    const response = await fetch('students');
+    //    const data = await response.json();
+    //    setStudents(data);
+    //}
 
 }
 
