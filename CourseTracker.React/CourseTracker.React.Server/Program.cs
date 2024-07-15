@@ -27,7 +27,14 @@ namespace CourseTracker.React.Server
 
             builder.Services.Scan(p => p.FromAssemblies(assemblies)
                 .AddClasses()
-                .AsMatchingInterface()); 
+                .AsMatchingInterface());
+
+            builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             var app = builder.Build();
 
@@ -43,8 +50,9 @@ namespace CourseTracker.React.Server
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors("MyPolicy");
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

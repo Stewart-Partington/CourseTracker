@@ -19,10 +19,9 @@ namespace CourseTracker.React.Server.Controllers
         [HttpGet]
         public ActionResult<List<StudentListItemModel>> Get()
         {
+            var result = _listQuery.Execute();
 
-            //throw new Exception("Wups");
-
-            return _listQuery.Execute();
+            return result;
         }
 
     }
