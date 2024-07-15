@@ -41,7 +41,7 @@ function App() {
     );
 
     async function populateStudentsData() {
-        fetch('https://localhost:7147/api/Students')
+        fetch('/api/students')
             .then(response => response.json())
             .then(json => setStudents(json))
             .catch(error => console.error(error));
