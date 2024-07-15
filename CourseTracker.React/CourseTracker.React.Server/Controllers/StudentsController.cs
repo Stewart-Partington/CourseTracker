@@ -19,9 +19,7 @@ namespace CourseTracker.React.Server.Controllers
         [HttpGet]
         public ActionResult<List<StudentListItemModel>> Get()
         {
-            var result = _listQuery.Execute();
-
-            return result;
+            return _listQuery.Execute();
         }
 
     }
