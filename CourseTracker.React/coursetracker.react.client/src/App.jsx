@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import Banner from "./Banner";
+import StudentRow from "./StudentRow";
 
 function App() {
     const [students, setStudents] = useState();
@@ -7,33 +9,46 @@ function App() {
         populateStudentsData();
     }, []);
 
+    const addStudent = () => {
+        setStudents([
+            ...students,
+            {
+                id: 0,
+                firstName: "Joe",
+                lastName: "Schmoe",
+                programName: "PP!",
+                average: 72
+            }
+        ]);
+    };
+
     const contents = students === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tableLabel">
-            <thead>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>Name</th>
-                    <th>Program</th>
-                    <th>Average</th>
-                </tr>
-            </thead>
-            <tbody>
-                {students.map(student =>
-                    <tr key={student.id}>
-                        <td></td>
-                        <td>{student.firstName}</td>
-                        <td>{student.programName}</td>
-                        <td>{student.average}</td>
+        
+        ?
+        <Banner bannerText = "Getting Students..." />
+        :
+        <>
+            <Banner bannerText="Students" />
+            <table className="table table-striped" aria-labelledby="tableLabel">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Name</th>
+                        <th>Program</th>
+                        <th>Average</th>
                     </tr>
-                )}
-            </tbody>
-        </table>;
+                </thead>
+                <tbody>
+                    {students.map(student => <StudentRow key={ student.id} student={student} />)}
+                </tbody>
+            </table>
+            <buttonn className="btn btn-primary" onClick={addStudent} >
+                Add Student
+            </buttonn>
+        </>;
 
     return (
         <div className="row">
-            <h1 id="tableLabel">Students</h1>
-            <p>This component demonstrates fetching data from the server.</p>
             <div>
                 {contents}
             </div>
