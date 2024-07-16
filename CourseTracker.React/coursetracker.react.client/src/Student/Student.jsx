@@ -6,11 +6,11 @@ const Student = () => {
 
     
     const { param: student } = useContext(navContext);
-    const [model, setStudent] = useState(null);
+    const [model, setStudent] = useState([]);
 
     useEffect(() => {
         populateStudentData();
-    }, null);
+    }, []);
 
     const contents = student === undefined 
         ?

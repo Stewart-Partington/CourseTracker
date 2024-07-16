@@ -26,7 +26,7 @@ namespace CourseTracker.React.Server.Controllers
         }
 
         [HttpGet("{id?}")]
-        public ActionResult<StudentDetailModel> Get(Guid? id)
+        public ActionResult<StudentDetailModel> Get(Guid? id = null)
         {
             //if (id == null) {
             //    return new StudentDetailModel();
