@@ -1,14 +1,23 @@
-import { useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import Banner from "../Banner";
 import { navContext } from "../App";
 
 const Student = () => {
 
+    
     const { param: student } = useContext(navContext);
+    const [model, setStudent] = useState(null);
 
-    const contents = 
+    useEffect(() => {
+        populateStudentData();
+    }, null);
+
+    const contents = student === undefined 
+        ?
+        <Banner bannerText="Getting Student..." />
+        :
         <>
-            <h1>Student</h1>
+            <Banner bannerText="Got the Student" />
         </>
 
     return (
@@ -18,6 +27,16 @@ const Student = () => {
             </div>
         </div>
     );
+
+    async function populateStudentData() {
+
+        var uri = student === null ? '/api/students' : '/api/students/' + student.id;
+
+        await fetch(uri)
+            .then(response => response.json())
+            .then(json => setStudent(json))
+            .catch(error => console.error(error));
+    }
 
 }
 

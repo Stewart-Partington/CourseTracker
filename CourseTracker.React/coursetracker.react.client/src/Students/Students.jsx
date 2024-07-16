@@ -50,7 +50,7 @@ const Students = () => {
     );
 
     async function populateStudentsData() {
-        fetch('/api/students')
+        await fetch('/api/students')
             .then(response => response.json())
             .then(json => setStudents(json))
             .catch(error => console.error(error));

@@ -1,4 +1,5 @@
-﻿using CourseTracker.Application.Students.Queries.GetStudentsList;
+﻿using CourseTracker.Application.Students.Queries.GetStudentDetail;
+using CourseTracker.Application.Students.Queries.GetStudentsList;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseTracker.React.Server.Controllers
@@ -10,16 +11,32 @@ namespace CourseTracker.React.Server.Controllers
     {
 
         private readonly IGetStudentsListQuery _listQuery;
+        private readonly IGetStudentDetailQuery _detailQuery;
 
-        public StudentsController(IGetStudentsListQuery listQuery)
+        public StudentsController(IGetStudentsListQuery listQuery, IGetStudentDetailQuery detailQuery)
         {
             _listQuery = listQuery;
+            _detailQuery = detailQuery;
         }
 
         [HttpGet]
         public ActionResult<List<StudentListItemModel>> Get()
         {
             return _listQuery.Execute();
+        }
+
+        [HttpGet("{id?}")]
+        public ActionResult<StudentDetailModel> Get(Guid? id)
+        {
+            //if (id == null) {
+            //    return new StudentDetailModel();
+            //else
+            //    return _detailQuery.Execute((Guid)id);
+
+            var result = id == null ? new StudentDetailModel() : _detailQuery.Execute((Guid)id);
+
+            return result;
+
         }
 
     }
