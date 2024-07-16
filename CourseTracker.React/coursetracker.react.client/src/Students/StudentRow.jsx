@@ -8,7 +8,7 @@ const StudentRow = ({ student }) => {
 
     const editStudent = (e) => {
         e.preventDefault();
-        navigate(NavValues.student, student);
+        navigate(NavValues.student, student.id);
     };
 
 	return (

@@ -5,14 +5,23 @@ import { navContext } from "../App";
 const Student = () => {
 
     
-    const { param: student } = useContext(navContext);
-    const [model, setStudent] = useState([]);
+    const { param: id } = useContext(navContext);
+    const [student, setStudent] = useState({});
 
     useEffect(() => {
-        populateStudentData();
-    }, []);
+        //populateStudentData();
 
-    const contents = student === undefined 
+        const fetchStudent = async () => {
+            const response = await fetch('/api/students/' + id);
+            const student = await response.json();
+            console.log(student);
+            setStudent(student);
+        }
+        fetchStudent();
+
+    }, {});
+
+    const contents = student.id === undefined
         ?
         <Banner bannerText="Getting Student..." />
         :
@@ -28,23 +37,11 @@ const Student = () => {
         </div>
     );
 
-    async function populateStudentData() {
-
-        var uri = student === null ? '/api/students/00000000-0000-0000-0000-000000000000' : '/api/students/' + student.id;
-
-        await fetch(uri)
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .then(json => setStudent(json))
-            .then(console.log(student))
-            .catch(error => console.error(error));
-    }
-
     function GetBannerTitleForStudent() {
 
         var result = null;
 
-        if (student == null)
+        if (student.id == "00000000-0000-0000-0000-000000000000")
             result = "Add new Student";
         else
             result = student.firstName + " " + student.lastName;
