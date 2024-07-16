@@ -17,7 +17,7 @@ const Student = () => {
         <Banner bannerText="Getting Student..." />
         :
         <>
-            <Banner bannerText="Got the Student" />
+            <Banner bannerText={GetBannerTitleForStudent()} />
         </>
 
     return (
@@ -34,8 +34,23 @@ const Student = () => {
 
         await fetch(uri)
             .then(response => response.json())
+            .then(json => console.log(json))
             .then(json => setStudent(json))
+            .then(console.log(student))
             .catch(error => console.error(error));
+    }
+
+    function GetBannerTitleForStudent() {
+
+        var result = null;
+
+        if (student == null)
+            result = "Add new Student";
+        else
+            result = student.firstName + " " + student.lastName;
+
+        return result;
+
     }
 
 }

@@ -25,7 +25,7 @@ namespace CourseTracker.React.Server.Controllers
             return _listQuery.Execute();
         }
 
-        [HttpGet("{id?}")]
+        [HttpGet("{id?}")] 
         public ActionResult<StudentDetailModel> Get(Guid? id)
         {
 
