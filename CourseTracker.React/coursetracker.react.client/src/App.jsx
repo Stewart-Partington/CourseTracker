@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Banner from "./Banner";
-import StudentRow from "./StudentRow";
+import StudentRow from "./Students/StudentRow";
 import NavValues from "../Helpers/NavValues";
 
 const navContext = React.createContext(NavValues.students);
