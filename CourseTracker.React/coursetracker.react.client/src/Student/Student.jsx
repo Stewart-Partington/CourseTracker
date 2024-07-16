@@ -1,10 +1,23 @@
-
+import { useContext } from "react";
+import Banner from "../Banner";
+import { navContext } from "../App";
 
 const Student = () => {
 
-	return (
-		<h1>This is Student</h1>
-	)
+    const { param: student } = useContext(navContext);
+
+    const contents = 
+        <>
+            <h1>Student</h1>
+        </>
+
+    return (
+        <div className="row">
+            <div>
+                {contents}
+            </div>
+        </div>
+    );
 
 }
 

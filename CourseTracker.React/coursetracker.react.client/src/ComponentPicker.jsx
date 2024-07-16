@@ -11,7 +11,6 @@ const ComponentPicker = ({ currentNavLocation }) => {
 			return <Student />;
 		default:
 			return <Students />;
-
 	}
 
 };
