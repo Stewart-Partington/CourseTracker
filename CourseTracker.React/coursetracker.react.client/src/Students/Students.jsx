@@ -1,26 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Banner from "../Banner";
 import StudentRow from "./StudentRow";
+import NavValues from "../../Helpers/NavValues";
+import { navContext } from "../App";
 
 const Students = () => {
 
     const [students, setStudents] = useState();
+    const { navigate } = useContext(navContext);
 
     useEffect(() => {
         populateStudentsData();
     }, []);
 
     const addStudent = () => {
-        setStudents([
-            ...students,
-            {
-                id: 0,
-                firstName: "Joe",
-                lastName: "Schmoe",
-                programName: "PP!",
-                average: 72
-            }
-        ]);
+        navigate(NavValues.student, null);
     };
 
     const contents = students === undefined
@@ -42,9 +36,9 @@ const Students = () => {
                     {students.map(student => <StudentRow key={ student.id} student={student} />)}
                 </tbody>
             </table>
-            <buttonn className="btn btn-primary" onClick={addStudent} >
+            <button className="btn btn-primary" onClick={addStudent} >
                 Add Student
-            </buttonn>
+            </button>
         </>;
 
     return (
