@@ -26,14 +26,10 @@ namespace CourseTracker.React.Server.Controllers
         }
 
         [HttpGet("{id?}")]
-        public ActionResult<StudentDetailModel> Get(Guid? id = null)
+        public ActionResult<StudentDetailModel> Get(Guid? id)
         {
-            //if (id == null) {
-            //    return new StudentDetailModel();
-            //else
-            //    return _detailQuery.Execute((Guid)id);
 
-            var result = id == null ? new StudentDetailModel() : _detailQuery.Execute((Guid)id);
+            var result = id == Guid.Empty ? new StudentDetailModel() : _detailQuery.Execute((Guid)id);
 
             return result;
 

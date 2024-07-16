@@ -30,7 +30,7 @@ const Student = () => {
 
     async function populateStudentData() {
 
-        var uri = student === null ? '/api/students' : '/api/students/' + student.id;
+        var uri = student === null ? '/api/students/00000000-0000-0000-0000-000000000000' : '/api/students/' + student.id;
 
         await fetch(uri)
             .then(response => response.json())
