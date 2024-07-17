@@ -8,7 +8,7 @@ const Student = () => {
 
     
     const { param: id } = useContext(navContext);
-    const { student, setStudent } = useStudent(id);
+    const { student, setStudent, saveStudent } = useStudent(id);
 
     const contents = student.id === undefined
         ?
@@ -16,7 +16,7 @@ const Student = () => {
         :
         <>
             <Banner bannerText={GetBannerTitleForStudent()} />
-            <StudentForm student={student} />
+            <StudentForm student={student} setStudent={setStudent} saveStudent={saveStudent} />
         </>
 
     return (
