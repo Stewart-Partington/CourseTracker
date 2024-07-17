@@ -66,3 +66,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+label.required::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: 500;
+}

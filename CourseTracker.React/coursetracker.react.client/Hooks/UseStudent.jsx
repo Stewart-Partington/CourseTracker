@@ -16,7 +16,23 @@ const useStudent = (studentId) => {
 
     }, []);
 
-    return { student, setStudent };
+	const saveStudent = (student) => {
+		postStudent(student);
+		setStudent(student);
+	};
+
+	const postStudent = async (student) => {
+		await fetch('api/students', {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(student)
+		});
+	};
+
+    return { student, setStudent, saveStudent };
 
 };
 

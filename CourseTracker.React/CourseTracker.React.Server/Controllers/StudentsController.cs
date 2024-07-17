@@ -1,4 +1,5 @@
-﻿using CourseTracker.Application.Students.Queries.GetStudentDetail;
+﻿using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,18 @@ namespace CourseTracker.React.Server.Controllers
             var result = id == Guid.Empty ? new StudentDetailModel() : _detailQuery.Execute((Guid)id);
 
             return result;
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Guid>> Post(StudentDetailModel student)
+        {
+
+            return null;
+
+            //Guid result = await _createCommand.ExecuteAsync(student);
+
+            //return CreatedAtAction("Get", new { id = result }, result);
 
         }
 

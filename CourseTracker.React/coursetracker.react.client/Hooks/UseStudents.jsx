@@ -13,7 +13,7 @@ const useStudents = () => {
 			.then(response => response.json())
 			.then(json => setStudents(json))
 			.catch(error => console.error(error));
-	}
+	};
 
 	return { students, setStudents };
 
