@@ -1,4 +1,5 @@
-import { useEffect, useContext, useState } from "react";
+import { useContext } from "react";
+import UseStudent from "../../Hooks/UseStudent";
 import Banner from "../Banner";
 import StudentForm from "./StudentForm";
 import { navContext } from "../App";
@@ -7,19 +8,7 @@ const Student = () => {
 
     
     const { param: id } = useContext(navContext);
-    const [student, setStudent] = useState({});
-
-    useEffect(() => {
-
-        const fetchStudent = async () => {
-            const response = await fetch('/api/students/' + id);
-            const student = await response.json();
-            console.log(student);
-            setStudent(student);
-        }
-        fetchStudent();
-
-    }, []);
+    const { student, setStudent } = UseStudent(id);
 
     const contents = student.id === undefined
         ?

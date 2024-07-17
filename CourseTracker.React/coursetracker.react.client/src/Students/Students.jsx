@@ -1,4 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
+import UseStudents from "../../Hooks/UseStudents";
 import Banner from "../Banner";
 import StudentRow from "./StudentRow";
 import NavValues from "../../Helpers/NavValues";
@@ -6,12 +7,8 @@ import { navContext } from "../App";
 
 const Students = () => {
 
-    const [students, setStudents] = useState();
+    const { students, setStudents } = UseStudents();
     const { navigate } = useContext(navContext);
-
-    useEffect(() => {
-        populateStudentsData();
-    }, []);
 
     const addStudent = () => {
         navigate(NavValues.student, "00000000-0000-0000-0000-000000000000");
@@ -22,13 +19,10 @@ const Students = () => {
         <Banner bannerText = "Getting Students..." />
         :
         <>
-
             <Banner bannerText="Students" />
-
             <button className="btn btn-primary" onClick={addStudent} >
                 Add Student
             </button>
-
             <table className="table table-striped" aria-labelledby="tableLabel">
                 <thead>
                     <tr>
@@ -41,8 +35,7 @@ const Students = () => {
                 <tbody>
                     {students.map(student => <StudentRow key={ student.id} student={student} />)}
                 </tbody>
-            </table>
-            
+            </table>       
         </>;
 
     return (
@@ -52,13 +45,6 @@ const Students = () => {
             </div>
         </div>
     );
-
-    async function populateStudentsData() {
-        await fetch('/api/students')
-            .then(response => response.json())
-            .then(json => setStudents(json))
-            .catch(error => console.error(error));
-    }
 
 }
 
