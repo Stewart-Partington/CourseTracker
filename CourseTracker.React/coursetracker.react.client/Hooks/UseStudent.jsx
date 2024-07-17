@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const UseStudent = (studentId) => {
+const useStudent = (studentId) => {
 
 	const [student, setStudent] = useState({});
 
@@ -20,4 +20,4 @@ const UseStudent = (studentId) => {
 
 };
 
-export default UseStudent;
+export default useStudent;

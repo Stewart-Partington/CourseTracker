@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import UseStudent from "../../Hooks/UseStudent";
+import useStudent from "../../Hooks/UseStudent";
 import Banner from "../Banner";
 import StudentForm from "./StudentForm";
 import { navContext } from "../App";
@@ -8,7 +8,7 @@ const Student = () => {
 
     
     const { param: id } = useContext(navContext);
-    const { student, setStudent } = UseStudent(id);
+    const { student, setStudent } = useStudent(id);
 
     const contents = student.id === undefined
         ?

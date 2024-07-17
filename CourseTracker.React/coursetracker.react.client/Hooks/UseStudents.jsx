@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const UseStudents = () => {
+const useStudents = () => {
 
 	const [students, setStudents] = useState();
 
@@ -19,4 +19,4 @@ const UseStudents = () => {
 
 };
 
-export default UseStudents;
+export default useStudents;

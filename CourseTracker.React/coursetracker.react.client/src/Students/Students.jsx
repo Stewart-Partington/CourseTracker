@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import UseStudents from "../../Hooks/UseStudents";
+import useStudents from "../../Hooks/UseStudents";
 import Banner from "../Banner";
 import StudentRow from "./StudentRow";
 import NavValues from "../../Helpers/NavValues";
@@ -7,7 +7,7 @@ import { navContext } from "../App";
 
 const Students = () => {
 
-    const { students, setStudents } = UseStudents();
+    const { students, setStudents } = useStudents();
     const { navigate } = useContext(navContext);
 
     const addStudent = () => {
