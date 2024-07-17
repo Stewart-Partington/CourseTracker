@@ -1,5 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import Banner from "../Banner";
+import StudentForm from "./StudentForm";
 import { navContext } from "../App";
 
 const Student = () => {
@@ -9,7 +10,6 @@ const Student = () => {
     const [student, setStudent] = useState({});
 
     useEffect(() => {
-        //populateStudentData();
 
         const fetchStudent = async () => {
             const response = await fetch('/api/students/' + id);
@@ -19,7 +19,7 @@ const Student = () => {
         }
         fetchStudent();
 
-    }, {});
+    }, []);
 
     const contents = student.id === undefined
         ?
@@ -27,6 +27,7 @@ const Student = () => {
         :
         <>
             <Banner bannerText={GetBannerTitleForStudent()} />
+            <StudentForm student={student} />
         </>
 
     return (

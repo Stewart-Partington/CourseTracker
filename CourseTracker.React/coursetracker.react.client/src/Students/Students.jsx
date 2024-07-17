@@ -22,7 +22,13 @@ const Students = () => {
         <Banner bannerText = "Getting Students..." />
         :
         <>
+
             <Banner bannerText="Students" />
+
+            <button className="btn btn-primary" onClick={addStudent} >
+                Add Student
+            </button>
+
             <table className="table table-striped" aria-labelledby="tableLabel">
                 <thead>
                     <tr>
@@ -36,9 +42,7 @@ const Students = () => {
                     {students.map(student => <StudentRow key={ student.id} student={student} />)}
                 </tbody>
             </table>
-            <button className="btn btn-primary" onClick={addStudent} >
-                Add Student
-            </button>
+            
         </>;
 
     return (
