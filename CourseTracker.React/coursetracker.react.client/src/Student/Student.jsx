@@ -12,7 +12,9 @@ const Student = () => {
 
     const contents = student.id === undefined
         ?
-        <h1>Getting Student...</h1>
+        <bannerContext.Provider value={{ banner }} >
+            <Banner />
+        </bannerContext.Provider>
         :
         <>
             <bannerContext.Provider value={{ banner }} >

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { bannerContext } from "../src/App";
+//import { bannerContext } from "../src/App";
 
 const useStudent = (studentId) => {
 
 	const [student, setStudent] = useState({});
-	const [banner, setBanner] = useState();
+	const [banner, setBanner] = useState("Getting Student");
 
     useEffect(() => {
 
@@ -22,7 +22,6 @@ const useStudent = (studentId) => {
 	const saveStudent = (student) => {
 		postStudent(student);
 		setStudent(student);
-		//setBanner("Hey there you handsome mofo!");
 	};
 
 	const postStudent = async (student) => {

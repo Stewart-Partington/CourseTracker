@@ -1,10 +1,5 @@
-//import { useState } from "react";
-//import useStudent from "../../Hooks/UseStudent";
 
 const StudentForm = ({ student, setStudent, saveStudent }) => {
-
-    //const { saveStudent } = useStudent(student.id);
-    ////const [ student, setStudent] = useState(student);
 
     const onSubmitClick = () => {
         saveStudent(student);

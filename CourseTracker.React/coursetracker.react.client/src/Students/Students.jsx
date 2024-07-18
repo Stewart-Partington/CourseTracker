@@ -15,10 +15,11 @@ const Students = () => {
         navigate(NavValues.student, "00000000-0000-0000-0000-000000000000");
     };
 
-    
     const contents = students === undefined
         ?
-        <h1>Getting Students...</h1>
+        <bannerContext.Provider value={{ banner }} >
+            <Banner />
+        </bannerContext.Provider>
         :
         <>
             <bannerContext.Provider value={{ banner }} >

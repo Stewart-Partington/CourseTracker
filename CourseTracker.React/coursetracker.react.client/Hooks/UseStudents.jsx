@@ -3,19 +3,21 @@ import { useEffect, useState } from 'react';
 const useStudents = () => {
 
 	const [students, setStudents] = useState();
-	const [banner, setBanner] = useState();
+	const [banner, setBanner] = useState("Getting Students...");
 
 	useEffect(() => {
-		setBanner("Students");
-		populateStudentsData();
-	}, []);
 
-	async function populateStudentsData() {
-		await fetch('/api/students')
-			.then(response => response.json())
-			.then(json => setStudents(json))
-			.catch(error => console.error(error));
-	};
+		const fetchStudents = async () => {
+			const response = await fetch('/api/students');
+			if (response.status == 200) {
+				const students = await response.json();
+				setStudents(students);
+				setBanner("Students");
+			}
+		}
+		fetchStudents();
+
+	}, []);
 
 	return { students, setStudents, banner };
 
