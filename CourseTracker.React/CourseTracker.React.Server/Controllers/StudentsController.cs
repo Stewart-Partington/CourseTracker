@@ -31,7 +31,7 @@ namespace CourseTracker.React.Server.Controllers
         {
 
             var result = id == Guid.Empty ? new StudentDetailModel() : _detailQuery.Execute((Guid)id);
-
+             
             return result;
 
         }
