@@ -36,7 +36,7 @@ const useStudent = (studentId) => {
 		});
 	};
 
-    return { student, setStudent, saveStudent, banner, setBanner };
+    return { student, setStudent, saveStudent, banner };
 
 };
 

@@ -16,9 +16,7 @@ function App() {
 
         <div className="row">
             <navContext.Provider value={nav}>    
-                {/*<bannerContext.Provider value="">*/}
-                    <ComponentPicker currentNavLocation={nav.current} />
-                {/*</bannerContext.Provider>*/}
+                <ComponentPicker currentNavLocation={nav.current} />
             </navContext.Provider>
         </div>
     );

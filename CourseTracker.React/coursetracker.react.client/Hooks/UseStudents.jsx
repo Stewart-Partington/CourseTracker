@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 const useStudents = () => {
 
 	const [students, setStudents] = useState();
+	const [banner, setBanner] = useState();
 
 	useEffect(() => {
+		setBanner("Students");
 		populateStudentsData();
 	}, []);
 
@@ -15,7 +17,7 @@ const useStudents = () => {
 			.catch(error => console.error(error));
 	};
 
-	return { students, setStudents };
+	return { students, setStudents, banner };
 
 };
 
