@@ -1,28 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from 'react';
 import useStudent from "../../Hooks/UseStudent";
 import Banner from "../Banner";
 import StudentForm from "./StudentForm";
 import { navContext } from "../App";
+import { bannerContext } from "../App";
 
 const Student = () => {
-
-    
+  
     const { param: id } = useContext(navContext);
-    const { student, setStudent, saveStudent } = useStudent(id);
+    const { student, setStudent, saveStudent, banner, setBanner } = useStudent(id);
 
     const contents = student.id === undefined
         ?
-        <Banner bannerText="Getting Student..." />
+        <h1>Getting Student...</h1>
         :
         <>
-            <Banner bannerText={GetBannerTitleForStudent()} />
+            <bannerContext.Provider value={{ banner, setBanner }} >
+                <Banner />
+            </bannerContext.Provider>
             <StudentForm student={student} setStudent={setStudent} saveStudent={saveStudent} />
         </>
 
     return (
         <div className="row">
             <div>
-                {contents}
+                {contents} 
             </div>
         </div>
     );

@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import useStudents from "../../Hooks/UseStudents";
 import Banner from "../Banner";
 import StudentRow from "./StudentRow";
 import NavValues from "../../Helpers/NavValues";
 import { navContext } from "../App";
+import { bannerContext } from "../App";
 
 const Students = () => {
 
@@ -14,12 +15,16 @@ const Students = () => {
         navigate(NavValues.student, "00000000-0000-0000-0000-000000000000");
     };
 
+    const [banner, setBanner] = useState("Students");
+
     const contents = students === undefined
         ?
-        <Banner bannerText = "Getting Students..." />
+        <h1>Getting Students...</h1>
         :
         <>
-            <Banner bannerText="Students" />
+            <bannerContext.Provider value={{ banner, setBanner }} >
+                <Banner/>
+            </bannerContext.Provider>
             <button className="btn btn-primary" onClick={addStudent} >
                 Add Student
             </button>

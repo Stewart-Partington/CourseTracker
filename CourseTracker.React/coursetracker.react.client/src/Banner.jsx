@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+import { bannerContext } from "./App";
 
-const Banner = (props) => {
+const Banner = () => {
+
+	const { banner, setBanner } = useContext(bannerContext);
+
 	return (
-		<h1>{props.bannerText}</h1>
+		<h1>{banner}</h1>
 	);
+
 };
 
 export default Banner;
