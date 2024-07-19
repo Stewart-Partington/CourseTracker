@@ -65,7 +65,7 @@ namespace CourseTracker.React.Server.Students
 
                 Guid result;
 
-                if (vmStudent.Id == null)
+                if (vmStudent.Id == Guid.Empty)
                 {
                     var createStudent = _mapper.Map<CreateStudentModel>(vmStudent);
                     result = await _createCommand.ExecuteAsync(createStudent);
