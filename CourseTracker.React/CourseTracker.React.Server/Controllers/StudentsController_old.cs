@@ -8,13 +8,13 @@ namespace CourseTracker.React.Server.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentsController : Controller
+    public class StudentsController_old : Controller
     {
 
         private readonly IGetStudentsListQuery _listQuery;
         private readonly IGetStudentDetailQuery _detailQuery;
 
-        public StudentsController(IGetStudentsListQuery listQuery, IGetStudentDetailQuery detailQuery)
+        public StudentsController_old(IGetStudentsListQuery listQuery, IGetStudentDetailQuery detailQuery)
         {
             _listQuery = listQuery;
             _detailQuery = detailQuery;

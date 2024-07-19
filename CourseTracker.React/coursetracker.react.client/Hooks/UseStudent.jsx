@@ -12,7 +12,7 @@ const useStudent = (studentId) => {
             const student = await response.json();
             console.log(student);
 			setStudent(student);
-			setBanner(student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : student.firstName + " " + student.lastName);
+			setBanner(student.id == null ? "Add new Student" : student.firstName + " " + student.lastName);
         }
         fetchStudent();
 

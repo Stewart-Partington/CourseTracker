@@ -1,5 +1,6 @@
 
 using System.Runtime.Loader;
+using CourseTracker.React.Server.Services.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CourseTracker.React.Server
@@ -28,6 +29,8 @@ namespace CourseTracker.React.Server
             builder.Services.Scan(p => p.FromAssemblies(assemblies)
                 .AddClasses()
                 .AsMatchingInterface());
+
+            builder.Services.AddAutoMapper(typeof(MapperConfig));
 
             var app = builder.Build();
 
