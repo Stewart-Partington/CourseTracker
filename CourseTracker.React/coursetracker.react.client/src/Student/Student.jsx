@@ -8,7 +8,7 @@ import { bannerContext } from "../App";
 const Student = () => {
   
     const { param: id } = useContext(navContext);
-    const { student, setStudent, saveStudent, banner } = useStudent(id);
+    const { student, setStudent, saveStudent, banner, cancelStudent } = useStudent(id);
 
     const contents = student.id === undefined
         ?
@@ -20,7 +20,7 @@ const Student = () => {
             <bannerContext.Provider value={{ banner }} >
                 <Banner />
             </bannerContext.Provider>
-            <StudentForm student={student} setStudent={setStudent} saveStudent={saveStudent} />
+            <StudentForm student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent} />
         </>
 
     return (

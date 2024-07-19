@@ -1,8 +1,12 @@
 
-const StudentForm = ({ student, setStudent, saveStudent }) => {
+const StudentForm = ({ student, setStudent, saveStudent, cancelStudent }) => {
 
     const onSubmitClick = () => {
         saveStudent(student);
+    }
+
+    const onCancelClick = () => {
+        cancelStudent();
     }
 
     var contents = 
@@ -51,8 +55,14 @@ const StudentForm = ({ student, setStudent, saveStudent }) => {
             </div>
 
             <div className="mt-3">
-                <button className="btn btn-primary" onClick={onSubmitClick} >
+                <button className="btn btn-primary me-2" onClick={onSubmitClick} >
                     Save
+                </button>
+                <button className="btn btn-secondary me-2" onClick={onCancelClick} >
+                    Cancel
+                </button>
+                <button className="btn btn-danger">
+                    Delete
                 </button>
             </div>
 
