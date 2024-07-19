@@ -1,19 +1,11 @@
-import { useContext } from 'react';
 import useStudents from "../../Hooks/UseStudents";
 import Banner from "../Banner";
 import StudentRow from "./StudentRow";
-import NavValues from "../../Helpers/NavValues";
-import { navContext } from "../App";
 import { bannerContext } from "../App";
 
 const Students = () => {
 
-    const { students, setStudents, banner } = useStudents();
-    const { navigate } = useContext(navContext);
-
-    const addStudent = () => {
-        navigate(NavValues.student, "00000000-0000-0000-0000-000000000000");
-    };
+    const { students, banner, addStudent, editStudent } = useStudents();
 
     const contents = students === undefined
         ?
@@ -38,7 +30,7 @@ const Students = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map(student => <StudentRow key={ student.id} student={student} />)}
+                    {students.map(student => <StudentRow key={student.id} student={student} editStudent={editStudent} />)}
                 </tbody>
             </table>       
         </>;

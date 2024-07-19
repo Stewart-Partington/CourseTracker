@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import NavValues from "../Helpers/NavValues";
+import { navContext } from "../src/App";
 
 const useStudents = () => {
 
 	const [students, setStudents] = useState();
 	const [banner, setBanner] = useState("Getting Students...");
+	const { navigate } = useContext(navContext);
 
 	useEffect(() => {
 
@@ -19,7 +22,15 @@ const useStudents = () => {
 
 	}, []);
 
-	return { students, setStudents, banner };
+	const addStudent = () => {
+		navigate(NavValues.student, "00000000-0000-0000-0000-000000000000");
+	}
+
+	const editStudent = (id) => {
+		navigate(NavValues.student, id);
+	}
+
+	return { students, setStudents, banner, addStudent, editStudent };
 
 };
 

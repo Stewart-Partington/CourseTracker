@@ -1,20 +1,15 @@
-import { useContext } from 'react';
-import NavValues from "../../Helpers/NavValues";
-import { navContext } from "../App";
 
-const StudentRow = ({ student }) => {
+const StudentRow = ({ student, editStudent }) => {
 
-    const { navigate } = useContext(navContext);
-
-    const editStudent = (e) => {
+    const editStudentClick = (e) => {
         e.preventDefault();
-        navigate(NavValues.student, student.id);
+        editStudent(student.id);
     };
 
 	return (
         <tr>
             <td>
-                <a href="" onClick={editStudent}>Edit</a>
+                <a href="" onClick={editStudentClick}>Edit</a>
             </td>
             <td>{student.firstName} {student.lastName}</td>
             <td>{student.programName}</td>
