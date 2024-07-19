@@ -31,7 +31,7 @@ const useStudent = () => {
 		navigate(NavValues.students);
 	}
 
-	const deleteStudent = () => {
+	const deleteStudent = (id) => {
 		// ToDo:
 		//   Conditionally show delete button
 		//   Delete

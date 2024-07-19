@@ -5,10 +5,6 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
         saveStudent(student);
     }
 
-    const onCancelClick = () => {
-        cancelStudent();
-    }
-
     const onDeleteClick = () => {
         deleteStudent(student.id);
     }
@@ -62,7 +58,7 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                 <button className="btn btn-primary me-2" onClick={onSubmitClick} >
                     Save
                 </button>
-                <button className="btn btn-secondary me-2" onClick={onCancelClick} >
+                <button className="btn btn-secondary me-2" onClick={cancelStudent} >
                     Cancel
                 </button>
                 <button className="btn btn-danger" onClick={onDeleteClick} >
