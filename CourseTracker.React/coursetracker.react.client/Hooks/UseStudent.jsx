@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-//import { bannerContext } from "../src/App";
 
 const useStudent = (studentId) => {
 
