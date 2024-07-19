@@ -1,5 +1,5 @@
 
-const StudentForm = ({ student, setStudent, saveStudent, cancelStudent }) => {
+const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteStudent }) => {
 
     const onSubmitClick = () => {
         saveStudent(student);
@@ -7,6 +7,10 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent }) => {
 
     const onCancelClick = () => {
         cancelStudent();
+    }
+
+    const onDeleteClick = () => {
+        deleteStudent(student.id);
     }
 
     var contents = 
@@ -61,7 +65,7 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent }) => {
                 <button className="btn btn-secondary me-2" onClick={onCancelClick} >
                     Cancel
                 </button>
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={onDeleteClick} >
                     Delete
                 </button>
             </div>

@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { navContext } from "../src/App";
+import NavValues from "../Helpers/NavValues";
 
-const useStudent = (studentId) => {
+const useStudent = () => {
 
 	const [student, setStudent] = useState({});
 	const [banner, setBanner] = useState("Getting Student");
+	const { param: id } = useContext(navContext);
+	const { navigate } = useContext(navContext);
 
     useEffect(() => {
 
         const fetchStudent = async () => {
-            const response = await fetch('/api/students/' + studentId);
+            const response = await fetch('/api/students/' + id);
             const student = await response.json();
             console.log(student);
 			setStudent(student);
@@ -24,7 +28,14 @@ const useStudent = (studentId) => {
 	};
 
 	const cancelStudent = () => {
-		debugger;
+		navigate(NavValues.students);
+	}
+
+	const deleteStudent = () => {
+		// ToDo:
+		//   Conditionally show delete button
+		//   Delete
+		navigate(NavValues.students);
 	}
 
 	const postStudent = async (student) => {
@@ -38,7 +49,7 @@ const useStudent = (studentId) => {
 		});
 	};
 
-    return { student, setStudent, saveStudent, banner, cancelStudent };
+	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent };
 
 };
 
