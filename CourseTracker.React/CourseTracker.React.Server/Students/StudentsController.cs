@@ -61,7 +61,7 @@ namespace CourseTracker.React.Server.Students
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(VmStudent vmStudent)
+        public async Task<JsonResult> Post(VmStudent vmStudent)
         {
 
             if (ModelState.IsValid)
@@ -81,7 +81,7 @@ namespace CourseTracker.React.Server.Students
                     result = updateStudent.Id;
                 }
 
-                return RedirectToAction("Detail", "Students", new { sid = result });
+                return Json(result);
             }
             else
             {

@@ -22,8 +22,9 @@ const useStudent = () => {
 
     }, []);
 
-	const saveStudent = (student) => {
-		postStudentApi(student);
+	const saveStudent = async (student) => {
+		var id = await postStudentApi(student);	
+		student.id = id;
 		setStudent(student);
 	};
 
@@ -37,6 +38,9 @@ const useStudent = () => {
 	}
 
 	const postStudentApi = async (student) => {
+
+		var result;
+
 		await fetch('api/students', {
 			method: "POST",
 			headers: {
@@ -44,7 +48,15 @@ const useStudent = () => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(student)
-		});
+		})
+			.then((response) => response.json())
+			.then((responseData) => {
+				console.log(responseData);
+				result = responseData;
+			});
+
+		return result;
+
 	};
 
 	const deleteStudentApi = async (id) => {
