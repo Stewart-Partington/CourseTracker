@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using CourseTracker.Application.Assessments.Commands.DeleteAssessment;
 using CourseTracker.Application.Students.Commands.CreateStudent;
+using CourseTracker.Application.Students.Commands.DeleteStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
@@ -19,9 +21,10 @@ namespace CourseTracker.React.Server.Students
         private readonly IGetStudentDetailQuery _detailQuery;
         private readonly ICreateStudentCommand _createCommand;
         private readonly IUpdateStudentCommand _updateCommand;
+        private readonly IDeleteStudentCommand _deleteCommand;
 
         public StudentsController(IMapper mapper, IGetStudentsListQuery listQuery, IGetStudentDetailQuery detailQuery, ICreateStudentCommand createCommand,
-            IUpdateStudentCommand updateCommand)
+            IUpdateStudentCommand updateCommand, IDeleteStudentCommand deleteCommand)
         {
             
             _mapper = mapper;
@@ -29,6 +32,7 @@ namespace CourseTracker.React.Server.Students
             _detailQuery = detailQuery;
             _createCommand = createCommand;
             _updateCommand = updateCommand;
+            _deleteCommand = deleteCommand; 
 
         }
 
@@ -89,6 +93,12 @@ namespace CourseTracker.React.Server.Students
 
             }
 
+        }
+
+        [HttpDelete]
+        public async Task DeleteAssessmentCommand(Guid id)
+        {
+            await _deleteCommand.ExecuteAsync(id);
         }
 
     }

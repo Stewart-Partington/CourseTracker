@@ -61,9 +61,11 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                 <button className="btn btn-secondary me-2" onClick={cancelStudent} >
                     Cancel
                 </button>
-                <button className="btn btn-danger" onClick={onDeleteClick} >
-                    Delete
-                </button>
+                {student.id != "00000000-0000-0000-0000-000000000000" && (
+                    <button className="btn btn-danger" onClick={onDeleteClick} >
+                        Delete
+                    </button>
+                )}
             </div>
 
         </div>

@@ -23,7 +23,7 @@ const useStudent = () => {
     }, []);
 
 	const saveStudent = (student) => {
-		postStudent(student);
+		postStudentApi(student);
 		setStudent(student);
 	};
 
@@ -32,13 +32,11 @@ const useStudent = () => {
 	}
 
 	const deleteStudent = (id) => {
-		// ToDo:
-		//   Conditionally show delete button
-		//   Delete
+		deleteStudentApi(id);
 		navigate(NavValues.students);
 	}
 
-	const postStudent = async (student) => {
+	const postStudentApi = async (student) => {
 		await fetch('api/students', {
 			method: "POST",
 			headers: {
@@ -48,6 +46,16 @@ const useStudent = () => {
 			body: JSON.stringify(student)
 		});
 	};
+
+	const deleteStudentApi = async (id) => {
+		await fetch('api/students?id=' + id, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+	}
 
 	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent };
 
