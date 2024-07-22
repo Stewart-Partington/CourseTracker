@@ -17,7 +17,7 @@ const Student = () => {
             <bannerContext.Provider value={{ banner }} >
                 <Banner />
             </bannerContext.Provider>
-            <StudentForm student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent} deleteStudent={deleteStudent} />
+            <StudentForm key={student.id} student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent} deleteStudent={deleteStudent} />
         </>
 
     return (

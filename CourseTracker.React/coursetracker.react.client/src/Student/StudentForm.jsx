@@ -13,8 +13,6 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
         <div className="border p-3">
             <h2>Average: {student.average} %</h2>
 
-            <input type="hidden" id="id" value={student.id}></input>
-
             <div className="row form-group">
                 <div className="col-md-12 fw-bold">
                     <label htmlFor="firstName" className="required">First Name</label>
