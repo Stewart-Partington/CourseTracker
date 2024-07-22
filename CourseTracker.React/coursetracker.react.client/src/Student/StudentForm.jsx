@@ -1,5 +1,6 @@
+import { useState } from 'react';
 
-const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteStudent }) => {
+const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved }) => {
 
     const onSubmitClick = () => {
         saveStudent(student);
@@ -59,7 +60,7 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                 <button className="btn btn-secondary me-2" onClick={cancelStudent} >
                     Cancel
                 </button>
-                {student.id != "00000000-0000-0000-0000-000000000000" && (
+                {studentSaved && (
                     <button className="btn btn-danger" onClick={onDeleteClick} >
                         Delete
                     </button>

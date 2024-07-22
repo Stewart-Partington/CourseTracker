@@ -6,6 +6,7 @@ const useStudent = () => {
 
 	const [student, setStudent] = useState({});
 	const [banner, setBanner] = useState("Getting Student");
+	const [studentSaved, setStudentSaved] = useState(student.id != "00000000-0000-0000-0000-000000000000");
 	const { param: id } = useContext(navContext);
 	const { navigate } = useContext(navContext);
 
@@ -17,6 +18,7 @@ const useStudent = () => {
             console.log(student);
 			setStudent(student);
 			setBanner(student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student:" + " " + student.firstName);
+			setStudentSaved(student.id == "00000000-0000-0000-0000-000000000000" ? false : true);
         }
         fetchStudent();
 
@@ -26,6 +28,7 @@ const useStudent = () => {
 		var id = await postStudentApi(student);	
 		student.id = id;
 		setStudent(student);
+		setStudentSaved(true);
 	};
 
 	const cancelStudent = () => {
@@ -69,7 +72,7 @@ const useStudent = () => {
 		});
 	}
 
-	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent };
+	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved };
 
 };
 
