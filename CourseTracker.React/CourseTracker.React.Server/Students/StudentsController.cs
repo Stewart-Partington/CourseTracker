@@ -85,12 +85,7 @@ namespace CourseTracker.React.Server.Students
             }
             else
             {
-                //ViewBag.SchoolYears = await _dal.GetSchoolYears((Guid)vmStudent.Id);
-                //HandleEntityIds(EntityTypes.Student, null);
-                //return View(vmStudent);
-
                 return null;
-
             }
 
         }

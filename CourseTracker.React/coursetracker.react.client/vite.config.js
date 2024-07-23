@@ -43,14 +43,14 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/weatherforecast': {
-                target,
-                secure: false
-            },
             '^/api/students': {
                 target,
                 secure: false
-            }
+            },
+            '^/api/schoolyears': {
+                target,
+                secure: false
+            },
         },
         port: 5173,
         https: {
