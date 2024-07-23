@@ -60,10 +60,6 @@ const useStudent = () => {
 		navigate(NavValues.students);
 	}
 
-	const getSchoolYears = () => {
-		return getScholYearsApi(student.id);
-	}
-
 	const postStudentApi = async (student) => {
 
 		var result = null;
@@ -96,28 +92,7 @@ const useStudent = () => {
 		});
 	}
 
-	const getScholYearsApi = async (studentId) => {
-
-		var result = null;
-
-		await fetch('api/schoolyears/' + studentId, {
-			method: "GET",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-		})
-			.then((response) => response.json())
-			.then((responseData) => {
-				console.log(responseData);
-				result = responseData;
-			});
-
-		return result;
-
-	}
-
-	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors, getSchoolYears };
+	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors };
 
 };
 

@@ -2,7 +2,7 @@ import useStudent from "../../Hooks/UseStudent";
 import Banner from "../Banner";
 import StudentForm from "./StudentForm";
 import { bannerContext } from "../App";
-import YearsTable from "./YearsTable";
+import YearsTable from "../SchoolYears/YearsTable";
 
 const Student = () => {
 
@@ -21,7 +21,7 @@ const Student = () => {
             <StudentForm key={student.id} student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent} deleteStudent={deleteStudent}
                 studentSaved={studentSaved} errors={errors} />
             {studentSaved && (            
-                <YearsTable getSchoolYears={getSchoolYears} />
+                <YearsTable studentId={student.id} />
             )}
         </>
 

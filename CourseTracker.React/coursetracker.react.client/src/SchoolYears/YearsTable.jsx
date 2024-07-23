@@ -1,7 +1,8 @@
+import useSchoolYears from "../../Hooks/UseSchoolYears";
 
-const YearsTable = ({ getSchoolYears }) => {
+const YearsTable = ({ studentId }) => {
 
-    const schoolYears = getSchoolYears();
+    const { schoolYears, addSchoolYear } = useSchoolYears(studentId);
 
     const contents = 
         <>
@@ -15,7 +16,7 @@ const YearsTable = ({ getSchoolYears }) => {
 
                     <div className="row mt-3">
                         <div className="col-md-12">
-                            <button className="btn btn-primary" >
+                            <button className="btn btn-primary" onClick={addSchoolYear}>
                                 Add School Year
                             </button>
                         </div>
