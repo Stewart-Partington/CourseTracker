@@ -5,7 +5,7 @@ import { bannerContext } from "../App";
 
 const Student = () => {
 
-    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved } = useStudent();
+    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors } = useStudent();
 
     const contents = student.id === undefined
         ?
@@ -18,7 +18,7 @@ const Student = () => {
                 <Banner />
             </bannerContext.Provider>
             <StudentForm key={student.id} student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent} deleteStudent={deleteStudent}
-                studentSaved={studentSaved} />
+                studentSaved={studentSaved} errors={errors} />
         </>
 
     return (

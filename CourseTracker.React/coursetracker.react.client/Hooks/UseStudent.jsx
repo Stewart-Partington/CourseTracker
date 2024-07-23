@@ -6,6 +6,7 @@ const useStudent = () => {
 
 	const [student, setStudent] = useState({});
 	const [banner, setBanner] = useState("Getting Student");
+	const [errors, setErrors] = useState({});
 	const [studentSaved, setStudentSaved] = useState(student.id != "00000000-0000-0000-0000-000000000000");
 	const { param: id } = useContext(navContext);
 	const { navigate } = useContext(navContext);
@@ -25,10 +26,29 @@ const useStudent = () => {
     }, []);
 
 	const saveStudent = async (student) => {
-		var id = await postStudentApi(student);	
-		student.id = id;
-		setStudent(student);
-		setStudentSaved(true);
+
+		var postResponse = await postStudentApi(student);	
+
+		if (postResponse.status === undefined) {
+			student.id = postResponse;
+			setStudent(student);
+			setStudentSaved(true);
+		}
+		else {
+
+			let newErrors = {};
+
+			if (postResponse.errors.FirstName !== undefined)
+				newErrors.firstName = postResponse.errors.FirstName[0];
+			if (postResponse.errors.LastName !== undefined)
+				newErrors.lastName = postResponse.errors.LastName[0];
+			if (postResponse.errors.ProgramName !== undefined)
+				newErrors.programName = postResponse.errors.ProgramName[0];
+
+			setErrors(newErrors);
+
+		}
+
 	};
 
 	const cancelStudent = () => {
@@ -42,7 +62,7 @@ const useStudent = () => {
 
 	const postStudentApi = async (student) => {
 
-		var result;
+		var result = null;
 
 		await fetch('api/students', {
 			method: "POST",
@@ -72,7 +92,7 @@ const useStudent = () => {
 		});
 	}
 
-	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved };
+	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors };
 
 };
 

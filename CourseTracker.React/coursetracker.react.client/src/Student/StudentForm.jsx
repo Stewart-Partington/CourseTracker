@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved }) => {
+const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved, errors }) => {
 
     const onSubmitClick = () => {
         saveStudent(student);
@@ -19,7 +19,7 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                     <label htmlFor="firstName" className="required">First Name</label>
                 </div>
                 <div className="col-md-12">
-                    
+                    {errors.firstName && <div className="text-danger">{errors.firstName}</div>}
                 </div>
                 <div className="col-md-12">
                     <input id="firstName" className="form-control w-50" type="text" value={student.firstName}
@@ -32,7 +32,7 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                     <label htmlFor="lastName" className="required">Last Name</label>
                 </div>
                 <div className="col-md-12">
-
+                    {errors.lastName && <div className="text-danger">{errors.lastName}</div>}
                 </div>
                 <div className="col-md-12">
                     <input id="lastName" className="form-control w-50" type="text" value={student.lastName}
@@ -45,7 +45,7 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                     <label htmlFor="programName" className="required">Program Name</label>
                 </div>
                 <div className="col-md-12">
-
+                    {errors.programName && <div className="text-danger">{errors.programName}</div>}
                 </div>
                 <div className="col-md-12">
                     <input id="programName" className="form-control w-50" type="text" value={student.programName}
