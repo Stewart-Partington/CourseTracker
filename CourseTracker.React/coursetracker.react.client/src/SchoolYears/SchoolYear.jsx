@@ -1,10 +1,24 @@
+import useSchoolYear from "../../Hooks/UseSchoolYear";
+import Banner from "../Banner";
+import { bannerContext } from "../App";
+import SchoolYearForm from "./SchoolYearForm";
 
 const SchoolYear = () => {
 
-	const contents = 
+    const { schoolYear, setSchoolYear, saveSchoolYear, banner, errors } = useSchoolYear();
+
+    const contents = schoolYear.id === undefined
+        ?
+        <bannerContext.Provider value={{ banner }} >
+            <Banner />
+        </bannerContext.Provider>
+        :
         <>
-			<h1>School Year</h1>
-		</>
+            <bannerContext.Provider value={{ banner }} >
+                <Banner />
+            </bannerContext.Provider>
+            <SchoolYearForm key={schoolYear.id} schoolYear={schoolYear} setSchoolYear={setSchoolYear} saveSchoolYear={saveSchoolYear} errors={errors} />
+        </>
 
     return (
         <div className="row">

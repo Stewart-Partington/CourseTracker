@@ -24,7 +24,11 @@ const useSchoolYears = (studentId) => {
 		navigate(NavValues.schoolYear, "00000000-0000-0000-0000-000000000000");
 	}
 
-	return { schoolYears, setSchoolYears, addSchoolYear };
+	const editSchoolYear = (id) => {
+		navigate(NavValues.schoolYear, id);
+	}
+
+	return { schoolYears, setSchoolYears, addSchoolYear, editSchoolYear };
 
 };
 

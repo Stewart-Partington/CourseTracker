@@ -6,7 +6,7 @@ import YearsTable from "../SchoolYears/YearsTable";
 
 const Student = () => {
 
-    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors, getSchoolYears } = useStudent();
+    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors } = useStudent();
 
     const contents = student.id === undefined
         ?
