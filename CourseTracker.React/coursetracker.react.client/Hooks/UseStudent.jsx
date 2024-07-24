@@ -57,7 +57,7 @@ const useStudent = () => {
 
 	const deleteStudent = (id) => {
 		deleteStudentApi(id);
-		navigate(NavLevels.students);
+		navigate(NavLevels.students, null);
 	}
 
 	const postStudentApi = async (student) => {
