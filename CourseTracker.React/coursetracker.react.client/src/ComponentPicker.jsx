@@ -3,9 +3,9 @@ import Student from "./Student/Student";
 import SchoolYear from "./SchoolYears/SchoolYear";
 import NavLevels from "../Helpers/NavLevels";
 
-const ComponentPicker = ({ currentNavLocation }) => {
+const ComponentPicker = ({ navLevel }) => {
 
-	switch (currentNavLocation) {
+	switch (navLevel) {
 		case NavLevels.students:
 			return <Students />;
 		case NavLevels.student:

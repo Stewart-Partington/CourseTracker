@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import ComponentPicker from "./ComponentPicker";;
 import NavLevels from "../Helpers/NavLevels";
+import NavStack from "../Helpers/NavStack";
 
 const navContext = React.createContext(NavLevels.students);
 const bannerContext = React.createContext({ bannerText: "" });
@@ -8,15 +9,81 @@ const bannerContext = React.createContext({ bannerText: "" });
 function App() {
 
     const navigate = useCallback(
-        (navLevel, id) => setNav({ current: navLevel, id, navigate }), [] 
+        (navLevel, id) => {
+
+            // Rename NavStack. Its not a stack. NavValues?
+
+            var myNav = nav.navStack;
+
+            switch (navLevel) {
+                case NavLevels.students:
+
+                    myNav.NavLevel = NavLevels.students;
+                    myNav.Student.Id = null;
+                    myNav.SchoolYear.Id = null;
+                    myNav.Course.Id = null;
+                    myNav.Assesment.Id = null;
+
+                    break;
+
+                case NavLevels.student:
+
+                    myNav.NavLevel = NavLevels.student;
+                    myNav.Student.Id = id;
+                    myNav.SchoolYear.Id = null;
+                    myNav.Course.Id = null;
+                    myNav.Assesment.Id = null;
+
+                    break;
+
+                case NavLevels.schoolYear:
+
+                    myNav.NavLevel = NavLevels.schoolYear;
+                    myNav.SchoolYear.Id = id;
+                    myNav.Course.Id = null;
+                    myNav.Assesment.Id = null;
+
+                    break;
+
+                case NavLevels.course:
+
+                    myNav.NavLevel = NavLevels.course;
+                    myNav.Course.Id = id;
+                    myNav.Assesment.Id = null;
+
+                    break;
+
+                case NavLevels.assessment:
+
+                    myNav.navLevel = NavLevels.assessment;
+                    myNave.Assesment.Id = id;
+
+                    break;
+
+                default:
+
+                    myNav.NavLevel = NavLevels.students;
+                    myNav.Student.Id = null;
+                    myNav.SchoolYear.Id = null;
+                    myNav.Course.Id = null;
+                    myNav.Assesment.Id = null;
+
+                    break;
+
+            }
+
+            setNav({ navStack: myNav, id, navigate })
+
+        }, []
     );
-    const [nav, setNav] = useState({ current: NavLevels.Students, navigate });
+
+    const [nav, setNav] = useState({ navStack: NavStack, navigate });
 
     return (
 
         <div className="row">
             <navContext.Provider value={nav}>    
-                <ComponentPicker currentNavLocation={nav.current} />
+                <ComponentPicker navLevel={nav.navStack.NavLevel} />
             </navContext.Provider>
         </div>
     );

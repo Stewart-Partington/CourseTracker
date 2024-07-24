@@ -52,7 +52,7 @@ const useStudent = () => {
 	};
 
 	const cancelStudent = () => {
-		navigate(NavLevels.students);
+		navigate(NavLevels.students, null);
 	}
 
 	const deleteStudent = (id) => {
