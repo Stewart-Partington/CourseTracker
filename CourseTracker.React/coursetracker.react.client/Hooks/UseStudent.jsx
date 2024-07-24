@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { navContext } from "../src/App";
-import NavValues from "../Helpers/NavValues";
+import NavLevels from "../Helpers/NavLevels";
 
 const useStudent = () => {
 
@@ -52,12 +52,12 @@ const useStudent = () => {
 	};
 
 	const cancelStudent = () => {
-		navigate(NavValues.students);
+		navigate(NavLevels.students);
 	}
 
 	const deleteStudent = (id) => {
 		deleteStudentApi(id);
-		navigate(NavValues.students);
+		navigate(NavLevels.students);
 	}
 
 	const postStudentApi = async (student) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { navContext } from "../src/App";
-import NavValues from "../Helpers/NavValues";
+import NavLevels from "../Helpers/NavLevels";
 
 const useSchoolYear = () => {
 

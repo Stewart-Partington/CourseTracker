@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import ComponentPicker from "./ComponentPicker";;
-import NavValues from "../Helpers/NavValues";
+import NavLevels from "../Helpers/NavLevels";
 
-const navContext = React.createContext(NavValues.students);
+const navContext = React.createContext(NavLevels.students);
 const bannerContext = React.createContext({ bannerText: "" });
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     const navigate = useCallback(
         (navTo, param) => setNav({ current: navTo, param, navigate }), [] 
     );
-    const [nav, setNav] = useState({ current: NavValues.Students, navigate });
+    const [nav, setNav] = useState({ current: NavLevels.Students, navigate });
 
     return (
 

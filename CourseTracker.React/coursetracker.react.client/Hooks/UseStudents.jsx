@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import NavValues from "../Helpers/NavValues";
+import NavLevels from "../Helpers/NavLevels";
 import { navContext } from "../src/App";
 
 const useStudents = () => {
@@ -23,11 +23,11 @@ const useStudents = () => {
 	}, []);
 
 	const addStudent = () => {
-		navigate(NavValues.student, "00000000-0000-0000-0000-000000000000");
+		navigate(NavLevels.student, "00000000-0000-0000-0000-000000000000");
 	}
 
 	const editStudent = (id) => {
-		navigate(NavValues.student, id);
+		navigate(NavLevels.student, id);
 	}
 
 	return { students, setStudents, banner, addStudent, editStudent };

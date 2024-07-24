@@ -1,16 +1,16 @@
 import Students from "./Students/Students";
 import Student from "./Student/Student";
 import SchoolYear from "./SchoolYears/SchoolYear";
-import NavValues from "../Helpers/NavValues";
+import NavLevels from "../Helpers/NavLevels";
 
 const ComponentPicker = ({ currentNavLocation }) => {
 
 	switch (currentNavLocation) {
-		case NavValues.students:
+		case NavLevels.students:
 			return <Students />;
-		case NavValues.student:
+		case NavLevels.student:
 			return <Student />;
-		case NavValues.schoolYear:
+		case NavLevels.schoolYear:
 			return <SchoolYear />;
 		default:
 			return <Students />;

@@ -1,5 +1,5 @@
 
-const NavValues = {
+const NavLevels = {
 	students: "Students",
 	student: "Student",
 	schoolYear: "SchoolYear",
@@ -7,4 +7,4 @@ const NavValues = {
 	assessment: "Assessment"
 };
 
-export default NavValues;
+export default NavLevels;
