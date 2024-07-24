@@ -1,6 +1,6 @@
 import NavLevels from "./NavLevels";
 
-const NavStack = {
+const NavValues = {
 	NavLevel: NavLevels.students,
 	Student: {
 		Id: null,
@@ -20,4 +20,4 @@ const NavStack = {
 	}
 }
 
-export default NavStack;
+export default NavValues;

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import ComponentPicker from "./ComponentPicker";;
 import NavLevels from "../Helpers/NavLevels";
-import NavStack from "../Helpers/NavStack";
+import NavValues from "../Helpers/NavValues";
 
 const navContext = React.createContext(NavLevels.students);
 const bannerContext = React.createContext({ bannerText: "" });
@@ -11,9 +11,9 @@ function App() {
     const navigate = useCallback(
         (navLevel, id) => {
 
-            // Rename NavStack. Its not a stack. NavValues?
+            // Rename NavValues. Its not a stack. NavValues?
 
-            var myNav = nav.navStack;
+            var myNav = nav.NavValues;
 
             switch (navLevel) {
                 case NavLevels.students:
@@ -72,18 +72,18 @@ function App() {
 
             }
 
-            setNav({ navStack: myNav, id, navigate })
+            setNav({ NavValues: myNav, id, navigate })
 
         }, []
     );
 
-    const [nav, setNav] = useState({ navStack: NavStack, navigate });
+    const [nav, setNav] = useState({ NavValues: NavValues, navigate });
 
     return (
 
         <div className="row">
             <navContext.Provider value={nav}>    
-                <ComponentPicker navLevel={nav.navStack.NavLevel} />
+                <ComponentPicker navLevel={nav.NavValues.NavLevel} />
             </navContext.Provider>
         </div>
     );
