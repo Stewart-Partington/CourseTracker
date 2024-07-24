@@ -8,7 +8,7 @@ const bannerContext = React.createContext({ bannerText: "" });
 function App() {
 
     const navigate = useCallback(
-        (navTo, param) => setNav({ current: navTo, param, navigate }), [] 
+        (navLevel, id) => setNav({ current: navLevel, id, navigate }), [] 
     );
     const [nav, setNav] = useState({ current: NavLevels.Students, navigate });
 

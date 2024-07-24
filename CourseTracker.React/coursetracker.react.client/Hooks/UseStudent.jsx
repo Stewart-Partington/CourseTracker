@@ -8,7 +8,7 @@ const useStudent = () => {
 	const [banner, setBanner] = useState("Getting Student");
 	const [errors, setErrors] = useState({});
 	const [studentSaved, setStudentSaved] = useState(student.id != "00000000-0000-0000-0000-000000000000");
-	const { param: id } = useContext(navContext);
+	const { id: id } = useContext(navContext);
 	const { navigate } = useContext(navContext);
 
     useEffect(() => {

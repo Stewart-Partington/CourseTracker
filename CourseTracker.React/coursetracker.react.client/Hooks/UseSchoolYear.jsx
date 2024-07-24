@@ -8,7 +8,7 @@ const useSchoolYear = () => {
 	const [banner, setBanner] = useState("Getting School Year");
 	const [errors, setErrors] = useState({});
 	const [schoolYearSaved, setSchoolYearSaved] = useState(schoolYear.id != "00000000-0000-0000-0000-000000000000");
-	const { param: id } = useContext(navContext);
+	const { id: id } = useContext(navContext);
 	const { navigate } = useContext(navContext);
 
 	useEffect(() => {
