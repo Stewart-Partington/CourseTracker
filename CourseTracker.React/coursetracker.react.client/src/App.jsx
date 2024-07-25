@@ -13,77 +13,79 @@ function App() {
 
             // Rename NavValues. Its not a stack. NavValues?
 
-            var myNav = nav.NavValues;
+            //var myNav = nav.NavValues;
+
+            //Google how to create global variables in react
 
             switch (navLevel) {
                 case NavLevels.students:
 
-                    myNav.NavLevel = NavLevels.students;
-                    myNav.Student.Id = null;
-                    myNav.SchoolYear.Id = null;
-                    myNav.Course.Id = null;
-                    myNav.Assesment.Id = null;
+                    NavValues.NavLevel = NavLevels.students;
+                    NavValues.Student.Id = null;
+                    NavValues.SchoolYear.Id = null;
+                    NavValues.Course.Id = null;
+                    NavValues.Assesment.Id = null;
 
                     break;
 
                 case NavLevels.student:
 
-                    myNav.NavLevel = NavLevels.student;
-                    myNav.Student.Id = id;
-                    myNav.SchoolYear.Id = null;
-                    myNav.Course.Id = null;
-                    myNav.Assesment.Id = null;
+                    NavValues.NavLevel = NavLevels.student;
+                    NavValues.Student.Id = id;
+                    NavValues.SchoolYear.Id = null;
+                    NavValues.Course.Id = null;
+                    NavValues.Assesment.Id = null;
 
                     break;
 
                 case NavLevels.schoolYear:
 
-                    myNav.NavLevel = NavLevels.schoolYear;
-                    myNav.SchoolYear.Id = id;
-                    myNav.Course.Id = null;
-                    myNav.Assesment.Id = null;
+                    NavValues.NavLevel = NavLevels.schoolYear;
+                    NavValues.SchoolYear.Id = id;
+                    NavValues.Course.Id = null;
+                    NavValues.Assesment.Id = null;
 
                     break;
 
                 case NavLevels.course:
 
-                    myNav.NavLevel = NavLevels.course;
-                    myNav.Course.Id = id;
-                    myNav.Assesment.Id = null;
+                    NavValues.NavLevel = NavLevels.course;
+                    NavValues.Course.Id = id;
+                    NavValues.Assesment.Id = null;
 
                     break;
 
                 case NavLevels.assessment:
 
-                    myNav.navLevel = NavLevels.assessment;
-                    myNave.Assesment.Id = id;
+                    NavValues.navLevel = NavLevels.assessment;
+                    NavValues.Assesment.Id = id;
 
                     break;
 
                 default:
 
-                    myNav.NavLevel = NavLevels.students;
-                    myNav.Student.Id = null;
-                    myNav.SchoolYear.Id = null;
-                    myNav.Course.Id = null;
-                    myNav.Assesment.Id = null;
+                    NavValues.NavLevel = NavLevels.students;
+                    NavValues.Student.Id = null;
+                    NavValues.SchoolYear.Id = null;
+                    NavValues.Course.Id = null;
+                    NavValues.Assesment.Id = null;
 
                     break;
 
             }
 
-            setNav({ NavValues: myNav, id, navigate })
+            setNav({ navValues: NavValues, id, navigate })
 
         }, []
     );
 
-    const [nav, setNav] = useState({ NavValues: NavValues, navigate });
+    const [nav, setNav] = useState({ navValues: NavValues, navigate });
 
     return (
 
         <div className="row">
             <navContext.Provider value={nav}>    
-                <ComponentPicker navLevel={nav.NavValues.NavLevel} />
+                <ComponentPicker navLevel={nav.navValues.NavLevel} />
             </navContext.Provider>
         </div>
     );
