@@ -1,12 +1,10 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
-import { navContext } from "../src/App";
 
-const useStudents = () => {
+const useStudents = (navigate) => {
 
 	const [students, setStudents] = useState();
 	const [banner, setBanner] = useState("Getting Students...");
-	const { navigate } = useContext(navContext);
 
 	useEffect(() => {
 
