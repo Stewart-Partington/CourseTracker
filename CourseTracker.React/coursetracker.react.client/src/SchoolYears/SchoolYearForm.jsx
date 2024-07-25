@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, errors }) => {
+const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors }) => {
 
     const onSubmitClick = () => {
         saveSchoolYear(schoolYear);
     }
 
-    //const onDeleteClick = () => {
-    //    deleteStudent(student.id);
-    //}
+    const onDeleteClick = () => {
+        deleteSchoolYear(schoolYear.id);
+    }
 
     var contents =
         <>
@@ -23,7 +23,7 @@ const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, errors }) =
                         {errors.index && <div className="text-danger">{errors.index}</div>}
                 </div>
                 <div className="col-md-12">
-                        <input id="index" className="form-control w-50" type="text" value={schoolYear.index}
+                        <input id="index" className="form-control w-50" type="number" value={schoolYear.index}
                             onChange={(e) => setSchoolYear({ ...schoolYear, index: e.target.value })} />
                 </div>
             </div>
@@ -36,7 +36,7 @@ const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, errors }) =
                         {errors.year && <div className="text-danger">{errors.year}</div>}
                 </div>
                 <div className="col-md-12">
-                        <input id="year" className="form-control w-50" type="text" value={schoolYear.year}
+                        <input id="year" className="form-control w-50" type="number" value={schoolYear.year}
                             onChange={(e) => setSchoolYear({ ...schoolYear, year: e.target.value })} />
                 </div>
             </div>
@@ -45,14 +45,14 @@ const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, errors }) =
                 <button className="btn btn-primary me-2" onClick={onSubmitClick} >
                     Save
                 </button>
-                {/*<button className="btn btn-secondary me-2" onClick={cancelStudent} >*/}
-                {/*    Cancel*/}
-                {/*</button>*/}
-                {/*{studentSaved && (*/}
-                {/*    <button className="btn btn-danger" onClick={onDeleteClick} >*/}
-                {/*        Delete*/}
-                {/*    </button>*/}
-                {/*)}*/}
+                <button className="btn btn-secondary me-2" onClick={cancelSchoolYear} >
+                    Cancel
+                </button>
+                {schoolYearSaved && (
+                    <button className="btn btn-danger" onClick={onDeleteClick} >
+                        Delete
+                    </button>
+                )}
             </div>
 
             </div>

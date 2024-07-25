@@ -88,7 +88,7 @@ namespace CourseTracker.React.Server.SchoolYears
         }
 
         [HttpDelete]
-        public async Task DeleteAssessmentCommand(Guid id)
+        public async Task Delete(Guid id)
         {
             await _deleteCommand.ExecuteAsync(id);
         }
