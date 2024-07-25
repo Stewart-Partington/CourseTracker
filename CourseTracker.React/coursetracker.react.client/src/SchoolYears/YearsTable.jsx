@@ -1,8 +1,9 @@
 import useSchoolYears from "../../Hooks/UseSchoolYears";
+import YearRow from "./YearRow";
 
 const YearsTable = ({ studentId }) => {
 
-    const { schoolYears, addSchoolYear } = useSchoolYears(studentId);
+    const { schoolYears, addSchoolYear, editSchoolYear } = useSchoolYears(studentId);
 
     const contents = 
         <>
@@ -33,7 +34,9 @@ const YearsTable = ({ studentId }) => {
                                 </tr>
                             </thead>
                             <tbody>
-
+                                {
+                                    schoolYears != undefined ? schoolYears.map(schoolYear => <YearRow key={schoolYear.id} schoolYear={schoolYear} editSchoolYear={editSchoolYear} />) : "loading..."
+                                }
                             </tbody>
                         </table>
                     </div>

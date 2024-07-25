@@ -11,12 +11,6 @@ function App() {
     const navigate = useCallback(
         (navLevel, id) => {
 
-            // Rename NavValues. Its not a stack. NavValues?
-
-            //var myNav = nav.NavValues;
-
-            //Google how to create global variables in react
-
             switch (navLevel) {
                 case NavLevels.students:
 
@@ -74,7 +68,7 @@ function App() {
 
             }
 
-            setNav({ navValues: NavValues, id, navigate })
+            setNav({ navValues: NavValues, navigate })
 
         }, []
     );

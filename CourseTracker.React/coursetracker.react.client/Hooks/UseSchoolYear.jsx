@@ -1,20 +1,16 @@
-import { useEffect, useState, useContext } from 'react';
-import { navContext } from "../src/App";
-import NavLevels from "../Helpers/NavLevels";
+import { useEffect, useState } from 'react';
 
-const useSchoolYear = () => {
+const useSchoolYear = (navValues, navigate) => {
 
 	const [schoolYear, setSchoolYear] = useState({});
 	const [banner, setBanner] = useState("Getting School Year");
 	const [errors, setErrors] = useState({});
 	const [schoolYearSaved, setSchoolYearSaved] = useState(schoolYear.id != "00000000-0000-0000-0000-000000000000");
-	const { id: id } = useContext(navContext);
-	const { navigate } = useContext(navContext);
 
 	useEffect(() => {
 
 		const fetchSchoolYear = async () => {
-			const response = await fetch('/api/schoolyears/' + id + "/false");
+			const response = await fetch('/api/schoolyears/' + navValues.SchoolYear.Id + "/" + navValues.Student.Id);
 			const schoolYear = await response.json();
 			console.log(schoolYear);
 			setSchoolYear(schoolYear);

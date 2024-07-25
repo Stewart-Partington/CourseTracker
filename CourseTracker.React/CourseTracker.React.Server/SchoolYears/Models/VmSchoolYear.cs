@@ -8,6 +8,8 @@ namespace CourseTracker.React.Server.SchoolYears.Models
 
         public Guid? Id { get; set; } = Guid.Empty;
 
+        public Guid StudentId { get; set; }
+
         [Required]
         public int? Index { get; set; } = null;
 

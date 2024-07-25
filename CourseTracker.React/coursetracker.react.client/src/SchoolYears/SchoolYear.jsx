@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { navContext } from "../App";
 import useSchoolYear from "../../Hooks/UseSchoolYear";
 import Banner from "../Banner";
 import { bannerContext } from "../App";
@@ -5,7 +7,9 @@ import SchoolYearForm from "./SchoolYearForm";
 
 const SchoolYear = () => {
 
-    const { schoolYear, setSchoolYear, saveSchoolYear, banner, errors } = useSchoolYear();
+    const { navValues: navValues } = useContext(navContext);
+    const { navigate } = useContext(navContext);
+    const { schoolYear, setSchoolYear, saveSchoolYear, banner, errors } = useSchoolYear(navValues, navigate);
 
     const contents = schoolYear.id === undefined
         ?
