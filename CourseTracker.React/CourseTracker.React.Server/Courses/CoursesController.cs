@@ -33,7 +33,7 @@ namespace CourseTracker.React.Server.Courses
             _deleteCommand = deleteCommand;
         }
 
-        [HttpGet("{studentId}")]
+        [HttpGet("{schoolYearId}")]
         public ActionResult<List<CoursesListItemModel>> Get(Guid schoolYearId)
         {
             return _listQuery.Execute(schoolYearId);

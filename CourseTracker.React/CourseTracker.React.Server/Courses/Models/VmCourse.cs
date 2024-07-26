@@ -6,7 +6,7 @@ namespace CourseTracker.React.Server.Courses.Models
     public class VmCourse
     {
 
-        public Guid? Id { get; set; }
+        public Guid? Id { get; set; } = Guid.Empty;
 
         public Guid SchoolYearId { get; set; }
 

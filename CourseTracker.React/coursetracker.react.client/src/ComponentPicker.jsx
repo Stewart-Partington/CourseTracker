@@ -1,6 +1,7 @@
 import Students from "./Students/Students";
 import Student from "./Student/Student";
 import SchoolYear from "./SchoolYears/SchoolYear";
+import Course from "./Courses/Course";
 import NavLevels from "../Helpers/NavLevels";
 
 const ComponentPicker = ({ navLevel }) => {
@@ -12,6 +13,8 @@ const ComponentPicker = ({ navLevel }) => {
 			return <Student />;
 		case NavLevels.schoolYear:
 			return <SchoolYear />;
+		case NavLevels.course:
+			return <Course />;
 		default:
 			return <Students />;
 	}

@@ -28,7 +28,7 @@ const useSchoolYear = (navValues, navigate) => {
 
 		if (postResponse.status === undefined) {
 			schoolYear.id = postResponse;
-			setSchoolYear(student);
+			setSchoolYear(schoolYear);
 			setSchoolYearSaved(true);
 		}
 		else {
