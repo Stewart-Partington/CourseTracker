@@ -35,7 +35,7 @@ const YearsTable = ({ studentId }) => {
                             </thead>
                             <tbody>
                                 {
-                                    schoolYears != undefined ? schoolYears.map(schoolYear => <YearRow key={schoolYear.id} schoolYear={schoolYear} editSchoolYear={editSchoolYear} />) : "loading..."
+                                    schoolYears != undefined ? schoolYears.map(schoolYear => <YearRow key={schoolYear.id} schoolYear={schoolYear} editSchoolYear={editSchoolYear} />) : "<tr>loading...</tr>"
                                 }
                             </tbody>
                         </table>

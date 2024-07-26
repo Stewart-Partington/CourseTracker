@@ -85,7 +85,7 @@ const useCourse = (navValues, navigate) => {
 		});
 	}
 
-	return { course, setCourse, saveCourse, banner, cancelCourse, deleteCourse, setCourseSaved, errors }
+	return { course, setCourse, saveCourse, banner, cancelCourse, deleteCourse, courseSaved, errors }
 
 }
 
