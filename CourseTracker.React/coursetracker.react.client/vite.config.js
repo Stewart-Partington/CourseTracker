@@ -51,6 +51,10 @@ export default defineConfig({
                 target,
                 secure: false
             },
+            '^/api/courses': {
+                target,
+                secure: false
+            },
         },
         port: 5173,
         https: {

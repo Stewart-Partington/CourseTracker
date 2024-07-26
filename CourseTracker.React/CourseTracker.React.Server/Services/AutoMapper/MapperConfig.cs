@@ -9,6 +9,12 @@ using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
 using CourseTracker.Domain.SchoolYears;
+using CourseTracker.React.Server.Courses.Models;
+using CourseTracker.Application.Courses.Queries.GetCourseDetail;
+using CourseTracker.Application.Courses.Queries.GetCoursesList;
+using CourseTracker.Application.Courses.Commands.CreateCourse;
+using CourseTracker.Application.Courses.Commands.UpdateCourse;
+using CourseTracker.Domain.Courses;
 
 namespace CourseTracker.React.Server.Services.AutoMapper
 {
@@ -32,6 +38,14 @@ namespace CourseTracker.React.Server.Services.AutoMapper
             CreateMap<VmSchoolYear, SchoolYear>();
             CreateMap<SchoolYearDetailModel, VmSchoolYear>();
             CreateMap<SchoolYearsListItemModel, SchoolYear>();
+
+            // Course
+            CreateMap<VmCourse, CourseDetailModel>();
+            CreateMap<VmCourse, CreateCourseModel>();
+            CreateMap<VmCourse, UpdateCourseModel>();
+            CreateMap<VmCourse, Course>();
+            CreateMap<CourseDetailModel, VmCourse>();
+            CreateMap<CoursesListItemModel, Course>();
 
         }
 
