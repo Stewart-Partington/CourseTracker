@@ -55,6 +55,10 @@ export default defineConfig({
                 target,
                 secure: false
             },
+            '^/api/assessments': {
+                target,
+                secure: false
+            },
         },
         port: 5173,
         https: {

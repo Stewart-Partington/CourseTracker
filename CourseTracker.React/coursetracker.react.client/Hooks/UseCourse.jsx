@@ -15,7 +15,7 @@ const useCourse = (navValues, navigate) => {
 			const course = await response.json();
 			console.log(course);
 			setCourse(course);
-			setBanner(course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course:" + " " + course.year);
+			setBanner(course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course:" + " " + course.name);
 			setCourseSaved(course.id == "00000000-0000-0000-0000-000000000000" ? false : true);
 		}
 		fetchCourse();

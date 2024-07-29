@@ -4,6 +4,7 @@ import useCourse from "../../Hooks/UseCourse";
 import Banner from "../Banner";
 import { bannerContext } from "../App";
 import CourseForm from "./CourseForm";
+import AssessmentsTable from "../Assessments/AssessmentsTable";
 
 const SchoolYear = () => {
 
@@ -23,7 +24,9 @@ const SchoolYear = () => {
             </bannerContext.Provider>
             <CourseForm key={course.id} course={course} setCourse={setCourse} saveCourse={saveCourse}
                 cancelCourse={cancelCourse} deleteCourse={deleteCourse} courseSaved={courseSaved} errors={errors} />
-            
+            {courseSaved && (
+                <AssessmentsTable courseId={course.id} />
+            )}
         </>
 
     return (
