@@ -15,6 +15,12 @@ using CourseTracker.Application.Courses.Queries.GetCoursesList;
 using CourseTracker.Application.Courses.Commands.CreateCourse;
 using CourseTracker.Application.Courses.Commands.UpdateCourse;
 using CourseTracker.Domain.Courses;
+using CourseTracker.Domain.Assessments;
+using CourseTracker.React.Server.Assesments.Models;
+using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
+using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
+using CourseTracker.Application.Assessments.Commands.CreateAssessment;
+using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 
 namespace CourseTracker.React.Server.Services.AutoMapper
 {
@@ -46,6 +52,14 @@ namespace CourseTracker.React.Server.Services.AutoMapper
             CreateMap<VmCourse, Course>();
             CreateMap<CourseDetailModel, VmCourse>();
             CreateMap<CoursesListItemModel, Course>();
+
+            // Assessment
+            CreateMap<VmAssessment, AssessmentDetailModel>();
+            CreateMap<VmAssessment, CreateAssessmentModel>();
+            CreateMap<VmAssessment, UpdateAssessmentModel>();
+            CreateMap<VmAssessment, Assessment>();
+            CreateMap<AssessmentDetailModel, VmAssessment>();
+            CreateMap<AssessmentsListItemModel, Assessment>();
 
         }
 
