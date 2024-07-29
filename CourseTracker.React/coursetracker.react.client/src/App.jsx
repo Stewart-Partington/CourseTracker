@@ -18,7 +18,7 @@ function App() {
                     NavValues.Student.Id = null;
                     NavValues.SchoolYear.Id = null;
                     NavValues.Course.Id = null;
-                    NavValues.Assesment.Id = null;
+                    NavValues.Assessment.Id = null;
 
                     break;
 
@@ -28,7 +28,7 @@ function App() {
                     NavValues.Student.Id = id;
                     NavValues.SchoolYear.Id = null;
                     NavValues.Course.Id = null;
-                    NavValues.Assesment.Id = null;
+                    NavValues.Assessment.Id = null;
 
                     break;
 
@@ -37,7 +37,7 @@ function App() {
                     NavValues.NavLevel = NavLevels.schoolYear;
                     NavValues.SchoolYear.Id = id;
                     NavValues.Course.Id = null;
-                    NavValues.Assesment.Id = null;
+                    NavValues.Assessment.Id = null;
 
                     break;
 
@@ -45,14 +45,14 @@ function App() {
 
                     NavValues.NavLevel = NavLevels.course;
                     NavValues.Course.Id = id;
-                    NavValues.Assesment.Id = null;
+                    NavValues.Assessment.Id = null;
 
                     break;
 
                 case NavLevels.assessment:
 
-                    NavValues.navLevel = NavLevels.assessment;
-                    NavValues.Assesment.Id = id;
+                    NavValues.NavLevel = NavLevels.assessment;
+                    NavValues.Assessment.Id = id;
 
                     break;
 
@@ -62,7 +62,7 @@ function App() {
                     NavValues.Student.Id = null;
                     NavValues.SchoolYear.Id = null;
                     NavValues.Course.Id = null;
-                    NavValues.Assesment.Id = null;
+                    NavValues.Assessment.Id = null;
 
                     break;
 

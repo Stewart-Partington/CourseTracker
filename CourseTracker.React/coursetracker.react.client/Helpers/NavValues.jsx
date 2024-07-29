@@ -14,7 +14,7 @@ const NavValues = {
 		Id: null,
 		Name: null,
 	},
-	Assesment: {
+	Assessment: {
 		Id: null,
 		Name: null,
 	}

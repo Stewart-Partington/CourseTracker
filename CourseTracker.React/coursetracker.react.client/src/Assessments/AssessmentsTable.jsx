@@ -1,9 +1,9 @@
-import useAssessment from "../../Hooks/UseAssessments";
+import useAssessments from "../../Hooks/UseAssessments";
 import AssessmentRow from "./AssessmentRow";
 
 const AssessmentsTable = ({ courseId }) => {
 
-	const { assessments, addAssessment, editAssessment } = useAssessment(courseId);
+	const { assessments, addAssessment, editAssessment } = useAssessments(courseId);
 
     const contents =
         <>

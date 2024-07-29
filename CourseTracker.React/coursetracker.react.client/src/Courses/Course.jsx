@@ -6,7 +6,7 @@ import { bannerContext } from "../App";
 import CourseForm from "./CourseForm";
 import AssessmentsTable from "../Assessments/AssessmentsTable";
 
-const SchoolYear = () => {
+const Course = () => {
 
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
@@ -39,4 +39,4 @@ const SchoolYear = () => {
 
 };
 
-export default SchoolYear;
+export default Course;
