@@ -55,7 +55,7 @@ const useAssessment = (navValues, navigate) => {
 		navigate(NavLevels.course, navValues.Course.Id);
 	}
 
-	const postAssessmentApi = async (course) => {
+	const postAssessmentApi = async (assessment) => {
 
 		var result = null;
 
@@ -65,7 +65,7 @@ const useAssessment = (navValues, navigate) => {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(course)
+			body: JSON.stringify(assessment)
 		})
 			.then((response) => response.json())
 			.then((responseData) => {

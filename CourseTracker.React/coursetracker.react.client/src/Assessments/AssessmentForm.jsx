@@ -2,6 +2,18 @@ import { useState } from 'react';
 
 const AssessmentForm = ({ assessment, setAssessment, saveAssessment, cancelAssessment, deleteAssessment, assessmentSaved, errors }) => {
 
+    const [typeOption, setTypeOption] = useState("Please Select");
+    const typeOptions = [
+        { value: "", label: "Please Select" },
+        { value: 1, label: "Assignment" },
+        { value: 2, label: "Test" },
+        { value: 3, label: "Exam" }
+    ];
+    const handleTypeSelect = e => {
+        assessment.assessmentType = parseInt(e.target.value);
+        setAssessment(assessment);
+    };
+
     const onSubmitClick = () => {
         saveAssessment(assessment);
     }
@@ -28,18 +40,21 @@ const AssessmentForm = ({ assessment, setAssessment, saveAssessment, cancelAsses
                     </div>
                 </div>
 
-                {/*<div className="row form-group">*/}
-                {/*    <div className="col-md-12 fw-bold">*/}
-                {/*        <label htmlFor="semester">Semester</label>*/}
-                {/*    </div>*/}
-                {/*    <div className="col-md-12">*/}
-                {/*        {errors.semester && <div className="text-danger">{errors.semester}</div>}*/}
-                {/*    </div>*/}
-                {/*    <div className="col-md-12">*/}
-                {/*        <input id="semester" className="form-control w-50" type="number" value={assessment.semester}*/}
-                {/*            onChange={(e) => setAssessment({ ...assessment, semester: e.target.value })} />*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div className="row form-group">
+                    <div className="col-md-12 fw-bold">
+                        <label htmlFor="assessmentType" className="required">Assessment Type</label>
+                    </div>
+                    <div className="col-md-12">
+                        {errors.assessmentType && <div className="text-danger">{errors.assessmentType}</div>}
+                    </div>
+                    <div className="col-md-12">
+                        <select value={typeOption} onChange={handleTypeSelect} className="form-control w-50">
+                            {typeOptions.map((option) => (
+                                <option value={option.value}>{option.label}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
 
                 {/*<div className="row form-group">*/}
                 {/*    <div className="col-md-12 fw-bold">*/}
