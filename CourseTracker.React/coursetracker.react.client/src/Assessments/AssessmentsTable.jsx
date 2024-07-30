@@ -7,7 +7,7 @@ const AssessmentsTable = ({ courseId }) => {
 
     const contents =
         <>
-            <section className="panel panel-default border p-3 mt-3">
+            <section className="panel panel-default border p-3 mt-3 row">
 
                 <div className="panel-heading">
                     <h3 className="panel-title">Assessments</h3>
