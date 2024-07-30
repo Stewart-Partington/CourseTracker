@@ -39,14 +39,14 @@ namespace CourseTracker.React.Server.SchoolYears
             return _listQuery.Execute(studentId);
         }
 
-        [HttpGet("{id}/{getChildren}")]
-        public ActionResult<VmSchoolYear> Get(Guid id, bool getChildren = false)
+        [HttpGet("{id}/{studentId}")]
+        public ActionResult<VmSchoolYear> Get(Guid id, Guid studentId)
         {
 
             VmSchoolYear result = null;
 
             if (id == Guid.Empty)
-                result = new VmSchoolYear();
+                result = new VmSchoolYear() { StudentId = studentId };
             else
             {
                 SchoolYearDetailModel schoolYearDetail = _detailQuery.Execute(id);
@@ -88,7 +88,7 @@ namespace CourseTracker.React.Server.SchoolYears
         }
 
         [HttpDelete]
-        public async Task DeleteAssessmentCommand(Guid id)
+        public async Task Delete(Guid id)
         {
             await _deleteCommand.ExecuteAsync(id);
         }

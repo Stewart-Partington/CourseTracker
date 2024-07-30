@@ -3,6 +3,7 @@ using CourseTracker.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CourseTracker.Domain.Assessments;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,7 @@ namespace CourseTracker.Application.Assessments.Queries.GetAssessmentList
 					Id = x.Id,
 					CourseId = x.CourseId,
 					AssessmentType = x.AssessmentType,
+					AssessmentTypeDescription = x.AssessmentType.ToString(),
 					Name = x.Name,
 					Grade = x.Grade,
 					Weight = x.Weight

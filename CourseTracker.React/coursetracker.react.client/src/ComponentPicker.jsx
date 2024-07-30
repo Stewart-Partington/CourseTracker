@@ -1,17 +1,23 @@
 import Students from "./Students/Students";
 import Student from "./Student/Student";
 import SchoolYear from "./SchoolYears/SchoolYear";
-import NavValues from "../Helpers/NavValues";
+import Course from "./Courses/Course";
+import Assessment from "./Assessments/Assessment";
+import NavLevels from "../Helpers/NavLevels";
 
-const ComponentPicker = ({ currentNavLocation }) => {
+const ComponentPicker = ({ navLevel }) => {
 
-	switch (currentNavLocation) {
-		case NavValues.students:
+	switch (navLevel) {
+		case NavLevels.students:
 			return <Students />;
-		case NavValues.student:
+		case NavLevels.student:
 			return <Student />;
-		case NavValues.schoolYear:
+		case NavLevels.schoolYear:
 			return <SchoolYear />;
+		case NavLevels.course:
+			return <Course />;
+		case NavLevels.assessment:
+			return <Assessment />;
 		default:
 			return <Students />;
 	}

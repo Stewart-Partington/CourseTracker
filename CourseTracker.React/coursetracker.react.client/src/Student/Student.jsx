@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { navContext } from "../App";
 import useStudent from "../../Hooks/UseStudent";
 import Banner from "../Banner";
 import StudentForm from "./StudentForm";
@@ -6,7 +8,9 @@ import YearsTable from "../SchoolYears/YearsTable";
 
 const Student = () => {
 
-    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors } = useStudent();
+    const { navValues: navValues } = useContext(navContext);
+    const { navigate } = useContext(navContext);
+    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors } = useStudent(navValues, navigate);
 
     const contents = student.id === undefined
         ?

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import NavValues from "../Helpers/NavValues";
+import NavLevels from "../Helpers/NavLevels";
 import { navContext } from "../src/App";
 
 const useSchoolYears = (studentId) => {
@@ -21,11 +21,11 @@ const useSchoolYears = (studentId) => {
 	}, []);
 
 	const addSchoolYear = () => {
-		navigate(NavValues.schoolYear, "00000000-0000-0000-0000-000000000000");
+		navigate(NavLevels.schoolYear, "00000000-0000-0000-0000-000000000000");
 	}
 
 	const editSchoolYear = (id) => {
-		navigate(NavValues.schoolYear, id);
+		navigate(NavLevels.schoolYear, id);
 	}
 
 	return { schoolYears, setSchoolYears, addSchoolYear, editSchoolYear };

@@ -1,20 +1,17 @@
-import { useEffect, useState, useContext } from 'react';
-import { navContext } from "../src/App";
-import NavValues from "../Helpers/NavValues";
+import { useEffect, useState } from 'react';
+import NavLevels from "../Helpers/NavLevels";
 
-const useSchoolYear = () => {
+const useSchoolYear = (navValues, navigate) => {
 
 	const [schoolYear, setSchoolYear] = useState({});
 	const [banner, setBanner] = useState("Getting School Year");
 	const [errors, setErrors] = useState({});
 	const [schoolYearSaved, setSchoolYearSaved] = useState(schoolYear.id != "00000000-0000-0000-0000-000000000000");
-	const { param: id } = useContext(navContext);
-	const { navigate } = useContext(navContext);
 
 	useEffect(() => {
 
 		const fetchSchoolYear = async () => {
-			const response = await fetch('/api/schoolyears/' + id + "/false");
+			const response = await fetch('/api/schoolyears/' + navValues.SchoolYear.Id + "/" + navValues.Student.Id);
 			const schoolYear = await response.json();
 			console.log(schoolYear);
 			setSchoolYear(schoolYear);
@@ -27,15 +24,11 @@ const useSchoolYear = () => {
 
 	const saveSchoolYear = async (schoolYear) => {
 
-		// Needs a studentid. Create a Nav object for:
-		// Using parent ids for post calls.
-		// Breadcrumbs.
-		// Nav library.
 		var postResponse = await postSchoolYearApi(schoolYear);
 
 		if (postResponse.status === undefined) {
 			schoolYear.id = postResponse;
-			setSchoolYear(student);
+			setSchoolYear(schoolYear);
 			setSchoolYearSaved(true);
 		}
 		else {
@@ -44,7 +37,7 @@ const useSchoolYear = () => {
 
 			if (postResponse.errors.Index !== undefined)
 				newErrors.index = postResponse.errors.Index[0];
-			if (postResponse.errors.year !== undefined)
+			if (postResponse.errors.Year !== undefined)
 				newErrors.year = postResponse.errors.Year[0];
 
 			setErrors(newErrors);
@@ -52,6 +45,15 @@ const useSchoolYear = () => {
 		}
 
 	};
+
+	const cancelSchoolYear = () => {
+		navigate(NavLevels.student, navValues.Student.Id);
+	}
+
+	const deleteSchoolYear = (id) => {
+		deleteSchoolYearApi(id);
+		navigate(NavLevels.student, navValues.Student.Id);
+	}
 
 	const postSchoolYearApi = async (schoolYear) => {
 
@@ -75,8 +77,17 @@ const useSchoolYear = () => {
 
 	};
 
-	return { schoolYear, setSchoolYear, saveSchoolYear, banner, errors }
-	//return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors };
+	const deleteSchoolYearApi = async (id) => {
+		await fetch('api/schoolyears?id=' + id, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+	}
+
+	return { schoolYear, setSchoolYear, saveSchoolYear, banner, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors }
 
 };
 

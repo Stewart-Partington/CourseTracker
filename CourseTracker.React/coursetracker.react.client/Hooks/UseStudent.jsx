@@ -1,20 +1,17 @@
-import { useEffect, useState, useContext } from 'react';
-import { navContext } from "../src/App";
-import NavValues from "../Helpers/NavValues";
+import { useEffect, useState } from 'react';
+import NavLevels from "../Helpers/NavLevels";
 
-const useStudent = () => {
+const useStudent = (navValues, navigate) => {
 
 	const [student, setStudent] = useState({});
 	const [banner, setBanner] = useState("Getting Student");
 	const [errors, setErrors] = useState({});
 	const [studentSaved, setStudentSaved] = useState(student.id != "00000000-0000-0000-0000-000000000000");
-	const { param: id } = useContext(navContext);
-	const { navigate } = useContext(navContext);
 
     useEffect(() => {
 
         const fetchStudent = async () => {
-            const response = await fetch('/api/students/' + id);
+			const response = await fetch('/api/students/' + navValues.Student.Id);
             const student = await response.json();
             console.log(student);
 			setStudent(student);
@@ -52,12 +49,12 @@ const useStudent = () => {
 	};
 
 	const cancelStudent = () => {
-		navigate(NavValues.students);
+		navigate(NavLevels.students, null);
 	}
 
 	const deleteStudent = (id) => {
 		deleteStudentApi(id);
-		navigate(NavValues.students);
+		navigate(NavLevels.students, null);
 	}
 
 	const postStudentApi = async (student) => {
