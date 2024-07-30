@@ -15,7 +15,7 @@ namespace CourseTracker.React.Server.Assesments.Models
         public AssessmentTypes? AssessmentType { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         //[Required]
         public double? Grade { get; set; }
@@ -23,7 +23,7 @@ namespace CourseTracker.React.Server.Assesments.Models
         //[Required]
         public double? Weight { get; set; }
 
-        public string? Notes { get; set; }
+        public string? Notes { get; set; } = string.Empty;
 
     }
 
