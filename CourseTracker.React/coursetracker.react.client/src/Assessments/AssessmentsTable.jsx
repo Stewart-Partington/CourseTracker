@@ -36,7 +36,7 @@ const AssessmentsTable = ({ courseId }) => {
                             </thead>
                             <tbody>
                                 {
-                                    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment} assessment={assessment} />) : "<tr>loading...</tr>"
+                                    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment} editAssessment={editAssessment} />) : "<tr>loading...</tr>"
                                 }
                             </tbody>
                         </table>

@@ -36,7 +36,9 @@ namespace CourseTracker.React.Server.Assesments
         [HttpGet("{courseId}")]
         public ActionResult<List<AssessmentsListItemModel>> Get(Guid courseId)
         {
-            return _listQuery.Execute(courseId);
+            var result =  _listQuery.Execute(courseId);
+
+            return result;
         }
 
         [HttpGet("{id}/{courseId}")]
