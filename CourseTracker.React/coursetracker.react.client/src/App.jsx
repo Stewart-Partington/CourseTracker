@@ -7,7 +7,7 @@ import NavValues from "../Helpers/NavValues";
 const navContext = React.createContext(NavLevels.students);
 const bannerContext = React.createContext({ bannerText: "" });
 
-function App() {
+const App = () => {
 
     const navigate = useCallback(
         (navLevel, id) => {

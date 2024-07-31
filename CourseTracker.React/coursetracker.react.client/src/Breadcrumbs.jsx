@@ -72,7 +72,7 @@ const Breadcrumbs = () => {
                         <a href="#" data-navlevel={NavLevels.schoolYear} data-id={navValues.SchoolYear.Id} >School Year: {navValues.Student.Id}</a>
                     </li>
                     <li className="breadcrumb-item" onClick={handleNavClick}>
-                        <a href="#" data-navlevel={NavLevels.course} data-id={navValues.Course.Id} >School Year: {navValues.Course.Id}</a>
+                        <a href="#" data-navlevel={NavLevels.course} data-id={navValues.Course.Id} >Course: {navValues.Course.Id}</a>
                     </li>
                     <li className="breadcrumb-item active">Assessment: {navValues.Assessment.Id} </li>
                 </>
