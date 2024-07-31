@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import ComponentPicker from "./ComponentPicker";;
+import ComponentPicker from "./ComponentPicker";
+import Breadcrumbs from "./Breadcrumbs";
 import NavLevels from "../Helpers/NavLevels";
 import NavValues from "../Helpers/NavValues";
 
@@ -78,7 +79,8 @@ function App() {
     return (
 
         <div className="row">
-            <navContext.Provider value={nav}>    
+            <navContext.Provider value={nav}>
+                <Breadcrumbs navValues={nav} />
                 <ComponentPicker navLevel={nav.navValues.NavLevel} />
             </navContext.Provider>
         </div>
