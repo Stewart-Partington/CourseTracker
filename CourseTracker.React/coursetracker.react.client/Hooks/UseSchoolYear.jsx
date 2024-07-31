@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 
-const useSchoolYear = (navValues, navigate) => {
+const useSchoolYear = (navValues, navigate, navSetter) => {
 
 	const [schoolYear, setSchoolYear] = useState({});
 	const [banner, setBanner] = useState("Getting School Year");
@@ -17,6 +17,10 @@ const useSchoolYear = (navValues, navigate) => {
 			setSchoolYear(schoolYear);
 			setBanner(schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : "School Year:" + " " + schoolYear.year);
 			setSchoolYearSaved(schoolYear.id == "00000000-0000-0000-0000-000000000000" ? false : true);
+
+			navValues.SchoolYear.Name = schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : schoolYear.year;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		fetchSchoolYear();
 

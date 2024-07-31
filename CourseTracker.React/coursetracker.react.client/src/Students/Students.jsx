@@ -8,6 +8,7 @@ import { bannerContext } from "../App";
 const Students = () => {
 
     const { navigate } = useContext(navContext);
+    const { navSetter } = useContext(navContext);
     const { students, banner, addStudent, editStudent } = useStudents(navigate);
 
     const contents = students === undefined

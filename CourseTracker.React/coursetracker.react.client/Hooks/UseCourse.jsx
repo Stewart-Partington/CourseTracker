@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 
-const useCourse = (navValues, navigate) => {
+const useCourse = (navValues, navigate, navSetter) => {
 
 	const [course, setCourse] = useState({});
 	const [banner, setBanner] = useState("Getting Course");
@@ -17,6 +17,10 @@ const useCourse = (navValues, navigate) => {
 			setCourse(course);
 			setBanner(course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course:" + " " + course.name);
 			setCourseSaved(course.id == "00000000-0000-0000-0000-000000000000" ? false : true);
+
+			navValues.Course.Name = course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : course.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		fetchCourse();
 

@@ -4,12 +4,15 @@ import Breadcrumbs from "./Breadcrumbs";
 import NavLevels from "../Helpers/NavLevels";
 import NavValues from "../Helpers/NavValues";
 
-const navContext = React.createContext(NavLevels.students);
+
+const navContext = React.createContext({ nav: null, setNav: () => { } });
 const bannerContext = React.createContext({ bannerText: "" });
 
 const App = () => {
 
-    const navigate = useCallback(
+    const navAndSetter = { nav: null, setNav: () => { } };
+
+    const Navigate = useCallback(
         (navLevel, id) => {
 
             switch (navLevel) {
@@ -69,13 +72,15 @@ const App = () => {
 
             }
 
-            setNav({ navValues: NavValues, navigate })
+            const navAndSetter = { nav: { navValues: NavValues, Navigate }, setNav: setNav };
+
+            setNav({ navValues: NavValues, navigate: Navigate, navSetter: setNav });
 
         }, []
     );
 
-    const [nav, setNav] = useState({ navValues: NavValues, navigate });
-
+    const [nav, setNav] = useState({ navValues: NavValues, navigate: Navigate, navSetter: null });
+    
     return (
 
         <div className="row">

@@ -10,7 +10,8 @@ const SchoolYear = () => {
 
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
-    const { schoolYear, setSchoolYear, saveSchoolYear, banner, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors } = useSchoolYear(navValues, navigate);
+    const { navSetter } = useContext(navContext);
+    const { schoolYear, setSchoolYear, saveSchoolYear, banner, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors } = useSchoolYear(navValues, navigate, navSetter);
 
     const contents = schoolYear.id === undefined
         ?

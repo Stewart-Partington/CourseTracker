@@ -10,7 +10,8 @@ const Student = () => {
 
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
-    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors } = useStudent(navValues, navigate);
+    const { navSetter } = useContext(navContext);
+    const { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors } = useStudent(navValues, navigate, navSetter);
 
     const contents = student.id === undefined
         ?

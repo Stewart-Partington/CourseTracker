@@ -9,7 +9,8 @@ const Assessment = () => {
 
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
-    const { assessment, setAssessment, saveAssessment, banner, cancelAssessment, deleteAssessment, assessmentSaved, errors } = useAssessment(navValues, navigate);
+    const { navSetter } = useContext(navContext);
+    const { assessment, setAssessment, saveAssessment, banner, cancelAssessment, deleteAssessment, assessmentSaved, errors } = useAssessment(navValues, navigate, navSetter);
 
     const contents = assessment.id === undefined
         ?
