@@ -80,7 +80,7 @@ function App() {
 
         <div className="row">
             <navContext.Provider value={nav}>
-                <Breadcrumbs navValues={nav} />
+                <Breadcrumbs />
                 <ComponentPicker navLevel={nav.navValues.NavLevel} />
             </navContext.Provider>
         </div>
