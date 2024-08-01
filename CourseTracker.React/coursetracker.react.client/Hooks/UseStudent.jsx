@@ -18,7 +18,7 @@ const useStudent = (navValues, navigate, navSetter) => {
 			setBanner(student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student:" + " " + student.firstName);
 			setStudentSaved(student.id == "00000000-0000-0000-0000-000000000000" ? false : true);
 
-			navValues.Student.Name = student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : student.firstName;
+			navValues.Student.Name = student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student: " + student.firstName;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 
         }
@@ -34,6 +34,11 @@ const useStudent = (navValues, navigate, navSetter) => {
 			student.id = postResponse;
 			setStudent(student);
 			setStudentSaved(true);
+
+			navValues.Student.Id = student.id;
+			navValues.Student.Name = "Student: " + student.firstName;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 

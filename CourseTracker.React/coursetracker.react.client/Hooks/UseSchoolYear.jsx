@@ -18,7 +18,7 @@ const useSchoolYear = (navValues, navigate, navSetter) => {
 			setBanner(schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : "School Year:" + " " + schoolYear.year);
 			setSchoolYearSaved(schoolYear.id == "00000000-0000-0000-0000-000000000000" ? false : true);
 
-			navValues.SchoolYear.Name = schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : schoolYear.year;
+			navValues.SchoolYear.Name = schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : "School Year: " + schoolYear.year;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 
 		}
@@ -34,6 +34,10 @@ const useSchoolYear = (navValues, navigate, navSetter) => {
 			schoolYear.id = postResponse;
 			setSchoolYear(schoolYear);
 			setSchoolYearSaved(true);
+
+			navValues.SchoolYear.Name = "School Year: " + schoolYear.year;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 

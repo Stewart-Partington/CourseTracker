@@ -18,7 +18,7 @@ const useCourse = (navValues, navigate, navSetter) => {
 			setBanner(course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course:" + " " + course.name);
 			setCourseSaved(course.id == "00000000-0000-0000-0000-000000000000" ? false : true);
 
-			navValues.Course.Name = course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : course.name;
+			navValues.Course.Name = course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course: " + course.name;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 
 		}
@@ -34,6 +34,10 @@ const useCourse = (navValues, navigate, navSetter) => {
 			course.id = postResponse;
 			setCourse(course);
 			setCourseSaved(true);
+
+			navValues.Course.Name = "Course: " + course.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 

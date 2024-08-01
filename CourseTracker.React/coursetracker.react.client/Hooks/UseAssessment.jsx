@@ -18,7 +18,7 @@ const useAssessment = (navValues, navigate, navSetter) => {
 			setBanner(assessment.id == "00000000-0000-0000-0000-000000000000" ? "Add new Assessment" : "Assessment:" + " " + assessment.name);
 			setAssessmentSaved(assessment.id == "00000000-0000-0000-0000-000000000000" ? false : true);
 
-			navValues.Assessment.Name = assessment.id == "00000000-0000-0000-0000-000000000000" ? "Add new Assessment" : assessment.name;
+			navValues.Assessment.Name = assessment.id == "00000000-0000-0000-0000-000000000000" ? "Add new Assessment" : "Assessment: " + assessment.name;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 
 		}
@@ -34,6 +34,10 @@ const useAssessment = (navValues, navigate, navSetter) => {
 			assessment.id = postResponse;
 			setAssessment(assessment);
 			setAssessmentSaved(true);
+
+			navValues.Assessment.Name = "Assessment: " + assessment.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 

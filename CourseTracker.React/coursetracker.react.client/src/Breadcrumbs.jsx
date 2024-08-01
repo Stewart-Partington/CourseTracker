@@ -29,7 +29,7 @@ const Breadcrumbs = () => {
                     <li className="breadcrumb-item" onClick={handleNavClick}>
                         <a href="#" data-navlevel={NavLevels.students} data-id="">Students</a>
                     </li>
-                    <li className="breadcrumb-item active">Student: {navValues.Student.Name} </li>
+                    <li className="breadcrumb-item active">{navValues.Student.Name} </li>
                 </>
             )}
 
@@ -41,7 +41,7 @@ const Breadcrumbs = () => {
                     <li className="breadcrumb-item" onClick={handleNavClick}>
                         <a href="#" data-navlevel={NavLevels.student} data-id={navValues.Student.Id} >Student: {navValues.Student.Name}</a>
                     </li>
-                    <li className="breadcrumb-item active">School Year: {navValues.SchoolYear.Name} </li>
+                    <li className="breadcrumb-item active">{navValues.SchoolYear.Name} </li>
                 </>
             )}
 
@@ -56,7 +56,7 @@ const Breadcrumbs = () => {
                     <li className="breadcrumb-item" onClick={handleNavClick}>
                         <a href="#" data-navlevel={NavLevels.schoolYear} data-id={navValues.SchoolYear.Id} >School Year: {navValues.SchoolYear.Name}</a>
                     </li>
-                    <li className="breadcrumb-item active">Course: {navValues.Course.Name} </li>
+                    <li className="breadcrumb-item active">{navValues.Course.Name} </li>
                 </>
             )}
 
@@ -74,7 +74,7 @@ const Breadcrumbs = () => {
                     <li className="breadcrumb-item" onClick={handleNavClick}>
                         <a href="#" data-navlevel={NavLevels.course} data-id={navValues.Course.Id} >Course: {navValues.Course.Name}</a>
                     </li>
-                    <li className="breadcrumb-item active">Assessment: {navValues.Assessment.Name} </li>
+                    <li className="breadcrumb-item active">{navValues.Assessment.Name} </li>
                 </>
             )}
 
