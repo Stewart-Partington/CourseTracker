@@ -4,7 +4,6 @@ import NavLevels from "../Helpers/NavLevels";
 const useStudents = (navigate) => {
 
 	const [students, setStudents] = useState();
-	const [banner, setBanner] = useState("Getting Students...");
 
 	useEffect(() => {
 
@@ -13,7 +12,6 @@ const useStudents = (navigate) => {
 			if (response.status == 200) {
 				const students = await response.json();
 				setStudents(students);
-				setBanner("Students");
 			}
 		}
 		fetchStudents();
@@ -28,7 +26,7 @@ const useStudents = (navigate) => {
 		navigate(NavLevels.student, id);
 	}
 
-	return { students, setStudents, banner, addStudent, editStudent };
+	return { students, setStudents, addStudent, editStudent };
 
 };
 

@@ -4,9 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import NavLevels from "../Helpers/NavLevels";
 import NavValues from "../Helpers/NavValues";
 
-
 const navContext = React.createContext({ nav: null, setNav: () => { } });
-const bannerContext = React.createContext({ bannerText: "" });
 
 const App = () => {
 
@@ -94,5 +92,4 @@ const App = () => {
 }
 
 export { navContext };
-export { bannerContext };
 export default App;

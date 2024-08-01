@@ -4,7 +4,6 @@ import NavLevels from "../Helpers/NavLevels";
 const useStudent = (navValues, navigate, navSetter) => {
 
 	const [student, setStudent] = useState({});
-	const [banner, setBanner] = useState("Getting Student");
 	const [errors, setErrors] = useState({});
 	const [studentSaved, setStudentSaved] = useState(student.id != "00000000-0000-0000-0000-000000000000");
 
@@ -15,7 +14,6 @@ const useStudent = (navValues, navigate, navSetter) => {
             const student = await response.json();
             console.log(student);
 			setStudent(student);
-			setBanner(student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student:" + " " + student.firstName);
 			setStudentSaved(student.id == "00000000-0000-0000-0000-000000000000" ? false : true);
 
 			navValues.Student.Name = student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student: " + student.firstName;
@@ -98,7 +96,7 @@ const useStudent = (navValues, navigate, navSetter) => {
 		});
 	}
 
-	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors };
+	return { student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved, errors };
 
 };
 

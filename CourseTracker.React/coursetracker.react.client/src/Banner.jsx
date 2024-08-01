@@ -1,12 +1,12 @@
-import { useContext } from 'react';
-import { bannerContext } from "./App";
+//import { useContext } from 'react';
+//import { bannerContext } from "./App";
 
-const Banner = () => {
+const Banner = ({ heading }) => {
 
-	const { banner } = useContext(bannerContext);
+	//const { banner } = useContext(bannerContext);
 
 	return (
-		<h1>{banner}</h1>
+		<h1>{heading}</h1>
 	);
 
 };
