@@ -3,23 +3,21 @@ import { navContext } from "../App";
 import useStudents from "../../Hooks/UseStudents";
 import Banner from "../Banner";
 import StudentRow from "./StudentRow";
-import { bannerContext } from "../App";
 
 const Students = () => {
 
     const { navigate } = useContext(navContext);
-    const { students, banner, addStudent, editStudent } = useStudents(navigate);
+    const { navValues: navValues } = useContext(navContext);
+    const { students, addStudent, editStudent } = useStudents(navigate);
 
     const contents = students === undefined
         ?
-        <bannerContext.Provider value={{ banner }} >
-            <Banner />
-        </bannerContext.Provider>
+        <>
+            <Banner heading="Getting Students..." />
+        </>
         :
         <>
-            <bannerContext.Provider value={{ banner }} >
-                <Banner/>
-            </bannerContext.Provider>
+            <Banner heading="Students" />
             <button className="btn btn-primary" onClick={addStudent} >
                 Add Student
             </button>

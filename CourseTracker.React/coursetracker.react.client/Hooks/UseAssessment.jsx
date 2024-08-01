@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 
-const useAssessment = (navValues, navigate) => {
+const useAssessment = (navValues, navigate, navSetter) => {
 
 	const [assessment, setAssessment] = useState({});
 	const [banner, setBanner] = useState("Getting Assessment");
@@ -17,6 +17,10 @@ const useAssessment = (navValues, navigate) => {
 			setAssessment(assessment);
 			setBanner(assessment.id == "00000000-0000-0000-0000-000000000000" ? "Add new Assessment" : "Assessment:" + " " + assessment.name);
 			setAssessmentSaved(assessment.id == "00000000-0000-0000-0000-000000000000" ? false : true);
+
+			navValues.Assessment.Name = assessment.id == "00000000-0000-0000-0000-000000000000" ? "Add new Assessment" : "Assessment: " + assessment.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		fetchAssessment();
 
@@ -30,6 +34,10 @@ const useAssessment = (navValues, navigate) => {
 			assessment.id = postResponse;
 			setAssessment(assessment);
 			setAssessmentSaved(true);
+
+			navValues.Assessment.Name = "Assessment: " + assessment.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 

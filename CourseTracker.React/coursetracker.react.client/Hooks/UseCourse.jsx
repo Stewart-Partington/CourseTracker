@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 
-const useCourse = (navValues, navigate) => {
+const useCourse = (navValues, navigate, navSetter) => {
 
 	const [course, setCourse] = useState({});
-	const [banner, setBanner] = useState("Getting Course");
 	const [errors, setErrors] = useState({});
 	const [courseSaved, setCourseSaved] = useState(course.id != "00000000-0000-0000-0000-000000000000");
 
@@ -15,8 +14,11 @@ const useCourse = (navValues, navigate) => {
 			const course = await response.json();
 			console.log(course);
 			setCourse(course);
-			setBanner(course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course:" + " " + course.name);
 			setCourseSaved(course.id == "00000000-0000-0000-0000-000000000000" ? false : true);
+
+			navValues.Course.Name = course.id == "00000000-0000-0000-0000-000000000000" ? "Add new Course" : "Course: " + course.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		fetchCourse();
 
@@ -30,6 +32,10 @@ const useCourse = (navValues, navigate) => {
 			course.id = postResponse;
 			setCourse(course);
 			setCourseSaved(true);
+
+			navValues.Course.Name = "Course: " + course.name;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 
@@ -85,7 +91,7 @@ const useCourse = (navValues, navigate) => {
 		});
 	}
 
-	return { course, setCourse, saveCourse, banner, cancelCourse, deleteCourse, courseSaved, errors }
+	return { course, setCourse, saveCourse, cancelCourse, deleteCourse, courseSaved, errors }
 
 }
 

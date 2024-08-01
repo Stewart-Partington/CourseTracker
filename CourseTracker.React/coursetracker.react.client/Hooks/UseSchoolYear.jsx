@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 
-const useSchoolYear = (navValues, navigate) => {
+const useSchoolYear = (navValues, navigate, navSetter) => {
 
 	const [schoolYear, setSchoolYear] = useState({});
-	const [banner, setBanner] = useState("Getting School Year");
 	const [errors, setErrors] = useState({});
 	const [schoolYearSaved, setSchoolYearSaved] = useState(schoolYear.id != "00000000-0000-0000-0000-000000000000");
 
@@ -15,8 +14,11 @@ const useSchoolYear = (navValues, navigate) => {
 			const schoolYear = await response.json();
 			console.log(schoolYear);
 			setSchoolYear(schoolYear);
-			setBanner(schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : "School Year:" + " " + schoolYear.year);
 			setSchoolYearSaved(schoolYear.id == "00000000-0000-0000-0000-000000000000" ? false : true);
+
+			navValues.SchoolYear.Name = schoolYear.id == "00000000-0000-0000-0000-000000000000" ? "Add new School Year" : "School Year: " + schoolYear.year;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		fetchSchoolYear();
 
@@ -30,6 +32,10 @@ const useSchoolYear = (navValues, navigate) => {
 			schoolYear.id = postResponse;
 			setSchoolYear(schoolYear);
 			setSchoolYearSaved(true);
+
+			navValues.SchoolYear.Name = "School Year: " + schoolYear.year;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 
@@ -87,7 +93,7 @@ const useSchoolYear = (navValues, navigate) => {
 		});
 	}
 
-	return { schoolYear, setSchoolYear, saveSchoolYear, banner, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors }
+	return { schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors }
 
 };
 

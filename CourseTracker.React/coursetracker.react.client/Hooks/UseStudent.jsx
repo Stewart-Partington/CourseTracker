@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 
-const useStudent = (navValues, navigate) => {
+const useStudent = (navValues, navigate, navSetter) => {
 
 	const [student, setStudent] = useState({});
-	const [banner, setBanner] = useState("Getting Student");
 	const [errors, setErrors] = useState({});
 	const [studentSaved, setStudentSaved] = useState(student.id != "00000000-0000-0000-0000-000000000000");
 
@@ -15,8 +14,11 @@ const useStudent = (navValues, navigate) => {
             const student = await response.json();
             console.log(student);
 			setStudent(student);
-			setBanner(student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student:" + " " + student.firstName);
 			setStudentSaved(student.id == "00000000-0000-0000-0000-000000000000" ? false : true);
+
+			navValues.Student.Name = student.id == "00000000-0000-0000-0000-000000000000" ? "Add new Student" : "Student: " + student.firstName;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
         }
         fetchStudent();
 
@@ -30,6 +32,11 @@ const useStudent = (navValues, navigate) => {
 			student.id = postResponse;
 			setStudent(student);
 			setStudentSaved(true);
+
+			navValues.Student.Id = student.id;
+			navValues.Student.Name = "Student: " + student.firstName;
+			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
+
 		}
 		else {
 
@@ -89,7 +96,7 @@ const useStudent = (navValues, navigate) => {
 		});
 	}
 
-	return { student, setStudent, saveStudent, banner, cancelStudent, deleteStudent, studentSaved, errors };
+	return { student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved, errors };
 
 };
 
