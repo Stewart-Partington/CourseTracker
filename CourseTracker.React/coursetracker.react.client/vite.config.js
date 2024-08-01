@@ -59,6 +59,10 @@ export default defineConfig({
                 target,
                 secure: false
             },
+            '^/api/attachments': {
+                target,
+                secure: false
+            },
         },
         port: 5173,
         https: {
