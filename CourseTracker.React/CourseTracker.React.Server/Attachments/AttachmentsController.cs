@@ -60,7 +60,6 @@ namespace CourseTracker.React.Server.Attachments
         }
 
         [HttpPost]
-        [Route("Attachments")]
         public async Task<ActionResult<Guid>> Post(List<IFormFile> files)
         {
 

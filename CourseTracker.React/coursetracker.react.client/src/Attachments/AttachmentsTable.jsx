@@ -3,7 +3,16 @@ import useAttachments from "../../Hooks/UseAttachments";
 
 const AttachmentsTable = ({ assessmentId }) => {
 
-    const { attachments, addAttachment, editAttachment } = useAttachments(assessmentId);
+    const { attachments, setAttachments, addAttachment, editAttachment } = useAttachments(assessmentId);
+
+    function handleInputChange(e) {       
+        setAttachments(e.target.files[0]);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        addAttachment(e);
+    }
 
     const contents =
         <>
@@ -17,28 +26,34 @@ const AttachmentsTable = ({ assessmentId }) => {
 
                     <div className="row mt-3">
                         <div className="col-md-12">
-                            <button className="btn btn-primary" onClick={addAttachment}>
-                                Add Attachment
-                            </button>
+
+                            <form onSubmit={handleSubmit}>
+                                <input type="file" onChange={ handleInputChange } />
+                                <button type="submit">Upload</button>
+                            </form>
+
+                            {/*<button className="btn btn-primary" onClick={addAttachment}>*/}
+                            {/*    Add Attachment*/}
+                            {/*</button>*/}
                         </div>
                     </div>
 
-                    <div className="table-responsive">
-                        <table id="tblAssessments" className="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/*{*/}
-                                {/*    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment} editAssessment={editAssessment} />) : "<tr>loading...</tr>"*/}
-                                {/*}*/}
-                            </tbody>
-                        </table>
-                    </div>
+                    {/*<div className="table-responsive">*/}
+                    {/*    <table id="tblAssessments" className="table table-striped">*/}
+                    {/*        <thead>*/}
+                    {/*            <tr>*/}
+                    {/*                <th>&nbsp;</th>*/}
+                    {/*                <th>Name</th>*/}
+                    {/*                <th>Type</th>*/}
+                    {/*            </tr>*/}
+                    {/*        </thead>*/}
+                    {/*        <tbody>*/}
+                    {/*            */}{/*{*/}
+                    {/*            */}{/*    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment} editAssessment={editAssessment} />) : "<tr>loading...</tr>"*/}
+                    {/*            */}{/*}*/}
+                    {/*        </tbody>*/}
+                    {/*    </table>*/}
+                    {/*</div>*/}
 
                 </div>
 

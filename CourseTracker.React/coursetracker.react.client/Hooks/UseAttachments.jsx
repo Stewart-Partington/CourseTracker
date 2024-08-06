@@ -20,8 +20,29 @@ const useAttachments = (assessmentId) => {
 
 	}, []);
 
-	const addAttachment = () => {
-		navigate(NavLevels.attachment, "00000000-0000-0000-0000-000000000000");
+	const addAttachment = (e) => {
+		
+		const formData = new FormData();
+
+		formData.append('file', attachments);
+		formData.append('fileName', attachments.name);
+
+		fetch('api/attachments', {
+			method: 'POST',
+			headers: {
+				//"Content-Type": 'multipart/form-data'
+				//"Content-Type": undefined
+				'Accept': '*/*'
+			},
+			body: formData
+		}).then(
+			response => response.json() // if the response is a JSON object
+		).then(
+			success => console.log(success) // Handle the success response object
+		).catch(
+			error => console.log(error) // Handle the error response object
+		);
+
 	}
 
 	const editAttachment = (id) => {
