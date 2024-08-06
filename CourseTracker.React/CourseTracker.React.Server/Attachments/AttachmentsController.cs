@@ -60,19 +60,19 @@ namespace CourseTracker.React.Server.Attachments
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Post(List<IFormFile> files)
+        public async Task<ActionResult<Guid>> Post(IFormFile file)
         {
 
             Guid result = Guid.Empty;
 
-            if (files.Count == 1)
+            if (file != null)
             {
 
-                FormFile formFile = (FormFile)files[0];
-                Guid studentId = Guid.Empty;
-                Guid schoolYearId = Guid.Empty;
-                Guid courseId = Guid.Empty;
-                Guid assessmentId = Guid.Empty;
+                FormFile formFile = (FormFile)file;
+                Guid studentId = Guid.Parse(Request.Headers["studentid"][0]);
+                Guid schoolYearId = Guid.Parse(Request.Headers["schoolyearid"][0]);
+                Guid courseId = Guid.Parse(Request.Headers["courseid"][0]);
+                Guid assessmentId = Guid.Parse(Request.Headers["assessmentid"][0]);
 
                 if (formFile.Length > 0)
                 {

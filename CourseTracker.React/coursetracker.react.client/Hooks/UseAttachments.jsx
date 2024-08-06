@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import NavLevels from "../Helpers/NavLevels";
 import { navContext } from "../src/App";
 
-const useAttachments = (assessmentId) => {
+const useAttachments = (assessmentId, navValues) => {
 
 	const [attachments, setAttachments] = useState();
 	const { navigate } = useContext(navContext);
@@ -30,8 +30,10 @@ const useAttachments = (assessmentId) => {
 		fetch('api/attachments', {
 			method: 'POST',
 			headers: {
-				//"Content-Type": 'multipart/form-data'
-				//"Content-Type": undefined
+				'studentId': navValues.Student.Id,
+				'schoolYearId': navValues.SchoolYear.Id,
+				'courseId': navValues.Course.Id,
+				'assessmentId': navValues.Assessment.Id,
 				'Accept': '*/*'
 			},
 			body: formData

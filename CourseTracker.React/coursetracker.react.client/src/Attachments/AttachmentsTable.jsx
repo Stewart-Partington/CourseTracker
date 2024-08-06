@@ -1,9 +1,11 @@
 import useAttachments from "../../Hooks/UseAttachments";
-
+import { useContext } from 'react';
+import { navContext } from "../App";
 
 const AttachmentsTable = ({ assessmentId }) => {
 
-    const { attachments, setAttachments, addAttachment, editAttachment } = useAttachments(assessmentId);
+    const { navValues: navValues } = useContext(navContext);
+    const { attachments, setAttachments, addAttachment, editAttachment } = useAttachments(assessmentId, navValues); 
 
     function handleInputChange(e) {       
         setAttachments(e.target.files[0]);
