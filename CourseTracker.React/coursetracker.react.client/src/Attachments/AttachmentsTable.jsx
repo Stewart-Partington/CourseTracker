@@ -1,14 +1,15 @@
 import useAttachments from "../../Hooks/UseAttachments";
 import { useContext } from 'react';
 import { navContext } from "../App";
+import AttachmentRow from "./AttachmentRow";
 
 const AttachmentsTable = ({ assessmentId }) => {
 
     const { navValues: navValues } = useContext(navContext);
-    const { attachments, setAttachments, addAttachment, editAttachment } = useAttachments(assessmentId, navValues); 
+    const { attachments, setAttachment, addAttachment, editAttachment } = useAttachments(assessmentId, navValues); 
 
     function handleInputChange(e) {       
-        setAttachments(e.target.files[0]);
+        setAttachment(e.target.files[0]);
     }
 
     function handleSubmit(e) {
@@ -33,29 +34,25 @@ const AttachmentsTable = ({ assessmentId }) => {
                                 <input type="file" onChange={ handleInputChange } />
                                 <button type="submit">Upload</button>
                             </form>
-
-                            {/*<button className="btn btn-primary" onClick={addAttachment}>*/}
-                            {/*    Add Attachment*/}
-                            {/*</button>*/}
                         </div>
                     </div>
 
-                    {/*<div className="table-responsive">*/}
-                    {/*    <table id="tblAssessments" className="table table-striped">*/}
-                    {/*        <thead>*/}
-                    {/*            <tr>*/}
-                    {/*                <th>&nbsp;</th>*/}
-                    {/*                <th>Name</th>*/}
-                    {/*                <th>Type</th>*/}
-                    {/*            </tr>*/}
-                    {/*        </thead>*/}
-                    {/*        <tbody>*/}
-                    {/*            */}{/*{*/}
-                    {/*            */}{/*    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment} editAssessment={editAssessment} />) : "<tr>loading...</tr>"*/}
-                    {/*            */}{/*}*/}
-                    {/*        </tbody>*/}
-                    {/*    </table>*/}
-                    {/*</div>*/}
+                    <div className="table-responsive">
+                        <table id="tblAttachments" className="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    attachments != undefined ? attachments.map(attachment => <AttachmentRow key={attachment.id} attachment={attachment} editAttachment={editAttachment} />) : "<tr>loading...</tr>"
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
 

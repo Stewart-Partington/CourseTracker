@@ -4,6 +4,7 @@ import { navContext } from "../src/App";
 
 const useAttachments = (assessmentId, navValues) => {
 
+	const [attachment, setAttachment] = useState();
 	const [attachments, setAttachments] = useState();
 	const { navigate } = useContext(navContext);
 
@@ -24,8 +25,8 @@ const useAttachments = (assessmentId, navValues) => {
 		
 		const formData = new FormData();
 
-		formData.append('file', attachments);
-		formData.append('fileName', attachments.name);
+		formData.append('file', attachment);
+		formData.append('fileName', attachment.name);
 
 		fetch('api/attachments', {
 			method: 'POST',
@@ -51,7 +52,7 @@ const useAttachments = (assessmentId, navValues) => {
 		navigate(NavLevels.attachment, id);
 	}
 
-	return { attachments, setAttachments, addAttachment, editAttachment };
+	return { attachments, setAttachment, addAttachment, editAttachment };
 
 }
 
