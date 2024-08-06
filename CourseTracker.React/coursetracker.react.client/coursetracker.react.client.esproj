@@ -12,6 +12,7 @@
     <Folder Include="Hooks\" />
     <Folder Include="src\Courses\" />
     <Folder Include="src\Assessments\" />
+    <Folder Include="src\Attachments\" />
     <Folder Include="src\Student\" />
     <Folder Include="src\Students\" />
   </ItemGroup>
