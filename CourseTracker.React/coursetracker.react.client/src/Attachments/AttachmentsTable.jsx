@@ -6,7 +6,7 @@ import AttachmentRow from "./AttachmentRow";
 const AttachmentsTable = ({ assessmentId }) => {
 
     const { navValues: navValues } = useContext(navContext);
-    const { attachments, setAttachment, addAttachment, editAttachment } = useAttachments(assessmentId, navValues); 
+    const { attachments, setAttachment, addAttachment } = useAttachments(assessmentId, navValues); 
 
     function handleInputChange(e) {       
         setAttachment(e.target.files[0]);
@@ -48,7 +48,7 @@ const AttachmentsTable = ({ assessmentId }) => {
                             </thead>
                             <tbody>
                                 {
-                                    attachments != undefined ? attachments.map(attachment => <AttachmentRow key={attachment.id} attachment={attachment} editAttachment={editAttachment} />) : "<tr>loading...</tr>"
+                                    attachments != undefined ? attachments.map(attachment => <AttachmentRow key={attachment.id} attachment={attachment} navValues={navValues} />) : "<tr>loading...</tr>"
                                 }
                             </tbody>
                         </table>

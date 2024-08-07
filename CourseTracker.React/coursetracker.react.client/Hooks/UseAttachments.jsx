@@ -48,11 +48,18 @@ const useAttachments = (assessmentId, navValues) => {
 
 	}
 
-	const editAttachment = (id) => {
-		navigate(NavLevels.attachment, id);
+	const downloadAttachment = async (id) => {
+
+		await fetch('api/attachments/' + navValues.Assessment.Id + '/' + id, {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+
 	}
 
-	return { attachments, setAttachment, addAttachment, editAttachment };
+	return { attachments, setAttachment, addAttachment, downloadAttachment };
 
 }
 

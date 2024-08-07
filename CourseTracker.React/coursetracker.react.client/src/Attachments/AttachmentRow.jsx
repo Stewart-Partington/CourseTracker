@@ -1,15 +1,15 @@
 
-const AttachmentRow = ({ attachment, editAttachment }) => {
+const AttachmentRow = ({ attachment, downloadAttachment, navValues }) => {
 
-    const editAttachmentClick = (e) => {
+    const downloadAttachmentClick = (e) => {
         e.preventDefault();
-        editAttachment(attachment.id);
+        downloadAttachment(attachment.id);
     };
 
     return (
         <tr>
             <td>
-                <a href="" onClick={editAttachmentClick}>Download</a>
+                <a href={'api/attachments/' + navValues.Assessment.Id + '/' + attachment.id}>Download</a>
             </td>
             <td>{attachment.name}</td>
             <td>{attachment.type}</td>
