@@ -1,12 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
-import NavLevels from "../Helpers/NavLevels";
 import { navContext } from "../src/App";
 
 const useAttachments = (assessmentId, navValues) => {
 
 	const [attachment, setAttachment] = useState();
 	const [attachments, setAttachments] = useState();
-	const { navigate } = useContext(navContext);
+	//const { navigate } = useContext(navContext);
 
 	useEffect(() => {
 
@@ -39,27 +38,35 @@ const useAttachments = (assessmentId, navValues) => {
 			},
 			body: formData
 		}).then(
-			response => response.json() // if the response is a JSON object
+			response => response.json()
 		).then(
-			success => console.log(success) // Handle the success response object
+			success => console.log(success)
 		).catch(
-			error => console.log(error) // Handle the error response object
+			error => console.log(error) 
 		);
 
 	}
 
-	const downloadAttachment = async (id) => {
+	const deleteAttachment = async (id) => {
 
-		await fetch('api/attachments/' + navValues.Assessment.Id + '/' + id, {
+		var response = await fetch('api/attachments?id=' + id, {
+			method: "DELETE",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 			},
 		});
 
+		if (response.ok) {
+			var newAttachments = attachments.filter(function (attachment) {
+				return attachment.id !== id;
+			});
+			setAttachments(newAttachments);
+		}
+
 	}
 
-	return { attachments, setAttachment, addAttachment, downloadAttachment };
+	return { attachments, setAttachment, addAttachment, deleteAttachment };
 
 }
 

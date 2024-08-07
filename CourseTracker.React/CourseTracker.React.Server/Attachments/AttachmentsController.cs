@@ -103,10 +103,9 @@ namespace CourseTracker.React.Server.Attachments
         }
 
         [HttpDelete]
-        [Route("Attachments/{id}")]
         public async Task<ActionResult<HttpResponseMessage>> Delete(Guid id)
         {
-            await _deleteCommand.ExecuteAsync(id);
+            //await _deleteCommand.ExecuteAsync(id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
