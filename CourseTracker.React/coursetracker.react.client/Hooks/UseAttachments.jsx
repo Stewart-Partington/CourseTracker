@@ -20,14 +20,14 @@ const useAttachments = (assessmentId, navValues) => {
 
 	}, []);
 
-	const addAttachment = (e) => {
+	const addAttachment = async (e) => {
 		
 		const formData = new FormData();
 
 		formData.append('file', attachment);
 		formData.append('fileName', attachment.name);
 
-		fetch('api/attachments', {
+		await fetch('api/attachments', {
 			method: 'POST',
 			headers: {
 				'studentId': navValues.Student.Id,
@@ -44,6 +44,12 @@ const useAttachments = (assessmentId, navValues) => {
 		).catch(
 			error => console.log(error) 
 		);
+
+		const getResponse = await fetch('api/attachments/' + assessmentId);
+		if (getResponse.status == 200) {
+			const attachments = await getResponse.json();
+			setAttachments(attachments);
+		}
 
 	}
 
