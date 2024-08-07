@@ -31,8 +31,12 @@ const AttachmentsTable = ({ assessmentId }) => {
                         <div className="col-md-12">
 
                             <form onSubmit={handleSubmit}>
-                                <input type="file" onChange={ handleInputChange } />
-                                <button type="submit">Upload</button>
+                                <div>
+                                    <input type="file" onChange={handleInputChange} />
+                                </div>
+                                <div className="mt-3">
+                                    <button type="submit" className="btn btn-primary">Upload</button>
+                                </div>
                             </form>
                         </div>
                     </div>
