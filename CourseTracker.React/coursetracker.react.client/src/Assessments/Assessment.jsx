@@ -3,6 +3,7 @@ import { navContext } from "../App";
 import useAssessment from "../../Hooks/UseAssessment";
 import Banner from "../Banner";
 import AssessmentForm from "./AssessmentForm";
+import AttachmentsTable from '../Attachments/AttachmentsTable';
 
 const Assessment = () => {
 
@@ -19,7 +20,9 @@ const Assessment = () => {
             <Banner heading={navValues.Assessment.Name} />
             <AssessmentForm key={assessment.id} assessment={assessment} setAssessment={setAssessment} saveAssessment={saveAssessment}
                 cancelAssessment={cancelAssessment} deleteAssessment={deleteAssessment} assessmentSaved={assessmentSaved} errors={errors} />
-            
+            {assessmentSaved && (
+                <AttachmentsTable assessmentId={assessment.id} />
+            )}
         </>
 
     return (

@@ -4,7 +4,8 @@ const NavLevels = {
 	student: "Student",
 	schoolYear: "SchoolYear",
 	course: "Course",
-	assessment: "Assessment"
+	assessment: "Assessment",
+	attachment: "Attachment"
 };
 
 export default NavLevels;
