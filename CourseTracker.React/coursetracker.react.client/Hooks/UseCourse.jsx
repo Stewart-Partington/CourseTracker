@@ -33,6 +33,7 @@ const useCourse = (navValues, navigate, navSetter) => {
 			setCourse(course);
 			setCourseSaved(true);
 
+			navValues.Course.Id = course.id;
 			navValues.Course.Name = "Course: " + course.name;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 

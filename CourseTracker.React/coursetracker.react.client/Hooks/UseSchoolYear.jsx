@@ -33,6 +33,7 @@ const useSchoolYear = (navValues, navigate, navSetter) => {
 			setSchoolYear(schoolYear);
 			setSchoolYearSaved(true);
 
+			navValues.SchoolYear.Id = schoolYear.id;
 			navValues.SchoolYear.Name = "School Year: " + schoolYear.year;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 
