@@ -35,6 +35,7 @@ const useAssessment = (navValues, navigate, navSetter) => {
 			setAssessment(assessment);
 			setAssessmentSaved(true);
 
+			navValues.Assessment.Id = assessment.id;
 			navValues.Assessment.Name = "Assessment: " + assessment.name;
 			navSetter({ navValues: navValues, navigate: navigate, navSetter: navSetter });
 
