@@ -1,0 +1,6 @@
+@CourseTracker.React.Server_HostAddress = http://localhost:5250
+
+GET {{CourseTracker.React.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

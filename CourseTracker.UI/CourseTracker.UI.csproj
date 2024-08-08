@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Attachments\Models\**" />
+    <Content Remove="Attachments\Models\**" />
+    <EmbeddedResource Remove="Attachments\Models\**" />
+    <None Remove="Attachments\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CourseTracker.Application\CourseTracker.Application.csproj" />
   </ItemGroup>
 
@@ -17,10 +24,6 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Attachments\Models\" />
   </ItemGroup>
 
 </Project>

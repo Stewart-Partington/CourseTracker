@@ -17,6 +17,8 @@ namespace CourseTracker.Application.Assessments.Queries.GetAssessmentList
 
 		public AssessmentTypes AssessmentType { get; set; }
 
+		public string AssessmentTypeDescription { get; set; }
+
 		public string Name { get; set; }
 
 		public double Grade { get; set; }
