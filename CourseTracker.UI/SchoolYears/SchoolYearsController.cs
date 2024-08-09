@@ -97,7 +97,7 @@ namespace CourseTracker.UI.SchoolYears
             List<SchoolYearsListItemModel> schoolYearItemModels = await _dal.GetSchoolYears(StudentId);
             List<SchoolYear> existingSchoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
             SchoolYear postedSchoolYear = _mapper.Map<SchoolYear>(vmSchoolYear);
-            var spec = new DuplicateMovieSpecification(postedSchoolYear);
+            var spec = new DuplicateSchoolYearSpecification(postedSchoolYear);
 
             result = spec.IsSatisfiedBy(existingSchoolYears);
 

@@ -9,7 +9,7 @@ namespace CourseTracker.Domain.SchoolYears
 {
 
     [TestFixture]
-    public class DuplicateMovieSpecificationTests
+    public class DuplicateSchoolYearSpecificationTests
     {
 
         private List<SchoolYear> _schoolYears;
@@ -26,7 +26,7 @@ namespace CourseTracker.Domain.SchoolYears
 
             bool result;
             SchoolYear newSchoolYear = new SchoolYear() { Year = 2020, Id = Guid.NewGuid() };
-            var spec = new DuplicateMovieSpecification(newSchoolYear);
+            var spec = new DuplicateSchoolYearSpecification(newSchoolYear);
 
             result = spec.IsSatisfiedBy(_schoolYears);
 
@@ -40,7 +40,7 @@ namespace CourseTracker.Domain.SchoolYears
 
             bool result;
             SchoolYear newSchoolYear = new SchoolYear() { Year = 2020, Id = Guid.NewGuid() };
-            var spec = new DuplicateMovieSpecification(newSchoolYear);
+            var spec = new DuplicateSchoolYearSpecification(newSchoolYear);
 
             _schoolYears.Add(new SchoolYear() { Year = 2019, Id = Guid.NewGuid() });
             _schoolYears.Add(new SchoolYear() { Year = 2021, Id = Guid.NewGuid() });
@@ -59,7 +59,7 @@ namespace CourseTracker.Domain.SchoolYears
 
             bool result;
             SchoolYear newSchoolYear = new SchoolYear() { Year = 2020, Id = Guid.NewGuid() };
-            var spec = new DuplicateMovieSpecification(newSchoolYear);
+            var spec = new DuplicateSchoolYearSpecification(newSchoolYear);
 
             _schoolYears.Add(new SchoolYear() { Year = 2020, Id = Guid.NewGuid() });
             _schoolYears.Add(new SchoolYear() { Year = 2021, Id = Guid.NewGuid() });
@@ -79,7 +79,7 @@ namespace CourseTracker.Domain.SchoolYears
             bool result;
             Guid sameGuid = Guid.NewGuid();
             SchoolYear newSchoolYear = new SchoolYear() { Year = 2020, Id = sameGuid };
-            var spec = new DuplicateMovieSpecification(newSchoolYear);
+            var spec = new DuplicateSchoolYearSpecification(newSchoolYear);
 
             _schoolYears.Add(new SchoolYear() { Year = 2020, Id = sameGuid });
             _schoolYears.Add(new SchoolYear() { Year = 2021, Id = Guid.NewGuid() });

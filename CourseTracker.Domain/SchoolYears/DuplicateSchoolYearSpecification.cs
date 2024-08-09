@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace CourseTracker.Domain.SchoolYears
 {
 
-    public sealed class DuplicateMovieSpecification : SpecificationBase<List<SchoolYear>>
+    public sealed class DuplicateSchoolYearSpecification : SpecificationBase<List<SchoolYear>>
     {
 
         private readonly SchoolYear _schoolYear;
 
-        public DuplicateMovieSpecification(SchoolYear schoolYear)
+        public DuplicateSchoolYearSpecification(SchoolYear schoolYear)
         {
             _schoolYear = schoolYear;
         }
