@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="col-6">
-            @Html.EditorFor(x => x.Notes, "Question", new { inputControl = Html.TextAreaFor(x => x.Notes, new { @class = "form-control" }) })
+            @Html.EditorFor(x => x.Notes, "Question", new { inputControl = Html.TextAreaFor(x => x.Notes, new { @class = "form-control", rows = "5" }) })
         </div>
     </div>
 
