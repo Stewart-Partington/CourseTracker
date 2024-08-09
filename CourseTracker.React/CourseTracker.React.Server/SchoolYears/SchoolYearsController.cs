@@ -6,6 +6,8 @@ using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.DeleteSchoolYear;
 using Microsoft.AspNetCore.Mvc;
 using CourseTracker.React.Server.SchoolYears.Models;
+using CourseTracker.Domain.SchoolYears;
+using CourseTracker.Domain.Students;
 
 namespace CourseTracker.React.Server.SchoolYears
 {
@@ -58,11 +60,14 @@ namespace CourseTracker.React.Server.SchoolYears
         }
 
         [HttpPost]
-        public async Task<JsonResult> Post(VmSchoolYear vmSchoolYear)
+        public async Task<IActionResult> Post(VmSchoolYear vmSchoolYear)
         {
 
             if (ModelState.IsValid)
             {
+
+                if (!IsComplexValidationValid(vmSchoolYear))
+                    return ValidationProblem(ModelState);
 
                 Guid result;
 
@@ -84,6 +89,24 @@ namespace CourseTracker.React.Server.SchoolYears
             {
                 return null;
             }
+
+        }
+
+        private bool IsComplexValidationValid(VmSchoolYear vmSchoolYear)
+        {
+
+            bool result = false;
+            List<SchoolYearsListItemModel> schoolYearItemModels = _listQuery.Execute(vmSchoolYear.StudentId); ;
+            List<SchoolYear> existingSchoolYears = _mapper.Map<List<SchoolYear>>(schoolYearItemModels);
+            SchoolYear postedSchoolYear = _mapper.Map<SchoolYear>(vmSchoolYear);
+            var spec = new DuplicateSchoolYearSpecification(postedSchoolYear);
+
+            result = spec.IsSatisfiedBy(existingSchoolYears);
+
+            if (!result)
+                ModelState.AddModelError("Year", "This School Year already exists.");
+
+            return result;
 
         }
 

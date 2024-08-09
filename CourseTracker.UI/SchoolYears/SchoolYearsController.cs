@@ -3,16 +3,11 @@ using CourseTracker.Application.SchoolYears.Commands.CreateSchoolYear;
 using CourseTracker.Application.SchoolYears.Commands.UpdateSchoolYear;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearDetail;
 using CourseTracker.Application.SchoolYears.Queries.GetSchoolYearsList;
-using CourseTracker.Application.Students.Commands.CreateStudent;
-using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Domain.SchoolYears;
-using CourseTracker.Domain.Students;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
-using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.SchoolYears
