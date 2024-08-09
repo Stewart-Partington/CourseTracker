@@ -48,6 +48,8 @@ const useAssessment = (navValues, navigate, navSetter) => {
 				newErrors.name = postResponse.errors.Name[0];
 			if (postResponse.errors.AssessmentType !== undefined)
 				newErrors.assessmentType = postResponse.errors.AssessmentType[0];
+			if (postResponse.errors.Weight !== undefined)
+				newErrors.weight = postResponse.errors.Weight[0];
 
 			setErrors(newErrors);
 
