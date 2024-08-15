@@ -15,13 +15,12 @@ RUN apt-get install curl
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
 RUN apt-get -y install nodejs
 
-#FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["CourseTracker.React1/coursetracker.react1.client/nuget.config", "CourseTracker.React1/coursetracker.react1.client/"]
 COPY ["CourseTracker.React1/CourseTracker.React1.Server/CourseTracker.React1.Server.csproj", "CourseTracker.React1/CourseTracker.React1.Server/"]
-COPY ["CourseTracker.React1/coursetracker.react1.client/coursetracker.react1.client.esproj", "CourseTracker.React1/coursetracker.react1.client/"]
+COPY ["coursetracker.react1.client/coursetracker.react1.client.esproj", "coursetracker.react1.client/"]
 RUN dotnet restore "./CourseTracker.React1/CourseTracker.React1.Server/CourseTracker.React1.Server.csproj"
 COPY . .
 WORKDIR "/src/CourseTracker.React1/CourseTracker.React1.Server"
