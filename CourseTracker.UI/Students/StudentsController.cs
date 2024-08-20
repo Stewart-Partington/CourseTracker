@@ -89,13 +89,20 @@ namespace CourseTracker.UI.Students
 
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Delete()
+		[HttpDelete]
+		[ValidateAntiForgeryToken]
+		public async Task<JsonResult> Delete(Guid id)
 		{
 
-			await _dal.DeleteStudent(StudentId);
+			if (id != StudentId)
+				throw new Exception("id != StudentId");
 
-            return RedirectToAction("Index");
+			//await _dal.DeleteStudent(StudentId);
+
+			return new JsonResult(new { result = true, uri = "~/Students" })
+			{
+				StatusCode = 200
+			};
 
         }
 

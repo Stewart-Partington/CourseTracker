@@ -1,17 +1,19 @@
 ﻿$(document).ready(function () {
-	confirmDelete.Init();
+    confirmDelete.Init(deleteUri);
 });
 
 var confirmDelete = {
 
-	Uri: "/Base/ConfirmDeleteModal",
+	Uri: null,
 	DeleteClass: "confirmDelete",
     ModalSelector: "modalContainer",
     SubmitButtonSelector: "btnYesDeleteRecord",
     CancelButtonSelector: "btnNoDeleteRecord",
     Form: null,
 
-	Init: function () {
+    Init: function (deleteUri) {
+
+        this.Uri = deleteUri;
 
         this.HookupMagnificPopup();
 
@@ -19,9 +21,9 @@ var confirmDelete = {
 
     HookupModalHandlers: function () {
 
-        //this.Form = $("#deleteConfirmationModal")[0];
+        this.Form = $("#deleteConfirmationModal")[0];
 
-        //$("#" + this.SubmitButtonSelector).on("click", deleteLevel.Delete);
+        $("#" + this.SubmitButtonSelector).on("click", confirmDelete.Delete);
 
         $("#" + this.CancelButtonSelector).on("click", function (e) {
             e.preventDefault();
@@ -47,7 +49,7 @@ var confirmDelete = {
 
         var id = $(item.el).data().id;
 
-        $.get(confirmDelete.Uri + "/" + id)
+        $.get("/Base/ConfirmDeleteModal/" + id)
             .done(function (data, textStatus, jqXHR) {
                 $("#" + confirmDelete.ModalSelector).html($(data));
                 confirmDelete.HookupModalHandlers();
@@ -60,6 +62,40 @@ var confirmDelete = {
 
     Close: function () {
         $(confirmDelete.ModalSelector).empty();
+    },
+
+    Delete: function (e) {
+
+        e.preventDefault();
+        var formData = $(confirmDelete.Form).serialize();
+
+        $.ajax({
+            type: "DELETE",
+            url: confirmDelete.Uri,
+            data: formData,
+            success: confirmDelete.DeleteSuccess,
+            fail: confirmDelete.DeleteFail
+        });
+
+    },
+
+    DeleteSuccess: function (data) {
+
+        if (data.result) {
+
+            $.magnificPopup.close();
+            window.location = data.uri;
+
+        }
+        else {
+            $(confirmDelete.ModalSelector).html($(data));
+            confirmDelete.HookupModalHandlers();
+        }
+
+    },
+
+    DeleteFail: function (e) {
+        $.magnificPopup.close();
     },
 
 }
