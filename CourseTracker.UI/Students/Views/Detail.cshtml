@@ -41,7 +41,8 @@
 
         @if (Model.Id != null)
         {
-            @Html.ActionLink("Delete", "Delete", "Students", null, new { @class = "btn btn-danger" })
+            @* @Html.ActionLink("Delete", "Delete", "Students", null, new { @class = "btn btn-danger confirmDelete" }) *@
+            <a class="btn btn-danger confirmDelete" href="#modalContainer" data-id="@Model.Id">Delete</a>
         }
 
     </div>

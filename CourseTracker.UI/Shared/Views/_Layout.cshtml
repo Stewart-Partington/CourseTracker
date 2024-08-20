@@ -25,10 +25,16 @@
             &copy; 2024 - CourseTracker.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    @{
+        await Html.RenderPartialAsync("ModalContainer");
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/magnific-popup-master/dist/jquery.magnific-popup.min.js"></script>
     <link href="~/lib/magnific-popup-master/dist/magnific-popup.css" rel="stylesheet" />
+    <script src="~/js/confirmdelete.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

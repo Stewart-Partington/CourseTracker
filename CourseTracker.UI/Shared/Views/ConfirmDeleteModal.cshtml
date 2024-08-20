@@ -1,0 +1,24 @@
+﻿@model Guid
+
+@{
+
+
+
+}
+
+<header class="modal-header">
+    <h2 class="modal-title">Are you sure you want to delete?</h2>
+</header>
+
+<form id="deleteConfirmationModal">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" id="id" name="id" value="@Model" />
+
+    <div class="modal-footer">
+        <button id="btnYesDeleteRecord" title="Yes" value="Yes" class="btn btn-primary">Yes</button>
+        <button id="btnNoDeleteRecord" title="No" class="btn btn-secondary cancel ml-2">No</button>
+    </div>
+
+</form>
