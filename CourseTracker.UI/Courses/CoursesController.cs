@@ -111,7 +111,7 @@ namespace CourseTracker.UI.Courses
         public async Task<JsonResult> Delete(Guid id)
         {
 
-            //await _dal.DeleteCourse(CourseId);
+            await _dal.DeleteCourse(id);
 
             return new JsonResult(new { result = true, id = id })
             {

@@ -117,7 +117,7 @@ namespace CourseTracker.UI.SchoolYears
         public async Task<JsonResult> Delete(Guid id)
         {
 
-            //await _dal.DeleteSchoolYear(SchoolYearId);
+            await _dal.DeleteSchoolYear(id);
 
             return new JsonResult(new { result = true, id = id })
             {

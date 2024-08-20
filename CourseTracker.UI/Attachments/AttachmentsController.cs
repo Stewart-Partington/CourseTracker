@@ -81,7 +81,7 @@ namespace CourseTracker.UI.Attachments
         public async Task<JsonResult> Delete(Guid id)
         {
 
-            //await _dal.DeleteAttachment(id);
+            await _dal.DeleteAttachment(id);
 
             return new JsonResult(new { result = true, id = id })
             {

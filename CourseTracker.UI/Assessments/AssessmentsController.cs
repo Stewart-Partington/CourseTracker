@@ -133,8 +133,8 @@ namespace CourseTracker.UI.Assessments
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(Guid id)
         {
-            
-            //await _dal.DeleteAssessment(AssessmentId);
+
+            await _dal.DeleteAssessment(id);
 
             return new JsonResult(new { result = true, id = id })
             {
