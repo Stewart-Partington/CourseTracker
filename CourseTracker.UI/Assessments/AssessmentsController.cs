@@ -129,13 +129,17 @@ namespace CourseTracker.UI.Assessments
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete()
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Delete(Guid id)
         {
+            
+            //await _dal.DeleteAssessment(AssessmentId);
 
-            await _dal.DeleteAssessment(AssessmentId);
-
-            return RedirectToAction("Detail", "Courses", new { cid = CourseId });
+            return new JsonResult(new { result = true, id = id })
+            {
+                StatusCode = 200
+            };
 
         }
 
