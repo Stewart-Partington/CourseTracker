@@ -10,11 +10,13 @@ using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using static CourseTracker.UI.Models.Enums;
 
-namespace CourseTracker.UI
+namespace CourseTracker.UI.Shared.Controllers
 {
-    
-    public class ControllerBase : Controller
+
+    public class BaseController : Controller
     {
+
+        #region Declarations
 
         protected readonly IApiDal _dal;
         protected readonly IMapper _mapper;
@@ -22,7 +24,11 @@ namespace CourseTracker.UI
 
         private readonly EntityIds _entityIds;
 
-        public ControllerBase(IApiDal dal, IMapper mapper, IState state)
+        #endregion
+
+        #region Constructors
+
+        public BaseController(IApiDal dal, IMapper mapper, IState state)
         {
             _dal = dal;
             _mapper = mapper;
@@ -30,6 +36,10 @@ namespace CourseTracker.UI
 
             _entityIds = _state.EntityIds;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public Guid StudentId
         {
@@ -91,7 +101,11 @@ namespace CourseTracker.UI
             }
         }
 
-        public void HandleEntityIds(EntityTypes entityType, object vm)
+        #endregion
+
+        #region Protected Methods
+
+        protected void HandleEntityIds(EntityTypes entityType, object vm)
         {
 
             EntityIds entityIds = _state.EntityIds == null ? new EntityIds() : _state.EntityIds;
@@ -160,6 +174,20 @@ namespace CourseTracker.UI
             _state.EntityIds = entityIds;
 
         }
+
+        #endregion
+
+        #region Public Action Methods
+
+        [HttpGet]
+        public PartialViewResult ConfirmDeleteModal(Guid id)
+        {
+
+            return PartialView("ConfirmDeleteModal", id);
+
+        }
+
+        #endregion
 
     }
 

@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
-using CourseTracker.Domain.Students;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -14,8 +13,8 @@ using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.Students
 {
-	
-	public class StudentsController : ControllerBase
+
+    public class StudentsController : BaseController
 	{
 
         public StudentsController(IApiDal dal, IMapper mapper, IState state)

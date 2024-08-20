@@ -3,13 +3,13 @@ using CourseTracker.Application.Attachments.Commands.CreateAttachment;
 using CourseTracker.UI.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
 
 namespace CourseTracker.UI.Attachments
 {
-    
-    public class AttachmentsController : ControllerBase
+
+    public class AttachmentsController : BaseController
     {
 
         public AttachmentsController(IApiDal dal, IMapper mapper, IState state)

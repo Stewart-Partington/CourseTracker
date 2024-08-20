@@ -6,16 +6,15 @@ using CourseTracker.Application.Courses.Queries.GetCoursesList;
 using CourseTracker.Domain.Courses;
 using CourseTracker.UI.Courses.Models;
 using CourseTracker.UI.Models;
-using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.Courses
 {
-    public class CoursesController : ControllerBase
+    public class CoursesController : BaseController
     {
 
         public CoursesController(IApiDal dal, IMapper mapper, IState state)

@@ -7,13 +7,14 @@ using CourseTracker.Domain.SchoolYears;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.SchoolYears
 {
 
-    public class SchoolYearsController : ControllerBase
+    public class SchoolYearsController : BaseController
     {
 
         public SchoolYearsController(IApiDal dal, IMapper mapper, IState state)
