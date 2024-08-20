@@ -76,14 +76,17 @@ namespace CourseTracker.UI.Attachments
 
         }
 
-        //[HttpDelete]
-        [HttpGet] // For now...
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Delete(Guid id)
         {
 
-            await _dal.DeleteAttachment(id);
+            //await _dal.DeleteAttachment(id);
 
-            return RedirectToAction("Detail", "Assessments", new { aid = AssessmentId });
+            return new JsonResult(new { result = true, id = id })
+            {
+                StatusCode = 200
+            };
 
         }
 

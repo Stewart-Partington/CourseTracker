@@ -48,11 +48,6 @@
 
         @Html.ActionLink("Cancel", "Detail", "Courses", new { cid = entityIds.Course.Value.Key }, new { @class = "btn btn-secondary" })
 
-        @if (Model.Id != null)
-        {
-            @Html.ActionLink("Delete", "Delete", "Assessments", null, new { @class = "btn btn-danger" })
-        }
-
     </div>
 
 </form>

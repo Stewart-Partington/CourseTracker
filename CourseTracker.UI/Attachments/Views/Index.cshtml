@@ -38,10 +38,10 @@
                 <tbody>
                     @foreach (AttachmentListItemModel attachment in attachments)
                     {
-                        <tr>
+                        <tr id="@attachment.Id">
                             <td>
                                 @Html.ActionLink("Download", "Download", "Attachments", new { @id = attachment.Id })
-                                @Html.ActionLink("Delete", "Delete", "Attachments", new { @id = attachment.Id })
+                                <a class="confirmDelete ms-1" href="#modalContainer">Delete</a>
                             </td>
                             <td>
                                 @attachment.Name
@@ -60,3 +60,10 @@
 </section>
 
 <script src="~/js/Attachments/Index.js" defer></script>
+<script type="text/javascript">
+
+    var deleteUri = "/Attachments/Delete";
+
+</script>
+
+<script src="~/js/confirmdelete.js"></script>
