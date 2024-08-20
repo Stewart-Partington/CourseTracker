@@ -70,9 +70,10 @@
                     <tbody>
                         @foreach (CoursesListItemModel course in courses)
                         {
-                            <tr>
+                            <tr id="@course.Id">
                                 <td>
                                     @Html.ActionLink("Details", "Detail", "Courses", new { @cid = course.Id })
+                                    <a class="confirmDelete ms-1" href="#modalContainer">Delete</a>
                                 </td>
                                 <td>
                                     @course.Name
@@ -92,5 +93,13 @@
         </div>
 
     </section>
+
+    <script type="text/javascript">
+
+        var deleteUri = "/Courses/Delete";
+
+    </script>
+
+    <script src="~/js/confirmdelete.js"></script>
 
 }
