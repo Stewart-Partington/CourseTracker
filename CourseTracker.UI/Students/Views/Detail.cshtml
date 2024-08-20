@@ -39,11 +39,6 @@
 
         @Html.ActionLink("Cancel", "Index", "Students", null, new { @class = "btn btn-secondary" })
 
-        @if (Model.Id != null)
-        {
-            <a class="btn btn-danger confirmDelete" href="#modalContainer" data-id="@Model.Id">Delete</a>
-        }
-
     </div>
 
 </form>
@@ -100,13 +95,5 @@
         </div>
 
     </section>
-
-    <script type="text/javascript">
-
-        var deleteUri = "/Students/Delete";
-
-    </script>
-
-    <script src="~/js/confirmdelete.js"></script>
 
 }

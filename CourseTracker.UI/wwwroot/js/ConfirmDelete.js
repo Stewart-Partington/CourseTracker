@@ -47,7 +47,7 @@ var confirmDelete = {
 
     ElementParse: function (item) {
 
-        var id = $(item.el).data().id;
+        var id = $(item.el).parents("tr").attr("id");
 
         $.get("/Base/ConfirmDeleteModal/" + id)
             .done(function (data, textStatus, jqXHR) {
@@ -83,8 +83,10 @@ var confirmDelete = {
 
         if (data.result) {
 
+            var tr = $("tr#" + data.id);
+
+            $(tr).remove();
             $.magnificPopup.close();
-            window.location = data.uri;
 
         }
         else {

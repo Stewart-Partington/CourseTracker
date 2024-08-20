@@ -94,12 +94,9 @@ namespace CourseTracker.UI.Students
 		public async Task<JsonResult> Delete(Guid id)
 		{
 
-			if (id != StudentId)
-				throw new Exception("id != StudentId");
-
 			//await _dal.DeleteStudent(StudentId);
 
-			return new JsonResult(new { result = true, uri = "~/Students" })
+			return new JsonResult(new { result = true, id = id })
 			{
 				StatusCode = 200
 			};
