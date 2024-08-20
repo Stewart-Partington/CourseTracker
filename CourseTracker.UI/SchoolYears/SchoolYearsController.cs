@@ -112,13 +112,17 @@ namespace CourseTracker.UI.SchoolYears
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete()
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Delete(Guid id)
         {
 
-            await _dal.DeleteSchoolYear(SchoolYearId);
+            //await _dal.DeleteSchoolYear(SchoolYearId);
 
-            return RedirectToAction("Detail", "Students", new { sid = StudentId });
+            return new JsonResult(new { result = true, id = id })
+            {
+                StatusCode = 200
+            };
 
         }
 
