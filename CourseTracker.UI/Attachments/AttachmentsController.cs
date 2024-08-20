@@ -3,13 +3,13 @@ using CourseTracker.Application.Attachments.Commands.CreateAttachment;
 using CourseTracker.UI.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
 
 namespace CourseTracker.UI.Attachments
 {
-    
-    public class AttachmentsController : ControllerBase
+
+    public class AttachmentsController : BaseController
     {
 
         public AttachmentsController(IApiDal dal, IMapper mapper, IState state)
@@ -76,14 +76,17 @@ namespace CourseTracker.UI.Attachments
 
         }
 
-        //[HttpDelete]
-        [HttpGet] // For now...
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Delete(Guid id)
         {
 
             await _dal.DeleteAttachment(id);
 
-            return RedirectToAction("Detail", "Assessments", new { aid = AssessmentId });
+            return new JsonResult(new { result = true, id = id })
+            {
+                StatusCode = 200
+            };
 
         }
 

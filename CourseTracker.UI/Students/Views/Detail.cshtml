@@ -39,11 +39,6 @@
 
         @Html.ActionLink("Cancel", "Index", "Students", null, new { @class = "btn btn-secondary" })
 
-        @if (Model.Id != null)
-        {
-            @Html.ActionLink("Delete", "Delete", "Students", null, new { @class = "btn btn-danger" })
-        }
-
     </div>
 
 </form>
@@ -78,9 +73,10 @@
                     <tbody>
                         @foreach (SchoolYearsListItemModel schoolYear in schoolYears)
                         {
-                        <tr>
+                        <tr id="@schoolYear.Id">
                             <td>
                                 @Html.ActionLink("Details", "Detail", "SchoolYears", new { @syid = schoolYear.Id })
+                                <a class="confirmDelete ms-1" href="#modalContainer">Delete</a>
                             </td>
                             <td>
                                 @schoolYear.Index
@@ -100,5 +96,13 @@
         </div>
 
     </section>
+
+    <script type="text/javascript">
+
+        var deleteUri = "/SchoolYears/Delete";
+
+    </script>
+
+    <script src="~/js/confirmdelete.js"></script>
 
 }

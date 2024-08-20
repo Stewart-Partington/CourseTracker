@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
 using CourseTracker.Application.Students.Commands.CreateStudent;
 using CourseTracker.Application.Students.Commands.UpdateStudent;
 using CourseTracker.Application.Students.Queries.GetStudentDetail;
 using CourseTracker.Application.Students.Queries.GetStudentsList;
-using CourseTracker.Domain.Students;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using CourseTracker.UI.Students.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -14,8 +13,8 @@ using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.Students
 {
-	
-	public class StudentsController : ControllerBase
+
+    public class StudentsController : BaseController
 	{
 
         public StudentsController(IApiDal dal, IMapper mapper, IState state)
@@ -90,13 +89,17 @@ namespace CourseTracker.UI.Students
 
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Delete()
+		[HttpDelete]
+		[ValidateAntiForgeryToken]
+		public async Task<JsonResult> Delete(Guid id)
 		{
 
-			await _dal.DeleteStudent(StudentId);
+			await _dal.DeleteStudent(id);
 
-            return RedirectToAction("Index");
+			return new JsonResult(new { result = true, id = id })
+			{
+				StatusCode = 200
+			};
 
         }
 

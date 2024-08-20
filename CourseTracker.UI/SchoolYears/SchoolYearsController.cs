@@ -7,13 +7,14 @@ using CourseTracker.Domain.SchoolYears;
 using CourseTracker.UI.SchoolYears.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.SchoolYears
 {
 
-    public class SchoolYearsController : ControllerBase
+    public class SchoolYearsController : BaseController
     {
 
         public SchoolYearsController(IApiDal dal, IMapper mapper, IState state)
@@ -111,13 +112,17 @@ namespace CourseTracker.UI.SchoolYears
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete()
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Delete(Guid id)
         {
 
-            await _dal.DeleteSchoolYear(SchoolYearId);
+            await _dal.DeleteSchoolYear(id);
 
-            return RedirectToAction("Detail", "Students", new { sid = StudentId });
+            return new JsonResult(new { result = true, id = id })
+            {
+                StatusCode = 200
+            };
 
         }
 

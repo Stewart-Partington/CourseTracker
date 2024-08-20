@@ -46,11 +46,6 @@
 
         @Html.ActionLink("Cancel", "Detail", "SchoolYears", new { syid = entityIds.SchoolYear.Value.Key }, new { @class = "btn btn-secondary" })
 
-        @if (Model.Id != null)
-        {
-            @Html.ActionLink("Delete", "Delete", "Courses", null, new { @class = "btn btn-danger" })
-        }
-
     </div>
 
 </form>
@@ -86,9 +81,10 @@
                     <tbody>
                         @foreach (AssessmentsListItemModel assessment in assessments)
                         {
-                            <tr>
+                            <tr id="@assessment.Id">
                                 <td>
                                     @Html.ActionLink("Details", "Detail", "Assessments", new { @aid = assessment.Id })
+                                    <a class="confirmDelete ms-1" href="#modalContainer">Delete</a>
                                 </td>
                                 <td>
                                     @assessment.Name
@@ -111,5 +107,13 @@
         </div>
 
     </section>
+
+    <script type="text/javascript">
+
+        var deleteUri = "/Assessments/Delete";
+
+    </script>
+
+    <script src="~/js/confirmdelete.js"></script>
 
 }

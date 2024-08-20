@@ -27,9 +27,10 @@
         <tbody>
             @foreach (StudentListItemModel student in students)
             {
-                <tr>
+                <tr id="@student.Id">
                     <td>
-                        @Html.ActionLink("Details", "Detail", "Students", new { @sid = student.Id })                        
+                        @Html.ActionLink("Details", "Detail", "Students", new { @sid = student.Id })
+                        <a class="confirmDelete ms-1" href="#modalContainer">Delete</a>
                     </td>
                     <td>
                         @string.Format("{0} {1}", student.FirstName, student.LastName)
@@ -45,3 +46,11 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+
+    var deleteUri = "/Students/Delete";
+
+</script>
+
+<script src="~/js/confirmdelete.js"></script>

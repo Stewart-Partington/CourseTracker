@@ -3,20 +3,17 @@ using CourseTracker.Application.Assessments.Commands.CreateAssessment;
 using CourseTracker.Application.Assessments.Commands.UpdateAssessment;
 using CourseTracker.Application.Assessments.Queries.GetAssementDetail;
 using CourseTracker.Application.Assessments.Queries.GetAssessmentList;
-using CourseTracker.Application.Courses.Queries.GetCoursesList;
 using CourseTracker.Domain.Assessments;
-using CourseTracker.Domain.Courses;
 using CourseTracker.UI.Assessments.Models;
-using CourseTracker.UI.Courses.Models;
-using CourseTracker.UI.Models;
 using CourseTracker.UI.Services.DAL;
 using CourseTracker.UI.Services.State;
+using CourseTracker.UI.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using static CourseTracker.UI.Models.Enums;
 
 namespace CourseTracker.UI.Assessments
 {
-    public class AssessmentsController : ControllerBase
+    public class AssessmentsController : BaseController
     {
 
         public AssessmentsController(IApiDal dal, IMapper mapper, IState state)
@@ -132,13 +129,17 @@ namespace CourseTracker.UI.Assessments
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete()
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> Delete(Guid id)
         {
 
-            await _dal.DeleteAssessment(AssessmentId);
+            await _dal.DeleteAssessment(id);
 
-            return RedirectToAction("Detail", "Courses", new { cid = CourseId });
+            return new JsonResult(new { result = true, id = id })
+            {
+                StatusCode = 200
+            };
 
         }
 
