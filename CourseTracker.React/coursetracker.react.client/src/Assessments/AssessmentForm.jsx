@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const AssessmentForm = ({ assessment, setAssessment, saveAssessment, cancelAssessment, deleteAssessment, assessmentSaved, errors }) => {
+const AssessmentForm = ({ assessment, setAssessment, saveAssessment, cancelAssessment, assessmentSaved, errors }) => {
 
     const [typeOption, setTypeOption] = useState(assessment.assessmentType);
     const typeOptions = [
@@ -24,10 +24,6 @@ const AssessmentForm = ({ assessment, setAssessment, saveAssessment, cancelAsses
 
     const onSubmitClick = () => {
         saveAssessment(assessment);
-    }
-
-    const onDeleteClick = () => {
-        deleteAssessment(assessment.id);
     }
 
     var contents =
@@ -118,11 +114,6 @@ const AssessmentForm = ({ assessment, setAssessment, saveAssessment, cancelAsses
                     <button className="btn btn-secondary me-2" onClick={cancelAssessment} >
                         Cancel
                     </button>
-                    {assessmentSaved && (
-                        <button className="btn btn-danger" onClick={onDeleteClick} >
-                            Delete
-                        </button>
-                    )}
                 </div>
 
             </div>
