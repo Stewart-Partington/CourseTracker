@@ -28,7 +28,30 @@ const useAssessments = (courseId) => {
 		navigate(NavLevels.assessment, id);
 	}
 
-	return { assessments, setAssessments, addAssessment, editAssessment };
+	const deleteAssessment = (id) => {
+		deleteAssessmentApi(id);
+	}
+
+	const deleteAssessmentApi = async (id) => {
+
+		var response = await fetch('api/assessments?id=' + id, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (response.ok) {
+			var newAssessments = assessments.filter(function (assessment) {
+				return assessment.id !== id;
+			});
+			setAssessments(newAssessments);
+		}
+
+	}
+
+	return { assessments, setAssessments, addAssessment, editAssessment, deleteAssessment };
 
 }
 

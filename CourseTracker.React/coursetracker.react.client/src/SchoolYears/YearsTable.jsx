@@ -3,7 +3,7 @@ import YearRow from "./YearRow";
 
 const YearsTable = ({ studentId }) => {
 
-    const { schoolYears, addSchoolYear, editSchoolYear } = useSchoolYears(studentId);
+    const { schoolYears, addSchoolYear, editSchoolYear, deleteSchoolYear } = useSchoolYears(studentId);
 
     const contents = 
         <>
@@ -35,7 +35,8 @@ const YearsTable = ({ studentId }) => {
                             </thead>
                             <tbody>
                                 {
-                                    schoolYears != undefined ? schoolYears.map(schoolYear => <YearRow key={schoolYear.id} schoolYear={schoolYear} editSchoolYear={editSchoolYear} />) : "<tr>loading...</tr>"
+                                    schoolYears != undefined ? schoolYears.map(schoolYear => <YearRow key={schoolYear.id} schoolYear={schoolYear}
+                                        editSchoolYear={editSchoolYear} deleteSchoolYear={deleteSchoolYear} />) : "<tr><td></td></tr>"
                                 }
                             </tbody>
                         </table>

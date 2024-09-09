@@ -10,7 +10,7 @@ const Course = () => {
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
     const { navSetter } = useContext(navContext);
-    const { course, setCourse, saveCourse, cancelCourse, deleteCourse, courseSaved, errors } = useCourse(navValues, navigate, navSetter);
+    const { course, setCourse, saveCourse, cancelCourse, courseSaved, errors } = useCourse(navValues, navigate, navSetter);
 
     const contents = course.id === undefined
         ?
@@ -19,7 +19,7 @@ const Course = () => {
         <>
             <Banner heading={navValues.Course.Name} />
             <CourseForm key={course.id} course={course} setCourse={setCourse} saveCourse={saveCourse}
-                cancelCourse={cancelCourse} deleteCourse={deleteCourse} courseSaved={courseSaved} errors={errors} />
+                cancelCourse={cancelCourse} courseSaved={courseSaved} errors={errors} />
             {courseSaved && (
                 <AssessmentsTable courseId={course.id} />
             )}

@@ -3,7 +3,7 @@ import CourseRow from "./CourseRow";
 
 const CoursesTable = ({ schoolYearId }) => {
 
-    const { courses, addCourse, editCourse } = useCourse(schoolYearId);
+    const { courses, addCourse, editCourse, deleteCourse } = useCourse(schoolYearId);
 
 	const contents = 
 		<>
@@ -35,7 +35,8 @@ const CoursesTable = ({ schoolYearId }) => {
                             </thead>
                             <tbody>
                                 {
-                                    courses != undefined ? courses.map(course => <CourseRow key={course.id} course={course} editCourse={editCourse} />) : "<tr>loading...</tr>"
+                                    courses != undefined ? courses.map(course => <CourseRow key={course.id} course={course} editCourse={editCourse}
+                                        deleteCourse={deleteCourse} />) : "<tr>loading...</tr>"
                                 }
                             </tbody>
                         </table>

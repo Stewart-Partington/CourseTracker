@@ -18,7 +18,7 @@ const Breadcrumbs = () => {
     }
 
 	const contents = 
-        <ol class="breadcrumb mt-3">
+        <ol className="breadcrumb mt-3">
 
             {navValues.NavLevel == NavLevels.students && (
                 <li className="breadcrumb-item active">Students</li>

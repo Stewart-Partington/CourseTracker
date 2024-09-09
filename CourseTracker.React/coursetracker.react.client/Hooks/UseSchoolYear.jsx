@@ -57,11 +57,6 @@ const useSchoolYear = (navValues, navigate, navSetter) => {
 		navigate(NavLevels.student, navValues.Student.Id);
 	}
 
-	const deleteSchoolYear = (id) => {
-		deleteSchoolYearApi(id);
-		navigate(NavLevels.student, navValues.Student.Id);
-	}
-
 	const postSchoolYearApi = async (schoolYear) => {
 
 		var result = null;
@@ -84,17 +79,7 @@ const useSchoolYear = (navValues, navigate, navSetter) => {
 
 	};
 
-	const deleteSchoolYearApi = async (id) => {
-		await fetch('api/schoolyears?id=' + id, {
-			method: "DELETE",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-		});
-	}
-
-	return { schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors }
+	return { schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, schoolYearSaved, errors }
 
 };
 

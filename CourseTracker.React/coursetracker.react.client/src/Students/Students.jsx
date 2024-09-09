@@ -8,7 +8,7 @@ const Students = () => {
 
     const { navigate } = useContext(navContext);
     const { navValues: navValues } = useContext(navContext);
-    const { students, addStudent, editStudent } = useStudents(navigate);
+    const { students, addStudent, editStudent, deleteStudent } = useStudents(navigate);
 
     const contents = students === undefined
         ?
@@ -31,7 +31,7 @@ const Students = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map(student => <StudentRow key={student.id} student={student} editStudent={editStudent} />)}
+                    {students.map(student => <StudentRow key={student.id} student={student} editStudent={editStudent} deleteStudent={deleteStudent} />)}
                 </tbody>
             </table>       
         </>;

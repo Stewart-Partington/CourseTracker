@@ -3,7 +3,7 @@ import AssessmentRow from "./AssessmentRow";
 
 const AssessmentsTable = ({ courseId }) => {
 
-	const { assessments, addAssessment, editAssessment } = useAssessments(courseId);
+	const { assessments, addAssessment, editAssessment, deleteAssessment } = useAssessments(courseId);
 
     const contents =
         <>
@@ -36,7 +36,8 @@ const AssessmentsTable = ({ courseId }) => {
                             </thead>
                             <tbody>
                                 {
-                                    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment} editAssessment={editAssessment} />) : "<tr>loading...</tr>"
+                                    assessments != undefined ? assessments.map(assessment => <AssessmentRow key={assessment.id} assessment={assessment}
+                                        editAssessment={editAssessment} deleteAssessment={deleteAssessment} />) : "<tr>loading...</tr>"
                                 }
                             </tbody>
                         </table>
