@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const CourseForm = ({ course, setCourse, saveCourse, cancelCourse, deleteCourse, courseSaved, errors }) => {
+const CourseForm = ({ course, setCourse, saveCourse, cancelCourse, courseSaved, errors }) => {
 
     const [notes, setNotes] = useState(course.notes);
     const handleNotesChange = e => {
@@ -11,10 +11,6 @@ const CourseForm = ({ course, setCourse, saveCourse, cancelCourse, deleteCourse,
 
     const onSubmitClick = () => {
         saveCourse(course);
-    }
-
-    const onDeleteClick = () => {
-        deleteCourse(course.id);
     }
 
     var contents =
@@ -76,11 +72,6 @@ const CourseForm = ({ course, setCourse, saveCourse, cancelCourse, deleteCourse,
                     <button className="btn btn-secondary me-2" onClick={cancelCourse} >
                         Cancel
                     </button>
-                    {courseSaved && (
-                        <button className="btn btn-danger" onClick={onDeleteClick} >
-                            Delete
-                        </button>
-                    )}
                 </div>
 
             </div>

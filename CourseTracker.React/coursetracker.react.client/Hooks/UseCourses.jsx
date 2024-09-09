@@ -28,7 +28,30 @@ const useCourses = (schoolYearId) => {
 		navigate(NavLevels.course, id);
 	}
 
-	return { courses, setCourses, addCourse, editCourse };
+	const deleteCourse = (id) => {
+		deleteCourseApi(id);
+	}
+
+	const deleteCourseApi = async (id) => {
+
+		var response = await fetch('api/courses?id=' + id, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (response.ok) {
+			var newCourses = courses.filter(function (course) {
+				return course.id !== id;
+			});
+			setCourses(newCourses);
+		}
+
+	}
+
+	return { courses, setCourses, addCourse, editCourse, deleteCourse };
 
 }
 

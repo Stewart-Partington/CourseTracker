@@ -55,11 +55,6 @@ const useCourse = (navValues, navigate, navSetter) => {
 		navigate(NavLevels.schoolYear, navValues.SchoolYear.Id);
 	}
 
-	const deleteCourse = (id) => {
-		deleteCourseApi(id);
-		navigate(NavLevels.schoolYear, navValues.SchoolYear.Id);
-	}
-
 	const postCourseApi = async (course) => {
 
 		var result = null;
@@ -82,17 +77,7 @@ const useCourse = (navValues, navigate, navSetter) => {
 
 	};
 
-	const deleteCourseApi = async (id) => {
-		await fetch('api/courses?id=' + id, {
-			method: "DELETE",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-		});
-	}
-
-	return { course, setCourse, saveCourse, cancelCourse, deleteCourse, courseSaved, errors }
+	return { course, setCourse, saveCourse, cancelCourse, courseSaved, errors }
 
 }
 
