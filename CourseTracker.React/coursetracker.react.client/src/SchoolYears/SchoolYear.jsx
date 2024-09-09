@@ -10,7 +10,7 @@ const SchoolYear = () => {
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
     const { navSetter } = useContext(navContext);
-    const { schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors } = useSchoolYear(navValues, navigate, navSetter);
+    const { schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, schoolYearSaved, errors } = useSchoolYear(navValues, navigate, navSetter);
 
     const contents = schoolYear.id === undefined
         ?
@@ -19,7 +19,7 @@ const SchoolYear = () => {
         <>
             <Banner heading={navValues.SchoolYear.Name} />
             <SchoolYearForm key={schoolYear.id} schoolYear={schoolYear} setSchoolYear={setSchoolYear} saveSchoolYear={saveSchoolYear}
-                cancelSchoolYear={cancelSchoolYear} deleteSchoolYear={deleteSchoolYear} schoolYearSaved={schoolYearSaved} errors={errors} />
+                cancelSchoolYear={cancelSchoolYear} schoolYearSaved={schoolYearSaved} errors={errors} />
             {schoolYearSaved && (
                 <CoursesTable schoolYearId={schoolYear.id} />
             )}

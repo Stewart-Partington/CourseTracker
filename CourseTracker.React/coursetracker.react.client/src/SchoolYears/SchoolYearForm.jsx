@@ -1,13 +1,9 @@
 import { useState } from 'react';
 
-const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, deleteSchoolYear, schoolYearSaved, errors }) => {
+const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, cancelSchoolYear, schoolYearSaved, errors }) => {
 
     const onSubmitClick = () => {
         saveSchoolYear(schoolYear);
-    }
-
-    const onDeleteClick = () => {
-        deleteSchoolYear(schoolYear.id);
     }
 
     var contents =
@@ -48,11 +44,6 @@ const SchoolYearForm = ({ schoolYear, setSchoolYear, saveSchoolYear, cancelSchoo
                 <button className="btn btn-secondary me-2" onClick={cancelSchoolYear} >
                     Cancel
                 </button>
-                {schoolYearSaved && (
-                    <button className="btn btn-danger" onClick={onDeleteClick} >
-                        Delete
-                    </button>
-                )}
             </div>
 
             </div>

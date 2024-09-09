@@ -28,7 +28,30 @@ const useSchoolYears = (studentId) => {
 		navigate(NavLevels.schoolYear, id);
 	}
 
-	return { schoolYears, setSchoolYears, addSchoolYear, editSchoolYear };
+	const deleteSchoolYear = (id) => {
+		deleteSchoolYearApi(id);
+	}
+
+	const deleteSchoolYearApi = async (id) => {
+
+		var response = await fetch('api/schoolyears?id=' + id, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (response.ok) {
+			var newSchoolYears = schoolYears.filter(function (schoolYear) {
+				return schoolYear.id !== id;
+			});
+			setSchoolYears(newSchoolYears);
+		}
+
+	}
+
+	return { schoolYears, setSchoolYears, addSchoolYear, editSchoolYear, deleteSchoolYear };
 
 };
 
