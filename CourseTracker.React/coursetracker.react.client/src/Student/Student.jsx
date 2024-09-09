@@ -10,7 +10,7 @@ const Student = () => {
     const { navValues: navValues } = useContext(navContext);
     const { navigate } = useContext(navContext);
     const { navSetter } = useContext(navContext);
-    const { student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved, errors } = useStudent(navValues, navigate, navSetter);
+    const { student, setStudent, saveStudent, cancelStudent, studentSaved, errors } = useStudent(navValues, navigate, navSetter);
 
     const contents = student.id === undefined
         ?
@@ -18,7 +18,7 @@ const Student = () => {
         :
         <>
             <Banner heading={navValues.Student.Name} />
-            <StudentForm key={student.id} student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent} deleteStudent={deleteStudent}
+            <StudentForm key={student.id} student={student} setStudent={setStudent} saveStudent={saveStudent} cancelStudent={cancelStudent}
                 studentSaved={studentSaved} errors={errors} />
             {studentSaved && (            
                 <YearsTable studentId={student.id} />

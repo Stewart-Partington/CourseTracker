@@ -26,7 +26,30 @@ const useStudents = (navigate) => {
 		navigate(NavLevels.student, id);
 	}
 
-	return { students, setStudents, addStudent, editStudent };
+	const deleteStudent = (id) => {
+		deleteStudentApi(id);
+	}
+
+	const deleteStudentApi = async (id) => {
+
+		var response = await fetch('api/students?id=' + id, {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (response.ok) {
+			var newStudents = students.filter(function (student) {
+				return student.id !== id;
+			});
+			setStudents(newStudents);
+		}
+
+	}
+
+	return { students, setStudents, addStudent, editStudent, deleteStudent };
 
 };
 

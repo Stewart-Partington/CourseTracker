@@ -59,11 +59,6 @@ const useStudent = (navValues, navigate, navSetter) => {
 		navigate(NavLevels.students, null);
 	}
 
-	const deleteStudent = (id) => {
-		deleteStudentApi(id);
-		navigate(NavLevels.students, null);
-	}
-
 	const postStudentApi = async (student) => {
 
 		var result = null;
@@ -86,17 +81,7 @@ const useStudent = (navValues, navigate, navSetter) => {
 
 	};
 
-	const deleteStudentApi = async (id) => {
-		await fetch('api/students?id=' + id, {
-			method: "DELETE",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-		});
-	}
-
-	return { student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved, errors };
+	return { student, setStudent, saveStudent, cancelStudent, studentSaved, errors };
 
 };
 

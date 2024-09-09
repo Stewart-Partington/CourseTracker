@@ -1,13 +1,9 @@
 import { useState } from 'react';
 
-const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteStudent, studentSaved, errors }) => {
+const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, studentSaved, errors }) => {
 
     const onSubmitClick = () => {
         saveStudent(student);
-    }
-
-    const onDeleteClick = () => {
-        deleteStudent(student.id);
     }
 
     var contents = 
@@ -60,11 +56,6 @@ const StudentForm = ({ student, setStudent, saveStudent, cancelStudent, deleteSt
                 <button className="btn btn-secondary me-2" onClick={cancelStudent} >
                     Cancel
                 </button>
-                {studentSaved && (
-                    <button className="btn btn-danger" onClick={onDeleteClick} >
-                        Delete
-                    </button>
-                )}
             </div>
 
         </div>
