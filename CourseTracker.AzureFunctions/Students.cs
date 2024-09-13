@@ -22,7 +22,7 @@ namespace CourseTracker.AzureFunctions
 
         [Function("GetStudents")]
         public IEnumerable<Student> GetStudents([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route ="Students")] HttpRequestData req,
-            [SqlInput("SELECT * FROM [dbo].[Students]", "SqlConnectionString")] IEnumerable<Student> result)
+            [SqlInput("SELECT * FROM [dbo].[Students]", "SqlConnectionString")] IEnumerable<Student> result) 
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -39,10 +39,15 @@ namespace CourseTracker.AzureFunctions
         }
 
         [Function("CreateStudent")]
-        public HttpResponseData CreateStudent([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Students")] HttpRequestData req)
+        [SqlOutput("[dbo].[Students]", "SqlConnectionString")]
+        public async Task<Student> CreateStudent([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Students")] HttpRequestData req)
         {
 
-            return null;
+            Student student = await req.ReadFromJsonAsync<Student>();
+
+            student.Id = Guid.NewGuid();
+
+            return student;
 
         }
 
