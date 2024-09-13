@@ -8,7 +8,7 @@ const StudentRow = ({ student, editStudent, deleteStudent }) => {
 
     const deleteStudentClick = (e) => {
         e.preventDefault();
-        deleteStudent(student.id);
+        //deleteStudent(student.id);
     };
 
 	return (
