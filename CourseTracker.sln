@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseTracker.React.Server"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "coursetracker.react.client", "CourseTracker.React\coursetracker.react.client\coursetracker.react.client.esproj", "{313509BC-7BE5-46D3-ABF2-7AFBFDB4F187}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseTracker.AzureFunctions", "CourseTracker.AzureFunctions\CourseTracker.AzureFunctions.csproj", "{574472CF-B91D-489D-B741-6CAFB972C12E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{313509BC-7BE5-46D3-ABF2-7AFBFDB4F187}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{313509BC-7BE5-46D3-ABF2-7AFBFDB4F187}.Release|Any CPU.Build.0 = Release|Any CPU
 		{313509BC-7BE5-46D3-ABF2-7AFBFDB4F187}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{574472CF-B91D-489D-B741-6CAFB972C12E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574472CF-B91D-489D-B741-6CAFB972C12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574472CF-B91D-489D-B741-6CAFB972C12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574472CF-B91D-489D-B741-6CAFB972C12E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
