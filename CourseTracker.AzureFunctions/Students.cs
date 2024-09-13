@@ -1,5 +1,7 @@
 using System.Net;
+using CourseTracker.Domain.Students;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Extensions.Sql;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 
@@ -17,16 +19,12 @@ namespace CourseTracker.AzureFunctions
         }
 
         [Function("GetSudents")]
-        public HttpResponseData GetSudents([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route ="Students")] HttpRequestData req)
+        public IEnumerable<Student> GetSudents([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route ="Students")] HttpRequestData req,
+            [SqlInput("SELECT * FROM [dbo].[Students]", "SqlConnectionString")] IEnumerable<Student> result)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-            response.WriteString("Welcome to Azure Functions!");
-
-            return response;
+            return result;
         }
 
         [Function("GetStudentById")]
