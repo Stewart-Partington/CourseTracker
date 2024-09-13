@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Extensions.Sql;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace CourseTracker.AzureFunctions
@@ -53,11 +54,14 @@ namespace CourseTracker.AzureFunctions
         }
 
         [Function("UpdateStudent")]
-        public HttpResponseData UpdateStudent([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "Students/{id}")] HttpRequestData req,
-            Guid id)
+        [SqlOutput("[dbo].[Students]", "SqlConnectionString")]
+        public async Task<PostStudentModel> UpdateStudent([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "Students")] HttpRequestData req,
+            [SqlInput($"SELECT * FROM [dbo].[Students] where Id = @Id", "SqlConnectionString", System.Data.CommandType.Text, "@Id={Query.id}")] IEnumerable<Student> result)
         {
 
-            return null;
+            PostStudentModel student = await req.ReadFromJsonAsync<PostStudentModel>();
+
+            return student;
 
         }
 
