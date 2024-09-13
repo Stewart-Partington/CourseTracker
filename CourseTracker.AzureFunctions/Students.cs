@@ -1,4 +1,5 @@
 using System.Net;
+using CourseTracker.AzureFunctions.Models;
 using CourseTracker.Domain.Students;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
@@ -40,10 +41,10 @@ namespace CourseTracker.AzureFunctions
 
         [Function("CreateStudent")]
         [SqlOutput("[dbo].[Students]", "SqlConnectionString")]
-        public async Task<Student> CreateStudent([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Students")] HttpRequestData req)
+        public async Task<PostStudentModel> CreateStudent([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Students")] HttpRequestData req)
         {
 
-            Student student = await req.ReadFromJsonAsync<Student>();
+            PostStudentModel student = await req.ReadFromJsonAsync<PostStudentModel>();
 
             student.Id = Guid.NewGuid();
 
