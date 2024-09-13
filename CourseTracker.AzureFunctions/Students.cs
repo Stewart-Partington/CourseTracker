@@ -20,8 +20,8 @@ namespace CourseTracker.AzureFunctions
             _logger = loggerFactory.CreateLogger<Students>();
         }
 
-        [Function("GetSudents")]
-        public IEnumerable<Student> GetSudents([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route ="Students")] HttpRequestData req,
+        [Function("GetStudents")]
+        public IEnumerable<Student> GetStudents([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route ="Students")] HttpRequestData req,
             [SqlInput("SELECT * FROM [dbo].[Students]", "SqlConnectionString")] IEnumerable<Student> result)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -30,11 +30,11 @@ namespace CourseTracker.AzureFunctions
         }
 
         [Function("GetStudentById")]
-        public HttpResponseData GetStudentById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Students/{id}")] HttpRequestData req,
-            Guid id)
+        public Student GetStudentById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetStudent")] HttpRequestData req,
+            [SqlInput($"SELECT * FROM [dbo].[Students] where Id = @Id", "SqlConnectionString", System.Data.CommandType.Text, "@Id={Query.id}")] IEnumerable<Student> result)
         {
 
-            return null;
+            return result.FirstOrDefault();
 
         }
 
