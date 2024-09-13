@@ -66,11 +66,16 @@ namespace CourseTracker.AzureFunctions
         }
 
         [Function("DeleteStudent")]
-        public HttpResponseData DeleteStudent([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Students/{id}")] HttpRequestData req,
-            Guid id)
+        [SqlOutput("[dbo].[Students]", "SqlConnectionString")]
+        public async Task<Guid> DeleteStudent([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Students")] HttpRequestData req,
+            [SqlInput($"SELECT * FROM [dbo].[Students] where Id = @Id", "SqlConnectionString", System.Data.CommandType.Text, "@Id={Query.id}")] IEnumerable<Student> result)
         {
 
-            return null;
+            // This doesn't work.
+
+            Student student = result.FirstOrDefault();
+
+            return student.Id;
 
         }
 
