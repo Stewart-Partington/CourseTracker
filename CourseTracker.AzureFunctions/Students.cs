@@ -1,5 +1,7 @@
 using System.Net;
 using CourseTracker.Domain.Students;
+using Google.Protobuf.WellKnownTypes;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Extensions.Sql;
 using Microsoft.Azure.Functions.Worker.Http;
